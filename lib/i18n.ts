@@ -91,9 +91,8 @@ type StudioCopy = {
 type FooterCopy = {
   privacy: string;
   terms: string;
-  contact: string;
-  ga4: string;
   copyright: string;
+  trademark: string;
 };
 
 export type PageCopy = {
@@ -240,9 +239,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "개인정보 처리방침",
       terms: "이용약관",
-      contact: "문의",
-      ga4: "GA4 분석 연동됨",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QR Code는 DENSO WAVE INCORPORATED의 등록상표입니다."
     }
   },
   en: {
@@ -285,9 +283,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Privacy",
       terms: "Terms",
-      contact: "Contact",
-      ga4: "GA4 tracking enabled",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QR Code is a trademark of DENSO WAVE INCORPORATED."
     }
   },
   zh: {
@@ -329,9 +326,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "隐私政策",
       terms: "服务条款",
-      contact: "联系我们",
-      ga4: "已启用 GA4 分析",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QR Code 是 DENSO WAVE INCORPORATED 的注册商标。"
     }
   },
   ja: {
@@ -374,9 +370,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "プライバシー",
       terms: "利用規約",
-      contact: "お問い合わせ",
-      ga4: "GA4計測を有効化",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QRコードは株式会社デンソーウェーブの登録商標です。"
     }
   },
   es: {
@@ -419,9 +414,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Privacidad",
       terms: "Términos",
-      contact: "Contacto",
-      ga4: "GA4 habilitado",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QR Code es una marca registrada de DENSO WAVE INCORPORATED."
     }
   },
   fr: {
@@ -464,9 +458,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Confidentialité",
       terms: "Conditions",
-      contact: "Contact",
-      ga4: "Suivi GA4 activé",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QR Code est une marque déposée de DENSO WAVE INCORPORATED."
     }
   },
   de: {
@@ -509,9 +502,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Datenschutz",
       terms: "Nutzungsbedingungen",
-      contact: "Kontakt",
-      ga4: "GA4-Tracking aktiviert",
-      copyright: "© Pixelyaki"
+      copyright: "© Pixelyaki",
+      trademark: "QR Code ist eine eingetragene Marke von DENSO WAVE INCORPORATED."
     }
   }
 };

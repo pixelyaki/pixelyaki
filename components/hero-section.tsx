@@ -8,14 +8,14 @@ type HeroSectionProps = {
 
 export function HeroSection({ copy }: HeroSectionProps) {
   return (
-    <section className="px-5 py-8 md:px-10 md:py-14">
-      <span className="mb-4 inline-block rounded-full border border-blue-100 bg-white px-3 py-2 text-sm font-semibold text-blue-700">
+    <section className="px-6 py-10 md:px-8 md:py-12">
+      <span className="mb-4 inline-flex items-center rounded-full border border-neutral-200 bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-600 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300">
         {copy.eyebrow}
       </span>
-      <h1 className="max-w-3xl font-[var(--font-heading)] text-[clamp(2rem,4.2vw,3.6rem)] leading-[1.05] tracking-[-0.03em]">
+      <h1 className="max-w-3xl font-(--font-heading) text-4xl leading-tight tracking-tight text-neutral-900 dark:text-neutral-100 md:text-5xl">
         {copy.title}
       </h1>
-      <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-600 md:text-[1.05rem]">
+      <p className="mt-4 max-w-xl text-sm leading-relaxed text-neutral-500 dark:text-neutral-400 md:text-base">
         {copy.description}
       </p>
     </section>

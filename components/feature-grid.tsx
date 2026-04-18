@@ -7,16 +7,15 @@ type FeatureGridProps = {
 
 export function FeatureGrid({ items }: FeatureGridProps) {
   return (
-    <section className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-2 xl:grid-cols-5">
-      {items.map((item) => (
-        <article
-          className="min-h-[110px] rounded-[14px] border border-blue-100 bg-white p-3.5"
-          key={item.title}
-        >
-          <strong className="mb-2 block text-[0.92rem]">{item.title}</strong>
-          <p className="text-[0.84rem] text-slate-600">{item.description}</p>
-        </article>
-      ))}
+    <section>
+      <div className="grid grid-cols-1 divide-y divide-neutral-200 dark:divide-neutral-800 sm:grid-cols-2 sm:divide-y-0 xl:grid-cols-5 *:border-r *:border-neutral-200 dark:*:border-neutral-800 last:*:border-r-0">
+        {items.map((item) => (
+          <article className="p-5" key={item.title}>
+            <strong className="mb-1.5 block text-sm font-medium text-neutral-900 dark:text-neutral-100">{item.title}</strong>
+            <p className="text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">{item.description}</p>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

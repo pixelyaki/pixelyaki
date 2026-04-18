@@ -4,6 +4,7 @@
 # next.js
 /.next
 /.next_stale_*
+/.turbo
 /out
 
 # production

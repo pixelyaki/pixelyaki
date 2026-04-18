@@ -14,9 +14,9 @@ export function DownloadActions({
   onDownloadSvg
 }: DownloadActionsProps) {
   return (
-    <div className="mt-2 grid grid-cols-2 gap-2.5">
+    <div className="mt-4 grid grid-cols-2 gap-2">
       <button
-        className="rounded-xl bg-blue-700 px-3 py-2.5 text-sm font-bold text-white transition hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-55"
+        className="rounded-md bg-blue-700 px-3 py-2 text-xs font-medium text-white transition-colors hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-40"
         type="button"
         disabled={disabled}
         onClick={onDownloadPng}
@@ -24,7 +24,7 @@ export function DownloadActions({
         {pngLabel}
       </button>
       <button
-        className="rounded-xl bg-blue-100 px-3 py-2.5 text-sm font-bold text-blue-700 transition hover:bg-blue-200 disabled:cursor-not-allowed disabled:opacity-55"
+        className="rounded-md border border-neutral-200 bg-white px-3 py-2 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
         type="button"
         disabled={disabled}
         onClick={onDownloadSvg}

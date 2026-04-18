@@ -33,6 +33,16 @@ export const metadata: Metadata = {
   }
 };
 
+const themeScript = `
+  try {
+    const stored = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (stored === 'dark' || (!stored && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {}
+`;
+
 export default function RootLayout({
   children
 }: Readonly<{
@@ -40,6 +50,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className={`${fontBody.variable} ${fontHeading.variable}`}>
         {children}
         <Ga4Provider gaId={process.env.NEXT_PUBLIC_GA_ID} />

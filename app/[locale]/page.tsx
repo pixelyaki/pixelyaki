@@ -18,34 +18,27 @@ export default async function LocalePage({ params }: LocalePageProps) {
   }
 
   const copy = getCopy(locale);
-  const shellSectionClass =
-    "rounded-[20px] border border-blue-100 bg-white shadow-[0_8px_30px_rgba(20,45,95,0.08)] motion-safe:animate-[rise-in_360ms_ease_both]";
 
   return (
-    <main className="mx-auto max-w-[1180px] px-3 py-6 sm:px-6">
-      <section className={`${shellSectionClass} mt-0`}>
+    <main className="mx-auto max-w-5xl px-4 py-8 md:py-12">
+      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm motion-safe:animate-[rise-in_360ms_ease_both] dark:border-neutral-800 dark:bg-neutral-900">
         <Header locale={locale} labels={copy.header} />
-      </section>
-
-      <section className={`${shellSectionClass} mt-7`}>
-        <HeroSection copy={copy.hero} />
-      </section>
-
-      <section className={`${shellSectionClass} mt-7`}>
-        <QrStudio copy={copy.studio} />
-      </section>
-
-      <section className={`${shellSectionClass} mt-7`}>
-        <FeatureGrid items={copy.features} />
-      </section>
-
-      <section className={`${shellSectionClass} mt-7`}>
-        <FaqSection items={copy.faq} title={copy.faqTitle} />
-      </section>
-
-      <section className={`${shellSectionClass} mt-7 px-5 py-5 text-center text-sm text-slate-600`}>
-        <Footer locale={locale} labels={copy.footer} />
-      </section>
+        <div className="border-t border-neutral-200 dark:border-neutral-800">
+          <HeroSection copy={copy.hero} />
+        </div>
+        <div className="border-t border-neutral-200 dark:border-neutral-800">
+          <QrStudio copy={copy.studio} />
+        </div>
+        <div className="border-t border-neutral-200 dark:border-neutral-800">
+          <FeatureGrid items={copy.features} />
+        </div>
+        <div className="border-t border-neutral-200 dark:border-neutral-800">
+          <FaqSection items={copy.faq} title={copy.faqTitle} />
+        </div>
+        <div className="border-t border-neutral-200 dark:border-neutral-800">
+          <Footer locale={locale} labels={copy.footer} />
+        </div>
+      </div>
     </main>
   );
 }

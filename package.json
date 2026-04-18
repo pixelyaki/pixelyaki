@@ -2,11 +2,17 @@
   "name": "pixelyaki-qr",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@11.11.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "turbo:dev": "turbo run dev --parallel",
+    "turbo:build": "turbo run build",
+    "turbo:lint": "turbo run lint",
+    "turbo:typecheck": "turbo run typecheck"
   },
   "dependencies": {
     "next": "^15.3.2",
@@ -24,6 +30,7 @@
     "eslint-config-next": "^15.3.2",
     "postcss": "^8.5.10",
     "tailwindcss": "^4.2.2",
+    "turbo": "^2.9.6",
     "typescript": "^5.8.3"
   }
 }

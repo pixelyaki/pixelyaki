@@ -17,20 +17,20 @@ export function ColorPickerGroup({
 }: ColorPickerGroupProps) {
   return (
     <>
-      <div className="flex items-center justify-between gap-3 text-sm text-slate-700">
-        <span className="font-medium">{foregroundLabel}</span>
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300">{foregroundLabel}</span>
         <input
-          className="h-10 w-14 cursor-pointer rounded-[10px] border border-blue-200 bg-white p-[2px]"
+          className="h-8 w-12 cursor-pointer rounded border border-neutral-200 bg-white p-0.5 dark:border-neutral-700 dark:bg-neutral-800"
           type="color"
           value={foregroundColor}
           onChange={(event) => onForegroundChange(event.target.value)}
           aria-label={foregroundLabel}
         />
       </div>
-      <div className="mt-2.5 flex items-center justify-between gap-3 text-sm text-slate-700">
-        <span className="font-medium">{backgroundLabel}</span>
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <span className="text-xs font-medium text-neutral-700 dark:text-neutral-300">{backgroundLabel}</span>
         <input
-          className="h-10 w-14 cursor-pointer rounded-[10px] border border-blue-200 bg-white p-[2px]"
+          className="h-8 w-12 cursor-pointer rounded border border-neutral-200 bg-white p-0.5 dark:border-neutral-700 dark:bg-neutral-800"
           type="color"
           value={backgroundColor}
           onChange={(event) => onBackgroundChange(event.target.value)}

@@ -137,26 +137,24 @@ export function QrStudio({ copy }: QrStudioProps) {
   }
 
   function onDownloadPng() {
-    if (!previewPng) {
-      return;
-    }
+    if (!previewPng) return;
     downloadDataUrl(previewPng, fileNamePng);
   }
 
   function onDownloadSvg() {
-    if (!previewSvg) {
-      return;
-    }
+    if (!previewSvg) return;
     downloadTextFile(previewSvg, fileNameSvg, "image/svg+xml;charset=utf-8");
   }
 
   return (
     <section
       id="generator"
-      className="grid gap-5 p-4 md:p-6 lg:grid-cols-[minmax(0,1fr)_420px]"
+      className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6 lg:grid-cols-[minmax(0,1fr)_380px]"
     >
-      <section className="rounded-[14px] border border-blue-100 bg-blue-50 p-4 md:p-5">
-        <h2 className="mb-4 text-base font-semibold tracking-[-0.01em]">{copy.inputPanelTitle}</h2>
+      <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
+        <h2 className="mb-4 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+          {copy.inputPanelTitle}
+        </h2>
         <QrTextField
           label={copy.textLabel}
           value={text}
@@ -190,10 +188,10 @@ export function QrStudio({ copy }: QrStudioProps) {
           onFileChange={onLogoFile}
           onRemove={() => setLogoDataUrl(null)}
         />
-        {logoErrorText ? <p className="text-sm text-red-700">{logoErrorText}</p> : null}
+        {logoErrorText ? <p className="text-xs text-red-500">{logoErrorText}</p> : null}
       </section>
 
-      <section className="rounded-[14px] border border-blue-100 bg-blue-50 p-4 md:p-5">
+      <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
         <QrPreviewCard
           title={copy.previewPanelTitle}
           previewUrl={previewPng}

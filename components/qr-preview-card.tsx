@@ -22,26 +22,20 @@ export function QrPreviewCard({
   isRendering
 }: QrPreviewCardProps) {
   return (
-    <section className="grid h-full content-start gap-3.5">
-      <h2 className="mb-1 text-base font-semibold tracking-[-0.01em]">{title}</h2>
-      <div
-        className="mx-auto mt-1 grid h-[300px] w-[300px] place-items-center rounded-[18px] border border-blue-100"
-        style={{
-          background:
-            "linear-gradient(45deg, #f4f6fb 25%, transparent 25%) -8px 0/16px 16px, linear-gradient(-45deg, #f4f6fb 25%, transparent 25%) -8px 0/16px 16px, linear-gradient(45deg, transparent 75%, #f4f6fb 75%) -8px 0/16px 16px, linear-gradient(-45deg, transparent 75%, #f4f6fb 75%) -8px 0/16px 16px, #fff"
-        }}
-      >
+    <section className="grid content-start gap-3">
+      <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">{title}</h2>
+      <div className="preview-checkerboard mx-auto grid h-72 w-72 place-items-center rounded-lg border border-neutral-200 dark:border-neutral-700">
         {previewUrl ? (
           <img className="h-full w-full object-contain" src={previewUrl} alt="QR preview" />
         ) : (
-          <p className="px-4 text-center text-xs leading-relaxed text-slate-600">{emptyPreview}</p>
+          <p className="px-4 text-center text-xs leading-relaxed text-neutral-400 dark:text-neutral-500">{emptyPreview}</p>
         )}
       </div>
-      {isRendering ? <p className="text-xs leading-relaxed text-slate-600">{loadingText}</p> : null}
-      {error ? <p className="text-sm text-red-700">{error}</p> : null}
-      <p className="text-xs leading-relaxed text-slate-600">{previewHint}</p>
-      <p className="text-xs leading-relaxed text-slate-600">
-        <strong>{fileNameLabel}</strong>
+      {isRendering ? <p className="text-xs text-neutral-400 dark:text-neutral-500">{loadingText}</p> : null}
+      {error ? <p className="text-xs text-red-500">{error}</p> : null}
+      <p className="text-xs leading-relaxed text-neutral-400 dark:text-neutral-500">{previewHint}</p>
+      <p className="text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
+        <span className="font-medium text-neutral-700 dark:text-neutral-300">{fileNameLabel}</span>
         <br />
         {fileNamePreview}
       </p>

@@ -25,7 +25,7 @@ export function QrPreviewCard({
     <section className="grid h-full content-start gap-3.5">
       <h2 className="mb-1 text-base font-semibold tracking-[-0.01em]">{title}</h2>
       <div
-        className="mx-auto mt-1 grid h-[300px] w-[300px] place-items-center rounded-[18px] border border-[#d5e1ff]"
+        className="mx-auto mt-1 grid h-[300px] w-[300px] place-items-center rounded-[18px] border border-blue-100"
         style={{
           background:
             "linear-gradient(45deg, #f4f6fb 25%, transparent 25%) -8px 0/16px 16px, linear-gradient(-45deg, #f4f6fb 25%, transparent 25%) -8px 0/16px 16px, linear-gradient(45deg, transparent 75%, #f4f6fb 75%) -8px 0/16px 16px, linear-gradient(-45deg, transparent 75%, #f4f6fb 75%) -8px 0/16px 16px, #fff"

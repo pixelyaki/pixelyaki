@@ -1,8 +1,9 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n";
+import { getSiteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = "https://example.com";
+  const base = getSiteUrl();
 
   return locales.map((locale) => ({
     url: `${base}/${locale}`,

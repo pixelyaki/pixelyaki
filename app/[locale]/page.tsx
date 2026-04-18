@@ -19,7 +19,7 @@ export default async function LocalePage({ params }: LocalePageProps) {
 
   const copy = getCopy(locale);
   const shellSectionClass =
-    "rounded-[20px] border border-[#dbe6ff] bg-white shadow-[0_8px_30px_rgba(20,45,95,0.08)] motion-safe:animate-[rise-in_360ms_ease_both]";
+    "rounded-[20px] border border-blue-100 bg-white shadow-[0_8px_30px_rgba(20,45,95,0.08)] motion-safe:animate-[rise-in_360ms_ease_both]";
 
   return (
     <main className="mx-auto max-w-[1180px] px-3 py-6 sm:px-6">

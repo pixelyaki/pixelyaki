@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { isLocale, locales } from "@/lib/i18n";
+import { defaultLocale, getSeoCopy, isLocale, locales } from "@/lib/i18n";
+import { getSiteUrl } from "@/lib/site";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -8,6 +10,46 @@ type LocaleLayoutProps = {
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params
+}: Omit<LocaleLayoutProps, "children">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) {
+    return {};
+  }
+
+  const seo = getSeoCopy(locale);
+  const siteUrl = getSiteUrl();
+  const canonicalPath = `/${locale}`;
+  const languageAlternates = Object.fromEntries(
+    locales.map((code) => [code, `/${code}`])
+  ) as Record<string, string>;
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    alternates: {
+      canonical: canonicalPath,
+      languages: {
+        ...languageAlternates,
+        "x-default": `/${defaultLocale}`
+      }
+    },
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      url: new URL(canonicalPath, siteUrl).toString(),
+      siteName: "Pixelyaki",
+      type: "website"
+    },
+    twitter: {
+      card: "summary",
+      title: seo.title,
+      description: seo.description
+    }
+  };
 }
 
 export default async function LocaleLayout({

@@ -15,24 +15,23 @@ type FooterProps = {
 export function Footer({ locale, labels }: FooterProps) {
   return (
     <footer className="space-y-2">
-      <p>{labels.ga4}</p>
       <p className="font-medium text-slate-700">
-        <a className="hover:text-[#1e4ed8]" href="#">
+        <a className="hover:text-blue-700" href="#">
           {labels.privacy}
         </a>{" "}
         ·{" "}
-        <a className="hover:text-[#1e4ed8]" href="#">
+        <a className="hover:text-blue-700" href="#">
           {labels.terms}
         </a>{" "}
         ·{" "}
-        <a className="hover:text-[#1e4ed8]" href="#">
+        <a className="hover:text-blue-700" href="#">
           {labels.contact}
         </a>
       </p>
       <p>
         {locales.map((code, index) => (
           <span key={code}>
-            <Link className="hover:text-[#1e4ed8]" href={`/${code}`}>
+            <Link className="hover:text-blue-700" href={`/${code}`}>
               {localeDisplayNames[code]}
             </Link>
             {index === locales.length - 1 ? "" : " · "}

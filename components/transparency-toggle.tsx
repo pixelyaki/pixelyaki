@@ -8,7 +8,7 @@ export function TransparencyToggle({ label, checked, onChange }: TransparencyTog
   return (
     <label className="flex items-center gap-2 text-sm text-slate-700">
       <input
-        className="h-4 w-4 rounded border-slate-300 accent-[#2b6bff]"
+        className="h-4 w-4 rounded border-slate-300 accent-blue-700"
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}

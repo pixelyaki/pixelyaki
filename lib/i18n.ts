@@ -6,6 +6,33 @@ export function isLocale(value: string): value is Locale {
   return locales.includes(value as Locale);
 }
 
+export function detectLocaleFromAcceptLanguage(
+  acceptLanguageHeader: string | null | undefined
+): Locale {
+  if (!acceptLanguageHeader) {
+    return defaultLocale;
+  }
+
+  const candidates = acceptLanguageHeader
+    .split(",")
+    .map((part) => part.trim().split(";")[0]?.toLowerCase())
+    .filter((part): part is string => Boolean(part));
+
+  for (const candidate of candidates) {
+    const normalized = candidate.replace("_", "-");
+    if (isLocale(normalized)) {
+      return normalized;
+    }
+
+    const baseLocale = normalized.split("-")[0];
+    if (isLocale(baseLocale)) {
+      return baseLocale;
+    }
+  }
+
+  return defaultLocale;
+}
+
 export const localeDisplayNames: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
@@ -77,6 +104,11 @@ export type PageCopy = {
   faqTitle: string;
   faq: FaqItem[];
   footer: FooterCopy;
+};
+
+export type SeoCopy = {
+  title: string;
+  description: string;
 };
 
 const baseFeatures: FeatureItem[] = [
@@ -486,4 +518,46 @@ const copyByLocale: Record<Locale, PageCopy> = {
 
 export function getCopy(locale: Locale): PageCopy {
   return copyByLocale[locale];
+}
+
+const seoByLocale: Record<Locale, SeoCopy> = {
+  ko: {
+    title: "Pixelyaki QR 코드 생성기 | 무료 PNG/SVG 다운로드",
+    description:
+      "회원가입 없이 텍스트를 QR 코드로 즉시 변환하세요. 색상 변경, 로고 삽입, 투명 PNG(모듈 10x10px), SVG 다운로드를 지원합니다."
+  },
+  en: {
+    title: "Pixelyaki QR Code Generator | Free PNG/SVG Download",
+    description:
+      "Create QR codes from text instantly with no sign-up. Customize colors, add logo, and download transparent PNG (10x10px modules) or SVG."
+  },
+  zh: {
+    title: "Pixelyaki 二维码生成器 | 免费 PNG/SVG 下载",
+    description:
+      "无需注册，立即将文本转换为二维码。支持颜色调整、Logo 插入、透明 PNG（模块 10x10px）和 SVG 下载。"
+  },
+  ja: {
+    title: "Pixelyaki QRコード生成 | 無料PNG/SVGダウンロード",
+    description:
+      "サインアップ不要でテキストをQRコード化。色変更、ロゴ挿入、透過PNG（1モジュール10x10px）、SVGダウンロードに対応。"
+  },
+  es: {
+    title: "Generador de QR Pixelyaki | Descarga PNG/SVG Gratis",
+    description:
+      "Convierte texto en códigos QR al instante sin registro. Personaliza colores, agrega logo y descarga PNG transparente (módulos 10x10px) o SVG."
+  },
+  fr: {
+    title: "Générateur QR Pixelyaki | PNG/SVG Gratuit",
+    description:
+      "Transformez du texte en QR instantanément sans inscription. Couleurs personnalisées, logo, PNG transparent (modules 10x10px) et SVG."
+  },
+  de: {
+    title: "Pixelyaki QR-Code-Generator | Kostenloser PNG/SVG-Download",
+    description:
+      "Erstelle QR-Codes aus Text ohne Anmeldung. Farben anpassen, Logo einfügen und als transparentes PNG (10x10px pro Modul) oder SVG herunterladen."
+  }
+};
+
+export function getSeoCopy(locale: Locale): SeoCopy {
+  return seoByLocale[locale];
 }

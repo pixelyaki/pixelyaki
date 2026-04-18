@@ -1,6 +1,9 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { defaultLocale } from "@/lib/i18n";
+import { detectLocaleFromAcceptLanguage } from "@/lib/i18n";
 
-export default function RootPage() {
-  redirect(`/${defaultLocale}`);
+export default async function RootPage() {
+  const requestHeaders = await headers();
+  const locale = detectLocaleFromAcceptLanguage(requestHeaders.get("accept-language"));
+  redirect(`/${locale}`);
 }

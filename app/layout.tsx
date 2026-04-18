@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Ga4Provider } from "@/components/ga4-provider";
+import { getSiteUrl } from "@/lib/site";
 
 const fontBody = Manrope({
   subsets: ["latin"],
@@ -16,10 +17,20 @@ const fontHeading = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://example.com"),
+  metadataBase: new URL(getSiteUrl()),
   title: "Pixelyaki QR Generator",
   description:
-    "Create free QR codes with custom colors, transparent PNG export, logo upload, and SVG download."
+    "Create free QR codes with custom colors, transparent PNG export, logo upload, and SVG download.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: ["/favicon.ico"]
+  }
 };
 
 export default function RootLayout({

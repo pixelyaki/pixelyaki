@@ -155,7 +155,7 @@ export function QrStudio({ copy }: QrStudioProps) {
       id="generator"
       className="grid gap-5 p-4 md:p-6 lg:grid-cols-[minmax(0,1fr)_420px]"
     >
-      <section className="rounded-[14px] border border-[#dbe6ff] bg-[#f1f5ff] p-4 md:p-5">
+      <section className="rounded-[14px] border border-blue-100 bg-blue-50 p-4 md:p-5">
         <h2 className="mb-4 text-base font-semibold tracking-[-0.01em]">{copy.inputPanelTitle}</h2>
         <QrTextField
           label={copy.textLabel}
@@ -193,7 +193,7 @@ export function QrStudio({ copy }: QrStudioProps) {
         {logoErrorText ? <p className="text-sm text-red-700">{logoErrorText}</p> : null}
       </section>
 
-      <section className="rounded-[14px] border border-[#dbe6ff] bg-[#f1f5ff] p-4 md:p-5">
+      <section className="rounded-[14px] border border-blue-100 bg-blue-50 p-4 md:p-5">
         <QrPreviewCard
           title={copy.previewPanelTitle}
           previewUrl={previewPng}

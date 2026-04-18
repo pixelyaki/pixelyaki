@@ -22,7 +22,7 @@ export function LogoUploader({
       </label>
       <input
         id="logo-upload"
-        className="w-full rounded-[11px] border border-dashed border-[#a6bbf7] bg-white px-3 py-2.5 text-sm text-slate-700 file:mr-3 file:rounded-md file:border-0 file:bg-[#e9efff] file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-[#1d3f95]"
+        className="w-full rounded-[11px] border border-dashed border-blue-300 bg-white px-3 py-2.5 text-sm text-slate-700 file:mr-3 file:rounded-md file:border-0 file:bg-blue-100 file:px-3 file:py-1.5 file:text-sm file:font-semibold file:text-blue-700"
         type="file"
         accept=".png,.jpg,.jpeg,.svg,image/png,image/jpeg,image/svg+xml"
         onChange={(event) => onFileChange(event.target.files?.[0] ?? null)}
@@ -30,7 +30,7 @@ export function LogoUploader({
       <small className="text-xs text-slate-600">{hint}</small>
       {hasLogo ? (
         <button
-          className="mt-1 rounded-xl bg-[#e9efff] px-3 py-2 text-sm font-semibold text-[#1d3f95] transition hover:bg-[#dbe6ff]"
+          className="mt-1 rounded-xl bg-blue-100 px-3 py-2 text-sm font-semibold text-blue-700 transition hover:bg-blue-200"
           type="button"
           onClick={onRemove}
         >

@@ -80,6 +80,7 @@ type StudioCopy = {
   svgButton: string;
   fileNameLabel: string;
   emptyPreview: string;
+  contrastWarning: string;
   generating: string;
   invalidText: string;
   invalidLogoType: string;
@@ -187,7 +188,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "텍스트를 1자 이상 128자 이하로 입력해 주세요.",
       invalidLogoType: "로고 파일 형식은 PNG/JPG/SVG만 가능합니다.",
       invalidLogoSize: "로고 파일 크기는 2MB 이하여야 합니다.",
-      renderError: "QR 코드를 생성하는 중 오류가 발생했습니다."
+      renderError: "QR 코드를 생성하는 중 오류가 발생했습니다.",
+      contrastWarning: "색상 대비가 낮아 QR 코드 인식에 문제가 생길 수 있습니다"
     },
     features: [
       {
@@ -272,7 +274,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "Please enter 1 to 128 characters.",
       invalidLogoType: "Only PNG/JPG/SVG logo files are supported.",
       invalidLogoSize: "Logo file size must be 2MB or less.",
-      renderError: "An error occurred while generating the QR code."
+      renderError: "An error occurred while generating the QR code.",
+      contrastWarning: "Low contrast — the QR code may not scan reliably"
     },
     features: baseFeatures,
     faqTitle: "Frequently Asked Questions",
@@ -314,7 +317,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "请输入 1 到 128 个字符。",
       invalidLogoType: "Logo 仅支持 PNG/JPG/SVG。",
       invalidLogoSize: "Logo 文件必须小于等于 2MB。",
-      renderError: "生成二维码时发生错误。"
+      renderError: "生成二维码时发生错误。",
+      contrastWarning: "色彩对比度低，二维码可能无法正常识别"
     },
     features: baseFeatures,
     faqTitle: "常见问题",
@@ -357,7 +361,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "1〜128文字で入力してください。",
       invalidLogoType: "ロゴはPNG/JPG/SVGのみ対応です。",
       invalidLogoSize: "ロゴは2MB以下にしてください。",
-      renderError: "QRコード生成中にエラーが発生しました。"
+      renderError: "QRコード生成中にエラーが発生しました。",
+      contrastWarning: "コントラストが低く、QRコードが読み取れない可能性があります"
     },
     features: baseFeatures,
     faqTitle: "よくある質問",
@@ -400,7 +405,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "Ingresa entre 1 y 128 caracteres.",
       invalidLogoType: "Solo se admiten logos PNG/JPG/SVG.",
       invalidLogoSize: "El logo debe ser de 2MB o menos.",
-      renderError: "Ocurrió un error al generar el código QR."
+      renderError: "Ocurrió un error al generar el código QR.",
+      contrastWarning: "Contraste insuficiente — el código QR puede no leerse correctamente"
     },
     features: baseFeatures,
     faqTitle: "Preguntas frecuentes",
@@ -443,7 +449,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "Saisissez entre 1 et 128 caractères.",
       invalidLogoType: "Seuls les logos PNG/JPG/SVG sont acceptés.",
       invalidLogoSize: "Le logo doit faire 2MB maximum.",
-      renderError: "Une erreur est survenue pendant la génération du QR."
+      renderError: "Une erreur est survenue pendant la génération du QR.",
+      contrastWarning: "Contraste insuffisant — le QR code pourrait ne pas être lisible"
     },
     features: baseFeatures,
     faqTitle: "Questions fréquentes",
@@ -486,7 +493,8 @@ const copyByLocale: Record<Locale, PageCopy> = {
       invalidText: "Bitte 1 bis 128 Zeichen eingeben.",
       invalidLogoType: "Nur PNG/JPG/SVG Logos werden unterstützt.",
       invalidLogoSize: "Das Logo muss 2MB oder kleiner sein.",
-      renderError: "Beim Erstellen des QR-Codes ist ein Fehler aufgetreten."
+      renderError: "Beim Erstellen des QR-Codes ist ein Fehler aufgetreten.",
+      contrastWarning: "Zu geringer Kontrast — der QR-Code könnte nicht lesbar sein"
     },
     features: baseFeatures,
     faqTitle: "Häufige Fragen",

@@ -22,7 +22,7 @@ export function QrPreviewCard({
   return (
     <section className="grid content-start gap-3">
       <h2 className="text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">{title}</h2>
-      <div className="preview-checkerboard mx-auto grid h-72 w-72 place-items-center rounded-lg border border-neutral-200 dark:border-neutral-700">
+      <div className="preview-checkerboard mx-auto grid h-72 w-72 place-items-center rounded-lg border border-neutral-200 dark:border-neutral-700 overflow-hidden">
         {previewUrl ? (
           <img className="h-full w-full object-contain" src={previewUrl} alt="QR preview" />
         ) : (

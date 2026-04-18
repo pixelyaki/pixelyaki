@@ -33,6 +33,7 @@ type StudioCopy = {
   invalidLogoType: string;
   invalidLogoSize: string;
   renderError: string;
+  contrastWarning: string;
 };
 
 type QrStudioProps = {
@@ -41,7 +42,7 @@ type QrStudioProps = {
 
 export function QrStudio({ copy }: QrStudioProps) {
   const [text, setText] = useState("");
-  const [foregroundColor, setForegroundColor] = useState("#101828");
+  const [foregroundColor, setForegroundColor] = useState("#000000");
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
   const [transparentBackground, setTransparentBackground] = useState(true);
   const [logoDataUrl, setLogoDataUrl] = useState<string | null>(null);
@@ -171,6 +172,18 @@ export function QrStudio({ copy }: QrStudioProps) {
           onBackgroundChange={setBackgroundColor}
         />
 
+        {(() => {
+          if (transparentBackground) return null;
+          const ratio = getContrastRatio(foregroundColor, backgroundColor);
+          if (ratio >= 4.5) return null;
+          const isVeryLow = ratio < 3;
+          return (
+            <p className={`mb-3 rounded-md border px-3 py-2 text-xs ${isVeryLow ? "border-red-200 bg-red-50 text-red-600 dark:border-red-900 dark:bg-red-950/40 dark:text-red-400" : "border-amber-200 bg-amber-50 text-amber-600 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-400"}`}>
+              {copy.contrastWarning} — {ratio.toFixed(1)}:1
+            </p>
+          );
+        })()}
+
         <div className="mb-4 grid gap-2">
           <TransparencyToggle
             label={copy.transparentBackground}
@@ -212,6 +225,22 @@ export function QrStudio({ copy }: QrStudioProps) {
       </section>
     </section>
   );
+}
+
+function hexToLinear(hex: string): number {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+  const toLinear = (c: number) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+}
+
+function getContrastRatio(hex1: string, hex2: string): number {
+  const l1 = hexToLinear(hex1);
+  const l2 = hexToLinear(hex2);
+  const lighter = Math.max(l1, l2);
+  const darker = Math.min(l1, l2);
+  return (lighter + 0.05) / (darker + 0.05);
 }
 
 function readFileAsDataUrl(file: File): Promise<string> {

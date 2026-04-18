@@ -44,14 +44,6 @@ body {
     #fff;
 }
 
-.dark .preview-checkerboard {
-  background:
-    linear-gradient(45deg, #262626 25%, transparent 25%) -8px 0 / 16px 16px,
-    linear-gradient(-45deg, #262626 25%, transparent 25%) -8px 0 / 16px 16px,
-    linear-gradient(45deg, transparent 75%, #262626 75%) -8px 0 / 16px 16px,
-    linear-gradient(-45deg, transparent 75%, #262626 75%) -8px 0 / 16px 16px,
-    #171717;
-}
 
 @keyframes rise-in {
   from {

@@ -14,7 +14,7 @@ export function FaqSection({ title, items }: FaqSectionProps) {
         {items.map((item) => (
           <article key={item.q} className="px-4 py-4">
             <strong className="mb-1.5 block text-sm font-medium text-neutral-900 dark:text-neutral-100">{item.q}</strong>
-            <p className="text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">{item.a}</p>
+            <p className="text-xs leading-snug text-neutral-500 dark:text-neutral-400">{item.a}</p>
           </article>
         ))}
       </div>

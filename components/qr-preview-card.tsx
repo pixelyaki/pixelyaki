@@ -31,7 +31,7 @@ export function QrPreviewCard({
       </div>
       {isRendering ? <p className="text-xs text-neutral-400 dark:text-neutral-500">{loadingText}</p> : null}
       {error ? <p className="text-xs text-red-500">{error}</p> : null}
-      <p className="text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
+      <p className="text-xs leading-snug text-neutral-500 dark:text-neutral-400">
         <span className="font-medium text-neutral-700 dark:text-neutral-300">{fileNameLabel}</span>
         <br />
         {fileNamePreview}

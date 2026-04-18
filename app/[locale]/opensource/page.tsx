@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft } from "iconoir-react";
 import { Header } from "@/components/header";
 import { getCopy, isLocale, type Locale } from "@/lib/i18n";
 
@@ -79,7 +80,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   ko: {
     title: "오픈소스 라이선스",
     updated: "최종 수정일: 2026년 4월 18일",
-    back: "← 홈으로",
+    back: "홈으로",
     intro: "Pixelyaki는 아래 오픈소스 라이브러리를 기반으로 제작되었습니다.",
     columns: {
       library: "라이브러리",
@@ -92,7 +93,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   en: {
     title: "Open Source Licenses",
     updated: "Last updated: April 18, 2026",
-    back: "← Back",
+    back: "Back",
     intro: "Pixelyaki is built with the open-source libraries listed below.",
     columns: {
       library: "Library",
@@ -105,7 +106,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   zh: {
     title: "开源许可",
     updated: "最后更新：2026年4月18日",
-    back: "← 返回",
+    back: "返回",
     intro: "Pixelyaki 基于以下开源库构建。",
     columns: {
       library: "库",
@@ -118,7 +119,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   ja: {
     title: "オープンソースライセンス",
     updated: "最終更新日：2026年4月18日",
-    back: "← 戻る",
+    back: "戻る",
     intro: "Pixelyaki は以下のオープンソースライブラリを利用して構築されています。",
     columns: {
       library: "ライブラリ",
@@ -131,7 +132,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   es: {
     title: "Licencias Open Source",
     updated: "Última actualización: 18 de abril de 2026",
-    back: "← Volver",
+    back: "Volver",
     intro: "Pixelyaki está construido con las siguientes librerías open source.",
     columns: {
       library: "Librería",
@@ -144,7 +145,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   fr: {
     title: "Licences Open Source",
     updated: "Dernière mise à jour : 18 avril 2026",
-    back: "← Retour",
+    back: "Retour",
     intro: "Pixelyaki est construit avec les bibliothèques open source ci-dessous.",
     columns: {
       library: "Bibliothèque",
@@ -157,7 +158,7 @@ const content: Record<Locale, OpenSourceCopy> = {
   de: {
     title: "Open-Source-Lizenzen",
     updated: "Letzte Aktualisierung: 18. April 2026",
-    back: "← Zurück",
+    back: "Zurück",
     intro: "Pixelyaki basiert auf den folgenden Open-Source-Bibliotheken.",
     columns: {
       library: "Bibliothek",
@@ -185,8 +186,9 @@ export default async function OpenSourcePage({ params }: Props) {
         <div className="border-t border-neutral-200 px-6 py-8 dark:border-neutral-800 md:px-10 md:py-10">
           <Link
             href={`/${locale}`}
-            className="mb-6 inline-block text-xs text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+            className="mb-6 inline-flex items-center gap-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
           >
+            <ArrowLeft width={14} height={14} aria-hidden />
             {copy.back}
           </Link>
           <h1 className="mb-1 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">

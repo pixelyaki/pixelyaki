@@ -1,0 +1,51 @@
+import { notFound } from "next/navigation";
+import { FaqSection } from "@/components/faq-section";
+import { FeatureGrid } from "@/components/feature-grid";
+import { Footer } from "@/components/footer";
+import { Header } from "@/components/header";
+import { HeroSection } from "@/components/hero-section";
+import { QrStudio } from "@/components/qr-studio";
+import { getCopy, isLocale } from "@/lib/i18n";
+
+type LocalePageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LocalePage({ params }: LocalePageProps) {
+  const { locale } = await params;
+  if (!isLocale(locale)) {
+    notFound();
+  }
+
+  const copy = getCopy(locale);
+  const shellSectionClass =
+    "mt-7 rounded-[20px] border border-[#dbe6ff] bg-white shadow-[0_8px_30px_rgba(20,45,95,0.08)] motion-safe:animate-[rise-in_360ms_ease_both]";
+
+  return (
+    <main className="mx-auto max-w-[1180px] px-3 py-6 sm:px-6">
+      <section className={shellSectionClass}>
+        <Header locale={locale} labels={copy.header} />
+      </section>
+
+      <section className={shellSectionClass}>
+        <HeroSection copy={copy.hero} />
+      </section>
+
+      <section className={shellSectionClass}>
+        <QrStudio copy={copy.studio} />
+      </section>
+
+      <section className={shellSectionClass}>
+        <FeatureGrid items={copy.features} />
+      </section>
+
+      <section className={shellSectionClass}>
+        <FaqSection items={copy.faq} title={copy.faqTitle} />
+      </section>
+
+      <section className={`${shellSectionClass} px-5 py-5 text-center text-sm text-slate-600`}>
+        <Footer locale={locale} labels={copy.footer} />
+      </section>
+    </main>
+  );
+}

@@ -27,7 +27,6 @@ type StudioCopy = {
   pngButton: string;
   svgButton: string;
   fileNameLabel: string;
-  previewHint: string;
   emptyPreview: string;
   generating: string;
   invalidText: string;
@@ -195,7 +194,7 @@ export function QrStudio({ copy }: QrStudioProps) {
         <QrPreviewCard
           title={copy.previewPanelTitle}
           previewUrl={previewPng}
-          previewHint={copy.previewHint}
+
           emptyPreview={copy.emptyPreview}
           loadingText={copy.generating}
           fileNameLabel={copy.fileNameLabel}

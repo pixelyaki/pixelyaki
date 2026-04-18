@@ -292,7 +292,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     hero: {
       eyebrow: "无需注册",
       title: "将文本快速转换为二维码",
-      description: "支持颜色修改、Logo 插入、透明 PNG（每个模块 10x10px，自动尺寸）和 SVG 下载。"
+      description: "支持颜色修改、Logo 插入、透明 PNG 和 SVG 下载。"
     },
     studio: {
       inputPanelTitle: "输入与选项",
@@ -335,7 +335,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       eyebrow: "サインアップ不要",
       title: "テキストをすぐにQRコード化",
       description:
-        "色変更、ロゴ挿入、透過PNG（1モジュール10x10px・自動サイズ）、SVGダウンロードに対応しています。"
+        "色変更、ロゴ挿入、透過PNG・SVGダウンロードに対応しています。"
     },
     studio: {
       inputPanelTitle: "入力とオプション",
@@ -378,7 +378,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       eyebrow: "Sin registro",
       title: "Convierte texto en QR al instante",
       description:
-        "Personaliza colores, inserta un logo y descarga PNG transparente (10x10px por módulo, tamaño automático) o SVG."
+        "Personaliza colores, inserta un logo y descarga PNG transparente o SVG."
     },
     studio: {
       inputPanelTitle: "Entrada y opciones",
@@ -421,7 +421,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       eyebrow: "Sans inscription",
       title: "Transformez votre texte en QR instantanément",
       description:
-        "Modifiez les couleurs, ajoutez un logo et exportez en PNG transparent (10x10px par module, taille automatique) ou SVG."
+        "Modifiez les couleurs, ajoutez un logo et exportez en PNG transparent ou SVG."
     },
     studio: {
       inputPanelTitle: "Saisie et options",
@@ -464,7 +464,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       eyebrow: "Ohne Anmeldung",
       title: "Text sofort in QR-Codes umwandeln",
       description:
-        "Farben anpassen, Logo einfügen und als transparentes PNG (10x10px pro Modul, automatische Größe) oder SVG herunterladen."
+        "Farben anpassen, Logo einfügen und als transparentes PNG oder SVG herunterladen."
     },
     studio: {
       inputPanelTitle: "Eingabe und Optionen",
@@ -508,37 +508,37 @@ const seoByLocale: Record<Locale, SeoCopy> = {
   ko: {
     title: "Pixelyaki QR 코드 생성기 | 무료 PNG/SVG 다운로드",
     description:
-      "회원가입 없이 텍스트를 QR 코드로 즉시 변환하세요. 색상 변경, 로고 삽입, 투명 PNG(모듈 10x10px), SVG 다운로드를 지원합니다."
+      "회원가입 없이 텍스트를 QR 코드로 즉시 변환하세요. 색상 변경, 로고 삽입, 투명 PNG와 SVG 다운로드를 지원합니다."
   },
   en: {
     title: "Pixelyaki QR Code Generator | Free PNG/SVG Download",
     description:
-      "Create QR codes from text instantly with no sign-up. Customize colors, add logo, and download transparent PNG (10x10px modules) or SVG."
+      "Create QR codes from text instantly with no sign-up. Customize colors, add logo, and download transparent PNG or SVG."
   },
   zh: {
     title: "Pixelyaki 二维码生成器 | 免费 PNG/SVG 下载",
     description:
-      "无需注册，立即将文本转换为二维码。支持颜色调整、Logo 插入、透明 PNG（模块 10x10px）和 SVG 下载。"
+      "无需注册，立即将文本转换为二维码。支持颜色调整、Logo 插入、透明 PNG 和 SVG 下载。"
   },
   ja: {
     title: "Pixelyaki QRコード生成 | 無料PNG/SVGダウンロード",
     description:
-      "サインアップ不要でテキストをQRコード化。色変更、ロゴ挿入、透過PNG（1モジュール10x10px）、SVGダウンロードに対応。"
+      "サインアップ不要でテキストをQRコード化。色変更、ロゴ挿入、透過PNG・SVGダウンロードに対応。"
   },
   es: {
     title: "Generador de QR Pixelyaki | Descarga PNG/SVG Gratis",
     description:
-      "Convierte texto en códigos QR al instante sin registro. Personaliza colores, agrega logo y descarga PNG transparente (módulos 10x10px) o SVG."
+      "Convierte texto en códigos QR al instante sin registro. Personaliza colores, agrega logo y descarga PNG transparente o SVG."
   },
   fr: {
     title: "Générateur QR Pixelyaki | PNG/SVG Gratuit",
     description:
-      "Transformez du texte en QR instantanément sans inscription. Couleurs personnalisées, logo, PNG transparent (modules 10x10px) et SVG."
+      "Transformez du texte en QR instantanément sans inscription. Couleurs personnalisées, logo, PNG transparent et SVG."
   },
   de: {
     title: "Pixelyaki QR-Code-Generator | Kostenloser PNG/SVG-Download",
     description:
-      "Erstelle QR-Codes aus Text ohne Anmeldung. Farben anpassen, Logo einfügen und als transparentes PNG (10x10px pro Modul) oder SVG herunterladen."
+      "Erstelle QR-Codes aus Text ohne Anmeldung. Farben anpassen, Logo einfügen und als transparentes PNG oder SVG herunterladen."
   }
 };
 

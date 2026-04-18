@@ -212,7 +212,7 @@ const content: Record<Locale, TermsContent> = {
       },
       {
         heading: "4. Haftungsausschluss",
-        body: "Der Dienst wird „wie besehen" bereitgestellt, ohne Gewährleistung für:\n• Genauigkeit, Zuverlässigkeit oder kontinuierliche Verfügbarkeit\n• Eignung für einen bestimmten Zweck\n\nWir haften nicht für direkte oder indirekte Schäden, die durch die Nutzung des Dienstes entstehen."
+        body: "Der Dienst wird 'wie besehen' bereitgestellt, ohne Gewährleistung für:\n• Genauigkeit, Zuverlässigkeit oder kontinuierliche Verfügbarkeit\n• Eignung für einen bestimmten Zweck\n\nWir haften nicht für direkte oder indirekte Schäden, die durch die Nutzung des Dienstes entstehen."
       },
       {
         heading: "5. Geistiges Eigentum",

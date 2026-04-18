@@ -216,7 +216,7 @@ const content: Record<Locale, TermsContent> = {
       },
       {
         heading: "5. Geistiges Eigentum",
-        body: "„QR Code" ist eine eingetragene Marke von DENSO WAVE INCORPORATED.\n\nDesign, Quellcode, Logo und alle Inhalte von Pixelyaki sind Eigentum von Pixelyaki und dürfen ohne vorherige Zustimmung nicht vervielfältigt oder verbreitet werden."
+        body: "'QR Code' ist eine eingetragene Marke von DENSO WAVE INCORPORATED.\n\nDesign, Quellcode, Logo und alle Inhalte von Pixelyaki sind Eigentum von Pixelyaki und dürfen ohne vorherige Zustimmung nicht vervielfältigt oder verbreitet werden."
       },
       {
         heading: "6. Änderungen der Bedingungen",

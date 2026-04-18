@@ -1,7 +1,53 @@
-import QRCode from "qrcode";
+"use client";
 
 const QR_MARGIN_MODULES = 1;
 const PNG_MODULE_PIXEL_SIZE = 10;
+
+type QrCodeModuleLike = {
+  create: (text: string, options: { errorCorrectionLevel: "H" }) => {
+    modules: {
+      size: number;
+    };
+  };
+  toCanvas: (
+    canvas: HTMLCanvasElement,
+    text: string,
+    options: {
+      margin: number;
+      scale: number;
+      errorCorrectionLevel: "H";
+      color: {
+        dark: string;
+        light: string;
+      };
+    }
+  ) => Promise<void>;
+  toString: (
+    text: string,
+    options: {
+      type: "svg";
+      width: number;
+      margin: number;
+      errorCorrectionLevel: "H";
+      color: {
+        dark: string;
+        light: string;
+      };
+    }
+  ) => Promise<string>;
+};
+
+let qrCodePromise: Promise<QrCodeModuleLike> | null = null;
+
+async function getQrCodeModule(): Promise<QrCodeModuleLike> {
+  if (!qrCodePromise) {
+    qrCodePromise = import("qrcode").then((module) => {
+      const resolved = (module.default ?? module) as QrCodeModuleLike;
+      return resolved;
+    });
+  }
+  return qrCodePromise;
+}
 
 export type QrRenderOptions = {
   text: string;
@@ -64,19 +110,20 @@ async function drawLogo(canvas: HTMLCanvasElement, logoDataUrl: string) {
   ctx.drawImage(img, x, y, logoSize, logoSize);
 }
 
-function getDynamicPngSizeFromModules(text: string): number {
-  const model = QRCode.create(text, { errorCorrectionLevel: "H" });
+function getDynamicPngSizeFromModules(qrCode: QrCodeModuleLike, text: string): number {
+  const model = qrCode.create(text, { errorCorrectionLevel: "H" });
   const moduleCount = model.modules.size;
   return (moduleCount + QR_MARGIN_MODULES * 2) * PNG_MODULE_PIXEL_SIZE;
 }
 
 export async function renderQrPngDataUrl(options: QrRenderOptions): Promise<string> {
-  const size = getDynamicPngSizeFromModules(options.text);
+  const qrCode = await getQrCodeModule();
+  const size = getDynamicPngSizeFromModules(qrCode, options.text);
   const canvas = document.createElement("canvas");
   canvas.width = size;
   canvas.height = size;
 
-  await QRCode.toCanvas(canvas, options.text, {
+  await qrCode.toCanvas(canvas, options.text, {
     margin: QR_MARGIN_MODULES,
     scale: PNG_MODULE_PIXEL_SIZE,
     errorCorrectionLevel: "H",
@@ -102,8 +149,9 @@ function escapeAttribute(value: string): string {
 }
 
 export async function renderQrSvgMarkup(options: QrRenderOptions): Promise<string> {
+  const qrCode = await getQrCodeModule();
   const size = options.size ?? 300;
-  let svg = await QRCode.toString(options.text, {
+  let svg = await qrCode.toString(options.text, {
     type: "svg",
     width: size,
     margin: QR_MARGIN_MODULES,

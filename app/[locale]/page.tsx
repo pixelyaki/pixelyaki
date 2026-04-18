@@ -19,31 +19,31 @@ export default async function LocalePage({ params }: LocalePageProps) {
 
   const copy = getCopy(locale);
   const shellSectionClass =
-    "mt-7 rounded-[20px] border border-[#dbe6ff] bg-white shadow-[0_8px_30px_rgba(20,45,95,0.08)] motion-safe:animate-[rise-in_360ms_ease_both]";
+    "rounded-[20px] border border-[#dbe6ff] bg-white shadow-[0_8px_30px_rgba(20,45,95,0.08)] motion-safe:animate-[rise-in_360ms_ease_both]";
 
   return (
     <main className="mx-auto max-w-[1180px] px-3 py-6 sm:px-6">
-      <section className={shellSectionClass}>
+      <section className={`${shellSectionClass} mt-0`}>
         <Header locale={locale} labels={copy.header} />
       </section>
 
-      <section className={shellSectionClass}>
+      <section className={`${shellSectionClass} mt-7`}>
         <HeroSection copy={copy.hero} />
       </section>
 
-      <section className={shellSectionClass}>
+      <section className={`${shellSectionClass} mt-7`}>
         <QrStudio copy={copy.studio} />
       </section>
 
-      <section className={shellSectionClass}>
+      <section className={`${shellSectionClass} mt-7`}>
         <FeatureGrid items={copy.features} />
       </section>
 
-      <section className={shellSectionClass}>
+      <section className={`${shellSectionClass} mt-7`}>
         <FaqSection items={copy.faq} title={copy.faqTitle} />
       </section>
 
-      <section className={`${shellSectionClass} px-5 py-5 text-center text-sm text-slate-600`}>
+      <section className={`${shellSectionClass} mt-7 px-5 py-5 text-center text-sm text-slate-600`}>
         <Footer locale={locale} labels={copy.footer} />
       </section>
     </main>

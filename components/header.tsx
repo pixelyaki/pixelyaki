@@ -11,12 +11,17 @@ type HeaderProps = {
 
 export function Header({ locale, labels }: HeaderProps) {
   const linkBase =
-    "rounded-full border px-2.5 py-1.5 text-sm font-medium transition-colors duration-150";
+    "rounded-full border px-2.5 py-1.5 text-sm font-medium transition-colors duration-150 whitespace-nowrap";
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
-      <div className="font-[var(--font-heading)] text-lg font-bold tracking-[-0.01em]">{labels.logo}</div>
-      <nav className="flex flex-wrap gap-2" aria-label="Language switcher">
+    <header className="grid grid-cols-1 gap-3 px-5 py-4 md:grid-cols-[auto_1fr_auto] md:items-center">
+      <div className="shrink-0 font-[var(--font-heading)] text-lg font-bold tracking-[-0.01em]">
+        {labels.logo}
+      </div>
+      <nav
+        className="flex min-w-0 gap-2 overflow-x-auto pb-1 md:justify-center md:pb-0"
+        aria-label="Language switcher"
+      >
         {locales.map((code) => (
           <Link
             key={code}
@@ -32,7 +37,7 @@ export function Header({ locale, labels }: HeaderProps) {
         ))}
       </nav>
       <a
-        className={`${linkBase} border-transparent bg-[#2b6bff] text-white hover:bg-[#1e4ed8]`}
+        className={`${linkBase} shrink-0 border-transparent bg-[#2b6bff] text-center text-white hover:bg-[#1e4ed8]`}
         href="#generator"
       >
         {labels.generate}

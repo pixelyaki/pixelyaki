@@ -17,7 +17,7 @@ const fontHeading = Space_Grotesk({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"),
-  title: "QR Generator",
+  title: "Pixelyaki QR Generator",
   description:
     "Create free QR codes with custom colors, transparent PNG export, logo upload, and SVG download."
 };

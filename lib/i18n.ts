@@ -128,7 +128,7 @@ const baseFaq: FaqItem[] = [
 const copyByLocale: Record<Locale, PageCopy> = {
   ko: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "생성하기"
     },
     hero: {
@@ -210,12 +210,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "이용약관",
       contact: "문의",
       ga4: "GA4 분석 연동됨",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   },
   en: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "Generate"
     },
     hero: {
@@ -255,12 +255,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "Terms",
       contact: "Contact",
       ga4: "GA4 tracking enabled",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   },
   zh: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "生成"
     },
     hero: {
@@ -299,12 +299,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "服务条款",
       contact: "联系我们",
       ga4: "已启用 GA4 分析",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   },
   ja: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "生成"
     },
     hero: {
@@ -344,12 +344,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "利用規約",
       contact: "お問い合わせ",
       ga4: "GA4計測を有効化",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   },
   es: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "Generar"
     },
     hero: {
@@ -389,12 +389,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "Términos",
       contact: "Contacto",
       ga4: "GA4 habilitado",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   },
   fr: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "Générer"
     },
     hero: {
@@ -434,12 +434,12 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "Conditions",
       contact: "Contact",
       ga4: "Suivi GA4 activé",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   },
   de: {
     header: {
-      logo: "QR Studio",
+      logo: "Pixelyaki",
       generate: "Erstellen"
     },
     hero: {
@@ -479,7 +479,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       terms: "Nutzungsbedingungen",
       contact: "Kontakt",
       ga4: "GA4-Tracking aktiviert",
-      copyright: "© QR Studio"
+      copyright: "© Pixelyaki"
     }
   }
 };

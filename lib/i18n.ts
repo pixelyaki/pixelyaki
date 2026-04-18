@@ -227,7 +227,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       },
       {
         q: "다운로드 형식은 어떻게 되나요?",
-        a: "투명 배경 PNG(모듈 1칸 10x10px, 자동 크기)와 SVG를 제공합니다."
+        a: "투명 배경 PNG와 SVG를 제공합니다."
       },
       {
         q: "로고 파일은 어떤 형식을 지원하나요?",
@@ -250,7 +250,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       eyebrow: "No sign-up required",
       title: "Turn text into QR codes instantly",
       description:
-        "Customize colors, embed a logo, and export transparent PNG (10x10px per module, auto-sized) or SVG."
+        "Customize colors, embed a logo, and export transparent PNG or SVG."
     },
     studio: {
       inputPanelTitle: "Input and options",

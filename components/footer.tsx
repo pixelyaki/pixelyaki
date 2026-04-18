@@ -6,6 +6,7 @@ type FooterProps = {
   labels: {
     privacy: string;
     terms: string;
+    openSource: string;
     copyright: string;
     trademark: string;
   };
@@ -21,6 +22,9 @@ export function Footer({ locale, labels }: FooterProps) {
           </Link>
           <Link className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100" href={`/${locale}/terms`}>
             {labels.terms}
+          </Link>
+          <Link className="transition-colors hover:text-neutral-900 dark:hover:text-neutral-100" href={`/${locale}/opensource`}>
+            {labels.openSource}
           </Link>
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-neutral-400 dark:text-neutral-500">

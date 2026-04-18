@@ -91,6 +91,7 @@ type StudioCopy = {
 type FooterCopy = {
   privacy: string;
   terms: string;
+  openSource: string;
   copyright: string;
   trademark: string;
 };
@@ -239,6 +240,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "개인정보 처리방침",
       terms: "이용약관",
+      openSource: "오픈소스 라이선스",
       copyright: "© Pixelyaki",
       trademark: "QR Code는 DENSO WAVE INCORPORATED의 등록상표입니다."
     }
@@ -283,6 +285,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Privacy",
       terms: "Terms",
+      openSource: "Open Source Licenses",
       copyright: "© Pixelyaki",
       trademark: "QR Code is a trademark of DENSO WAVE INCORPORATED."
     }
@@ -326,6 +329,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "隐私政策",
       terms: "服务条款",
+      openSource: "开源许可",
       copyright: "© Pixelyaki",
       trademark: "QR Code 是 DENSO WAVE INCORPORATED 的注册商标。"
     }
@@ -370,6 +374,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "プライバシー",
       terms: "利用規約",
+      openSource: "オープンソースライセンス",
       copyright: "© Pixelyaki",
       trademark: "QRコードは株式会社デンソーウェーブの登録商標です。"
     }
@@ -414,6 +419,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Privacidad",
       terms: "Términos",
+      openSource: "Licencias Open Source",
       copyright: "© Pixelyaki",
       trademark: "QR Code es una marca registrada de DENSO WAVE INCORPORATED."
     }
@@ -458,6 +464,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Confidentialité",
       terms: "Conditions",
+      openSource: "Licences Open Source",
       copyright: "© Pixelyaki",
       trademark: "QR Code est une marque déposée de DENSO WAVE INCORPORATED."
     }
@@ -502,6 +509,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     footer: {
       privacy: "Datenschutz",
       terms: "Nutzungsbedingungen",
+      openSource: "Open-Source-Lizenzen",
       copyright: "© Pixelyaki",
       trademark: "QR Code ist eine eingetragene Marke von DENSO WAVE INCORPORATED."
     }

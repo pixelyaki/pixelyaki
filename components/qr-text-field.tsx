@@ -21,7 +21,7 @@ export function QrTextField({
         {label}
       </label>
       <textarea
-        className="min-h-20 w-full resize-y rounded-md border border-neutral-200 bg-white px-3 py-2 text-sm text-neutral-900 outline-none transition focus:border-neutral-400 focus:ring-2 focus:ring-neutral-900/5 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:border-neutral-500 dark:focus:ring-neutral-100/5"
+        className="min-h-20 w-full resize-y rounded-md border border-neutral-200 bg-white p-2 text-sm text-neutral-900 outline-none transition focus:border-neutral-400 focus:ring-2 focus:ring-neutral-900/5 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:border-neutral-500 dark:focus:ring-neutral-100/5"
         id="qr-text"
         value={value}
         maxLength={MAX_TEXT_LENGTH}

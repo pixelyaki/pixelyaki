@@ -15,7 +15,9 @@
     "turbo:typecheck": "turbo run typecheck"
   },
   "dependencies": {
+    "iconoir-react": "^7.11.0",
     "next": "^15.3.2",
+    "qr-code-styling": "^1.9.2",
     "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

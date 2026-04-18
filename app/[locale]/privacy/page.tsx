@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ArrowLeft } from "iconoir-react";
 import { Header } from "@/components/header";
 import { getCopy, isLocale, type Locale } from "@/lib/i18n";
 
@@ -10,7 +11,7 @@ const content: Record<Locale, PrivacyContent> = {
   ko: {
     title: "개인정보 처리방침",
     updated: "최종 수정일: 2026년 4월 18일",
-    back: "← 홈으로",
+    back: "홈으로",
     sections: [
       {
         heading: "1. 서비스 개요",
@@ -45,7 +46,7 @@ const content: Record<Locale, PrivacyContent> = {
   en: {
     title: "Privacy Policy",
     updated: "Last updated: April 18, 2026",
-    back: "← Back",
+    back: "Back",
     sections: [
       {
         heading: "1. Overview",
@@ -80,7 +81,7 @@ const content: Record<Locale, PrivacyContent> = {
   zh: {
     title: "隐私政策",
     updated: "最后更新：2026年4月18日",
-    back: "← 返回",
+    back: "返回",
     sections: [
       {
         heading: "1. 服务概述",
@@ -115,7 +116,7 @@ const content: Record<Locale, PrivacyContent> = {
   ja: {
     title: "プライバシーポリシー",
     updated: "最終更新日：2026年4月18日",
-    back: "← 戻る",
+    back: "戻る",
     sections: [
       {
         heading: "1. サービス概要",
@@ -150,7 +151,7 @@ const content: Record<Locale, PrivacyContent> = {
   es: {
     title: "Política de Privacidad",
     updated: "Última actualización: 18 de abril de 2026",
-    back: "← Volver",
+    back: "Volver",
     sections: [
       {
         heading: "1. Descripción del servicio",
@@ -185,7 +186,7 @@ const content: Record<Locale, PrivacyContent> = {
   fr: {
     title: "Politique de Confidentialité",
     updated: "Dernière mise à jour : 18 avril 2026",
-    back: "← Retour",
+    back: "Retour",
     sections: [
       {
         heading: "1. Présentation du service",
@@ -220,7 +221,7 @@ const content: Record<Locale, PrivacyContent> = {
   de: {
     title: "Datenschutzerklärung",
     updated: "Letzte Aktualisierung: 18. April 2026",
-    back: "← Zurück",
+    back: "Zurück",
     sections: [
       {
         heading: "1. Dienstbeschreibung",
@@ -270,8 +271,9 @@ export default async function PrivacyPage({ params }: Props) {
         <div className="border-t border-neutral-200 px-6 py-8 dark:border-neutral-800 md:px-10 md:py-10">
           <Link
             href={`/${locale}`}
-            className="mb-6 inline-block text-xs text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+            className="mb-6 inline-flex items-center gap-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
           >
+            <ArrowLeft width={14} height={14} aria-hidden />
             {copy.back}
           </Link>
           <h1 className="mb-1 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">

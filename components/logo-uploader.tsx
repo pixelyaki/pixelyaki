@@ -22,7 +22,7 @@ export function LogoUploader({
       </label>
       <input
         id="logo-upload"
-        className="w-full rounded-md border border-dashed border-neutral-200 bg-white px-3 py-2 text-xs text-neutral-600 file:mr-3 file:rounded file:border-0 file:bg-neutral-900 file:px-2.5 file:py-1 file:text-xs file:font-medium file:text-white dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:file:bg-white dark:file:text-black"
+        className="w-full rounded-md border border-dashed border-neutral-200 bg-white p-2 text-xs text-neutral-600 file:mr-3 file:rounded file:border-0 file:bg-neutral-900 file:px-2.5 file:py-1 file:text-xs file:font-medium file:text-white dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:file:bg-white dark:file:text-black"
         type="file"
         accept=".png,.jpg,.jpeg,.svg,image/png,image/jpeg,image/svg+xml"
         onChange={(event) => onFileChange(event.target.files?.[0] ?? null)}

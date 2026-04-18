@@ -178,7 +178,7 @@ export function QrStudio({ copy }: QrStudioProps) {
           if (ratio >= 4.5) return null;
           const isVeryLow = ratio < 3;
           return (
-            <p className={`mb-3 rounded-md border px-3 py-2 text-xs ${isVeryLow ? "border-red-200 bg-red-50 text-red-600 dark:border-red-900 dark:bg-red-950/40 dark:text-red-400" : "border-amber-200 bg-amber-50 text-amber-600 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-400"}`}>
+            <p className={`mb-3 rounded-md border p-2 text-xs ${isVeryLow ? "border-red-200 bg-red-50 text-red-600 dark:border-red-900 dark:bg-red-950/40 dark:text-red-400" : "border-amber-200 bg-amber-50 text-amber-600 dark:border-amber-900 dark:bg-amber-950/40 dark:text-amber-400"}`}>
               {copy.contrastWarning} — {ratio.toFixed(1)}:1
             </p>
           );

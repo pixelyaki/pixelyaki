@@ -1,55 +1,6 @@
 "use client";
 
-const QR_MARGIN_MODULES = 1;
-const PNG_MODULE_PIXEL_SIZE = 10;
-
-type QrCodeModuleLike = {
-  create: (text: string, options: { errorCorrectionLevel: "H" }) => {
-    modules: {
-      size: number;
-    };
-  };
-  toCanvas: (
-    canvas: HTMLCanvasElement,
-    text: string,
-    options: {
-      margin: number;
-      scale: number;
-      errorCorrectionLevel: "H";
-      color: {
-        dark: string;
-        light: string;
-      };
-    }
-  ) => Promise<void>;
-  toString: (
-    text: string,
-    options: {
-      type: "svg";
-      width: number;
-      margin: number;
-      errorCorrectionLevel: "H";
-      color: {
-        dark: string;
-        light: string;
-      };
-    }
-  ) => Promise<string>;
-};
-
-let qrCodePromise: Promise<QrCodeModuleLike> | null = null;
-
-async function getQrCodeModule(): Promise<QrCodeModuleLike> {
-  if (!qrCodePromise) {
-    qrCodePromise = import("qrcode").then((module) => {
-      const resolved = (module.default ?? module) as QrCodeModuleLike;
-      return resolved;
-    });
-  }
-  return qrCodePromise;
-}
-
-export type QrRenderOptions = {
+type QrRenderOptions = {
   text: string;
   foregroundColor: string;
   backgroundColor: string;
@@ -58,125 +9,99 @@ export type QrRenderOptions = {
   size?: number;
 };
 
-function loadImage(dataUrl: string): Promise<HTMLImageElement> {
-  return new Promise((resolve, reject) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => reject(new Error("Failed to load image"));
-    image.src = dataUrl;
+type QrCodeStylingModule = typeof import("qr-code-styling");
+
+const ERROR_CORRECTION_LEVEL = "H";
+const MODULE_PIXEL_SIZE = 10;
+
+let qrCodeStylingModulePromise: Promise<QrCodeStylingModule> | null = null;
+
+async function getQrCodeStylingModule(): Promise<QrCodeStylingModule> {
+  if (!qrCodeStylingModulePromise) {
+    qrCodeStylingModulePromise = import("qr-code-styling");
+  }
+  return qrCodeStylingModulePromise;
+}
+
+async function getQrModuleCount(text: string): Promise<number> {
+  const qrcode = await import("qrcode");
+  const code = qrcode.create(text, { errorCorrectionLevel: ERROR_CORRECTION_LEVEL });
+  return code.modules.size;
+}
+
+async function createQrCodeStyling(options: QrRenderOptions) {
+  const [{ default: QRCodeStyling }, moduleCount] = await Promise.all([
+    getQrCodeStylingModule(),
+    getQrModuleCount(options.text)
+  ]);
+  const size = moduleCount * MODULE_PIXEL_SIZE;
+
+  return new QRCodeStyling({
+    width: size,
+    height: size,
+    data: options.text,
+    margin: 0,
+    qrOptions: {
+      errorCorrectionLevel: ERROR_CORRECTION_LEVEL
+    },
+    dotsOptions: {
+      type: "square",
+      color: options.foregroundColor,
+      roundSize: true
+    },
+    backgroundOptions: {
+      color: options.transparentBackground ? "transparent" : options.backgroundColor
+    },
+    image: options.logoDataUrl ?? undefined,
+    imageOptions: {
+      hideBackgroundDots: true,
+      imageSize: 0.25,
+      margin: 0,
+      saveAsBlob: true
+    }
   });
 }
 
-function drawRoundedRect(
-  ctx: CanvasRenderingContext2D,
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  radius: number
-) {
-  const r = Math.min(radius, width / 2, height / 2);
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + width, y, x + width, y + height, r);
-  ctx.arcTo(x + width, y + height, x, y + height, r);
-  ctx.arcTo(x, y + height, x, y, r);
-  ctx.arcTo(x, y, x + width, y, r);
-  ctx.closePath();
-}
-
-async function drawLogo(canvas: HTMLCanvasElement, logoDataUrl: string) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx) {
-    return;
+function toPngDataUrl(rawData: Blob | Buffer | null): Promise<string> {
+  if (!rawData) {
+    throw new Error("QR generation returned empty data");
   }
 
-  const img = await loadImage(logoDataUrl);
-  const logoSize = Math.round(canvas.width * 0.23);
-  const x = Math.round((canvas.width - logoSize) / 2);
-  const y = Math.round((canvas.height - logoSize) / 2);
-  const padding = Math.round(logoSize * 0.14);
+  if (rawData instanceof Blob) {
+    return blobToDataUrl(rawData);
+  }
 
-  drawRoundedRect(
-    ctx,
-    x - padding,
-    y - padding,
-    logoSize + padding * 2,
-    logoSize + padding * 2,
-    12
-  );
-  ctx.fillStyle = "rgba(255, 255, 255, 0.92)";
-  ctx.fill();
-  ctx.drawImage(img, x, y, logoSize, logoSize);
+  return Promise.resolve(`data:image/png;base64,${rawData.toString("base64")}`);
 }
 
-function getDynamicPngSizeFromModules(qrCode: QrCodeModuleLike, text: string): number {
-  const model = qrCode.create(text, { errorCorrectionLevel: "H" });
-  const moduleCount = model.modules.size;
-  return (moduleCount + QR_MARGIN_MODULES * 2) * PNG_MODULE_PIXEL_SIZE;
+function blobToDataUrl(blob: Blob): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result ?? ""));
+    reader.onerror = () => reject(new Error("Failed to read generated QR blob"));
+    reader.readAsDataURL(blob);
+  });
 }
 
 export async function renderQrPngDataUrl(options: QrRenderOptions): Promise<string> {
-  const qrCode = await getQrCodeModule();
-  const size = getDynamicPngSizeFromModules(qrCode, options.text);
-  const canvas = document.createElement("canvas");
-  canvas.width = size;
-  canvas.height = size;
-
-  await qrCode.toCanvas(canvas, options.text, {
-    margin: QR_MARGIN_MODULES,
-    scale: PNG_MODULE_PIXEL_SIZE,
-    errorCorrectionLevel: "H",
-    color: {
-      dark: options.foregroundColor,
-      light: options.transparentBackground ? "#0000" : options.backgroundColor
-    }
-  });
-
-  if (options.logoDataUrl) {
-    await drawLogo(canvas, options.logoDataUrl);
-  }
-
-  return canvas.toDataURL("image/png");
-}
-
-function escapeAttribute(value: string): string {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  const qrCode = await createQrCodeStyling(options);
+  const rawData = await qrCode.getRawData("png");
+  return toPngDataUrl(rawData);
 }
 
 export async function renderQrSvgMarkup(options: QrRenderOptions): Promise<string> {
-  const qrCode = await getQrCodeModule();
-  const size = options.size ?? 300;
-  let svg = await qrCode.toString(options.text, {
-    type: "svg",
-    width: size,
-    margin: QR_MARGIN_MODULES,
-    errorCorrectionLevel: "H",
-    color: {
-      dark: options.foregroundColor,
-      light: options.transparentBackground ? "#0000" : options.backgroundColor
-    }
-  });
+  const qrCode = await createQrCodeStyling(options);
+  const rawData = await qrCode.getRawData("svg");
 
-  if (!options.logoDataUrl) {
-    return svg;
+  if (!rawData) {
+    throw new Error("QR generation returned empty SVG");
   }
 
-  const logoSize = Math.round(size * 0.23);
-  const x = Math.round((size - logoSize) / 2);
-  const y = Math.round((size - logoSize) / 2);
-  const padding = Math.round(logoSize * 0.14);
-  const roundedRect = [
-    `<rect x="${x - padding}" y="${y - padding}" width="${logoSize + padding * 2}" height="${
-      logoSize + padding * 2
-    }" rx="12" ry="12" fill="rgba(255,255,255,0.92)" />`,
-    `<image href="${escapeAttribute(options.logoDataUrl)}" x="${x}" y="${y}" width="${logoSize}" height="${logoSize}" preserveAspectRatio="xMidYMid meet" />`
-  ].join("");
+  if (rawData instanceof Blob) {
+    return rawData.text();
+  }
 
-  svg = svg.replace("</svg>", `${roundedRect}</svg>`);
-  return svg;
+  return rawData.toString("utf-8");
 }
+
+export type { QrRenderOptions };

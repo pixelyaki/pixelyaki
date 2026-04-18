@@ -79,7 +79,6 @@ type StudioCopy = {
   pngButton: string;
   svgButton: string;
   fileNameLabel: string;
-  previewHint: string;
   emptyPreview: string;
   generating: string;
   invalidText: string;
@@ -113,7 +112,7 @@ export type SeoCopy = {
 const baseFeatures: FeatureItem[] = [
   {
     title: "Transparent PNG",
-    description: "Auto-sized export with 10x10px for each QR module."
+    description: "Auto-sized transparent PNG export."
   },
   {
     title: "SVG Export",
@@ -148,7 +147,7 @@ const baseFaq: FaqItem[] = [
   },
   {
     q: "What image outputs are supported?",
-    a: "PNG (transparent, auto-sized with 10x10px modules) and SVG are both supported."
+    a: "Transparent PNG (auto-sized) and SVG are both supported."
   },
   {
     q: "Which logo files can I upload?",
@@ -166,7 +165,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
       eyebrow: "회원가입 없이 바로 사용",
       title: "텍스트를 즉시 QR 코드로 변환하세요",
       description:
-        "색상 변경, 로고 삽입, 투명 PNG(모듈 1칸 10x10px, 자동 크기), SVG 다운로드까지 한 번에 처리할 수 있습니다."
+        "색상 변경, 로고 삽입, 투명 PNG와 SVG 다운로드까지 한 번에 처리할 수 있습니다."
     },
     studio: {
       inputPanelTitle: "입력 및 옵션",
@@ -183,7 +182,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "PNG 다운로드",
       svgButton: "SVG 다운로드",
       fileNameLabel: "파일명 미리보기",
-      previewHint: "PNG는 모듈 1칸당 10x10px 기준으로 자동 크기 생성",
       emptyPreview: "텍스트를 입력하면 QR 미리보기가 표시됩니다.",
       generating: "QR 생성 중...",
       invalidText: "텍스트를 1자 이상 128자 이하로 입력해 주세요.",
@@ -194,7 +192,7 @@ const copyByLocale: Record<Locale, PageCopy> = {
     features: [
       {
         title: "투명 PNG",
-        description: "QR 모듈 1칸당 10x10px로 자동 크기 다운로드합니다."
+        description: "투명 배경으로 자동 크기 다운로드합니다."
       },
       {
         title: "SVG 다운로드",
@@ -269,7 +267,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "Download PNG",
       svgButton: "Download SVG",
       fileNameLabel: "File name preview",
-      previewHint: "PNG uses 10x10px per module with automatic output size",
       emptyPreview: "Enter text to see a QR preview.",
       generating: "Generating QR...",
       invalidText: "Please enter 1 to 128 characters.",
@@ -312,7 +309,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "下载 PNG",
       svgButton: "下载 SVG",
       fileNameLabel: "文件名预览",
-      previewHint: "PNG 按每个模块 10x10px 自动生成尺寸",
       emptyPreview: "输入文本后将显示二维码预览。",
       generating: "正在生成二维码...",
       invalidText: "请输入 1 到 128 个字符。",
@@ -356,7 +352,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "PNGをダウンロード",
       svgButton: "SVGをダウンロード",
       fileNameLabel: "ファイル名プレビュー",
-      previewHint: "PNGは1モジュール10x10px基準で自動サイズ生成",
       emptyPreview: "テキストを入力するとプレビューが表示されます。",
       generating: "QRコードを生成中...",
       invalidText: "1〜128文字で入力してください。",
@@ -400,7 +395,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "Descargar PNG",
       svgButton: "Descargar SVG",
       fileNameLabel: "Vista del nombre de archivo",
-      previewHint: "PNG usa 10x10px por módulo con tamaño automático",
       emptyPreview: "Ingresa texto para ver la vista previa del QR.",
       generating: "Generando QR...",
       invalidText: "Ingresa entre 1 y 128 caracteres.",
@@ -444,7 +438,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "Télécharger PNG",
       svgButton: "Télécharger SVG",
       fileNameLabel: "Aperçu du nom de fichier",
-      previewHint: "PNG en 10x10px par module avec taille de sortie automatique",
       emptyPreview: "Saisissez un texte pour afficher l'aperçu QR.",
       generating: "Génération du QR...",
       invalidText: "Saisissez entre 1 et 128 caractères.",
@@ -488,7 +481,6 @@ const copyByLocale: Record<Locale, PageCopy> = {
       pngButton: "PNG herunterladen",
       svgButton: "SVG herunterladen",
       fileNameLabel: "Dateiname Vorschau",
-      previewHint: "PNG nutzt 10x10px pro Modul mit automatischer Ausgabegröße",
       emptyPreview: "Text eingeben, um die QR-Vorschau zu sehen.",
       generating: "QR wird erstellt...",
       invalidText: "Bitte 1 bis 128 Zeichen eingeben.",

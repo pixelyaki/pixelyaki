@@ -1,3 +1,5 @@
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "iconoir-react";
@@ -6,7 +8,7 @@ import { getCopy, isLocale, type Locale } from "@/lib/i18n";
 
 type OpenSourceCopy = {
   title: string;
-  updated: string;
+  updatedPrefix: string;
   back: string;
   intro: string;
   columns: {
@@ -16,6 +18,21 @@ type OpenSourceCopy = {
     link: string;
   };
   note: string;
+  emptyState: string;
+  defaultUsage: string;
+};
+
+type GeneratedPackage = {
+  name: string;
+  version: string;
+  license: string;
+  link: string;
+};
+
+type GeneratedLicenseData = {
+  generatedAt: string;
+  packageCount: number;
+  packages: GeneratedPackage[];
 };
 
 type LicenseItem = {
@@ -25,61 +42,23 @@ type LicenseItem = {
   link: string;
 };
 
-const licenseItems: LicenseItem[] = [
-  {
-    name: "Next.js",
-    usage: "Framework",
-    license: "MIT",
-    link: "https://github.com/vercel/next.js"
-  },
-  {
-    name: "React / React DOM",
-    usage: "UI library",
-    license: "MIT",
-    link: "https://github.com/facebook/react"
-  },
-  {
-    name: "Tailwind CSS",
-    usage: "Styling",
-    license: "MIT",
-    link: "https://github.com/tailwindlabs/tailwindcss"
-  },
-  {
-    name: "qr-code-styling",
-    usage: "QR renderer with logo/style",
-    license: "MIT",
-    link: "https://github.com/kozakdenys/qr-code-styling"
-  },
-  {
-    name: "qrcode",
-    usage: "QR module sizing / utilities",
-    license: "MIT",
-    link: "https://github.com/soldair/node-qrcode"
-  },
-  {
-    name: "TypeScript",
-    usage: "Type checking",
-    license: "Apache-2.0",
-    link: "https://github.com/microsoft/TypeScript"
-  },
-  {
-    name: "ESLint",
-    usage: "Linting",
-    license: "MIT",
-    link: "https://github.com/eslint/eslint"
-  },
-  {
-    name: "Turborepo (Turbo)",
-    usage: "Build task orchestration",
-    license: "MIT",
-    link: "https://github.com/vercel/turborepo"
-  }
-];
+const usageHintByPackage: Record<string, string> = {
+  next: "Framework",
+  react: "UI library",
+  "react-dom": "UI renderer",
+  tailwindcss: "Styling",
+  "qr-code-styling": "QR renderer with logo/style",
+  qrcode: "QR utilities",
+  typescript: "Type checking",
+  eslint: "Linting",
+  turbo: "Build task orchestration",
+  "iconoir-react": "Icon library"
+};
 
 const content: Record<Locale, OpenSourceCopy> = {
   ko: {
     title: "오픈소스 라이선스",
-    updated: "최종 수정일: 2026년 4월 18일",
+    updatedPrefix: "자동 갱신일:",
     back: "홈으로",
     intro: "Pixelyaki는 아래 오픈소스 라이브러리를 기반으로 제작되었습니다.",
     columns: {
@@ -88,11 +67,13 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "라이선스",
       link: "링크"
     },
-    note: "각 라이브러리의 상세 라이선스 조건은 공식 저장소를 확인해 주세요."
+    note: "아래 목록은 빌드 시 자동 생성됩니다. 상세 라이선스 조건은 각 공식 저장소를 확인해 주세요.",
+    emptyState: "라이선스 목록을 불러오지 못했습니다. 빌드를 다시 실행해 주세요.",
+    defaultUsage: "의존성"
   },
   en: {
     title: "Open Source Licenses",
-    updated: "Last updated: April 18, 2026",
+    updatedPrefix: "Auto-updated:",
     back: "Back",
     intro: "Pixelyaki is built with the open-source libraries listed below.",
     columns: {
@@ -101,11 +82,13 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "License",
       link: "Link"
     },
-    note: "Please refer to each official repository for full license terms."
+    note: "This list is generated automatically during build. Please refer to each repository for full license terms.",
+    emptyState: "Could not load the license list. Please run build again.",
+    defaultUsage: "Dependency"
   },
   zh: {
     title: "开源许可",
-    updated: "最后更新：2026年4月18日",
+    updatedPrefix: "自动更新：",
     back: "返回",
     intro: "Pixelyaki 基于以下开源库构建。",
     columns: {
@@ -114,11 +97,13 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "许可证",
       link: "链接"
     },
-    note: "完整许可条款请查看各官方仓库。"
+    note: "该列表会在构建时自动生成。完整许可条款请查看各官方仓库。",
+    emptyState: "无法加载许可列表，请重新执行构建。",
+    defaultUsage: "依赖项"
   },
   ja: {
     title: "オープンソースライセンス",
-    updated: "最終更新日：2026年4月18日",
+    updatedPrefix: "自動更新日：",
     back: "戻る",
     intro: "Pixelyaki は以下のオープンソースライブラリを利用して構築されています。",
     columns: {
@@ -127,11 +112,13 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "ライセンス",
       link: "リンク"
     },
-    note: "ライセンスの詳細は各公式リポジトリをご確認ください。"
+    note: "この一覧はビルド時に自動生成されます。詳細なライセンス条件は各公式リポジトリをご確認ください。",
+    emptyState: "ライセンス一覧を読み込めませんでした。ビルドを再実行してください。",
+    defaultUsage: "依存関係"
   },
   es: {
     title: "Licencias Open Source",
-    updated: "Última actualización: 18 de abril de 2026",
+    updatedPrefix: "Actualizado automáticamente:",
     back: "Volver",
     intro: "Pixelyaki está construido con las siguientes librerías open source.",
     columns: {
@@ -140,11 +127,13 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "Licencia",
       link: "Enlace"
     },
-    note: "Consulta cada repositorio oficial para ver los términos completos de licencia."
+    note: "Esta lista se genera automáticamente durante el build. Consulta cada repositorio para ver los términos completos.",
+    emptyState: "No se pudo cargar la lista de licencias. Ejecuta el build nuevamente.",
+    defaultUsage: "Dependencia"
   },
   fr: {
     title: "Licences Open Source",
-    updated: "Dernière mise à jour : 18 avril 2026",
+    updatedPrefix: "Mise à jour automatique :",
     back: "Retour",
     intro: "Pixelyaki est construit avec les bibliothèques open source ci-dessous.",
     columns: {
@@ -153,11 +142,13 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "Licence",
       link: "Lien"
     },
-    note: "Veuillez consulter chaque dépôt officiel pour les conditions complètes de licence."
+    note: "Cette liste est générée automatiquement pendant le build. Consultez chaque dépôt pour les conditions complètes.",
+    emptyState: "Impossible de charger la liste des licences. Relancez le build.",
+    defaultUsage: "Dépendance"
   },
   de: {
     title: "Open-Source-Lizenzen",
-    updated: "Letzte Aktualisierung: 18. April 2026",
+    updatedPrefix: "Automatisch aktualisiert:",
     back: "Zurück",
     intro: "Pixelyaki basiert auf den folgenden Open-Source-Bibliotheken.",
     columns: {
@@ -166,9 +157,72 @@ const content: Record<Locale, OpenSourceCopy> = {
       license: "Lizenz",
       link: "Link"
     },
-    note: "Die vollständigen Lizenzbedingungen finden Sie in den offiziellen Repositories."
+    note: "Diese Liste wird beim Build automatisch erzeugt. Vollständige Lizenzbedingungen finden Sie in den offiziellen Repositories.",
+    emptyState: "Lizenzliste konnte nicht geladen werden. Bitte Build erneut ausführen.",
+    defaultUsage: "Abhängigkeit"
   }
 };
+
+async function readGeneratedLicenseData(): Promise<GeneratedLicenseData | null> {
+  const dataPath = path.join(process.cwd(), "data", "open-source-licenses.json");
+
+  try {
+    const raw = await fs.readFile(dataPath, "utf8");
+    const parsed = JSON.parse(raw) as Partial<GeneratedLicenseData>;
+
+    if (!Array.isArray(parsed.packages)) {
+      return null;
+    }
+
+    const packages = parsed.packages
+      .filter(
+        (item): item is GeneratedPackage =>
+          Boolean(
+            item &&
+              typeof item.name === "string" &&
+              typeof item.version === "string" &&
+              typeof item.license === "string" &&
+              typeof item.link === "string"
+          )
+      )
+      .map((item) => ({
+        name: item.name,
+        version: item.version,
+        license: item.license || "UNKNOWN",
+        link: item.link
+      }));
+
+    return {
+      generatedAt:
+        typeof parsed.generatedAt === "string" && parsed.generatedAt
+          ? parsed.generatedAt
+          : new Date(0).toISOString(),
+      packageCount:
+        typeof parsed.packageCount === "number" ? parsed.packageCount : packages.length,
+      packages
+    };
+  } catch {
+    return null;
+  }
+}
+
+function formatGeneratedDate(isoDate: string, locale: Locale): string {
+  const date = new Date(isoDate);
+  if (Number.isNaN(date.getTime())) {
+    return "-";
+  }
+
+  return new Intl.DateTimeFormat(locale, { dateStyle: "long" }).format(date);
+}
+
+function toLicenseItems(packages: GeneratedPackage[], defaultUsage: string): LicenseItem[] {
+  return packages.map((item) => ({
+    name: `${item.name}@${item.version}`,
+    usage: usageHintByPackage[item.name] ?? defaultUsage,
+    license: item.license,
+    link: item.link
+  }));
+}
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -178,6 +232,11 @@ export default async function OpenSourcePage({ params }: Props) {
 
   const copy = content[locale];
   const headerLabels = getCopy(locale).header;
+  const generatedData = await readGeneratedLicenseData();
+  const items = generatedData ? toLicenseItems(generatedData.packages, copy.defaultUsage) : [];
+  const updatedDate = generatedData
+    ? formatGeneratedDate(generatedData.generatedAt, locale)
+    : "-";
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 md:py-12">
@@ -194,40 +253,56 @@ export default async function OpenSourcePage({ params }: Props) {
           <h1 className="mb-1 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
             {copy.title}
           </h1>
-          <p className="mb-2 text-xs text-neutral-400 dark:text-neutral-500">{copy.updated}</p>
-          <p className="mb-6 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">{copy.intro}</p>
+          <p className="mb-2 text-xs text-neutral-400 dark:text-neutral-500">
+            {copy.updatedPrefix} {updatedDate}
+          </p>
+          <p className="mb-6 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+            {copy.intro}
+          </p>
 
-          <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
-            <table className="w-full min-w-[720px] text-left text-sm">
-              <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 dark:bg-neutral-950 dark:text-neutral-400">
-                <tr>
-                  <th className="px-4 py-3">{copy.columns.library}</th>
-                  <th className="px-4 py-3">{copy.columns.usage}</th>
-                  <th className="px-4 py-3">{copy.columns.license}</th>
-                  <th className="px-4 py-3">{copy.columns.link}</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
-                {licenseItems.map((item) => (
-                  <tr key={item.name} className="align-top">
-                    <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">{item.name}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{item.usage}</td>
-                    <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">{item.license}</td>
-                    <td className="px-4 py-3">
-                      <a
-                        className="text-blue-700 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                        href={item.link}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {item.link}
-                      </a>
-                    </td>
+          {items.length > 0 ? (
+            <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
+              <table className="w-full min-w-[720px] text-left text-sm">
+                <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 dark:bg-neutral-950 dark:text-neutral-400">
+                  <tr>
+                    <th className="px-4 py-3">{copy.columns.library}</th>
+                    <th className="px-4 py-3">{copy.columns.usage}</th>
+                    <th className="px-4 py-3">{copy.columns.license}</th>
+                    <th className="px-4 py-3">{copy.columns.link}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
+                  {items.map((item) => (
+                    <tr key={item.name} className="align-top">
+                      <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">
+                        {item.name}
+                      </td>
+                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                        {item.usage}
+                      </td>
+                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
+                        {item.license}
+                      </td>
+                      <td className="px-4 py-3">
+                        <a
+                          className="text-blue-700 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                          href={item.link}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {item.link}
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <p className="rounded-lg border border-neutral-200 px-4 py-3 text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
+              {copy.emptyState}
+            </p>
+          )}
 
           <p className="mt-5 text-xs text-neutral-500 dark:text-neutral-400">{copy.note}</p>
         </div>

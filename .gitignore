@@ -20,5 +20,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# generated data
+/data/open-source-licenses.json
+
 # local env files
 .env*.local

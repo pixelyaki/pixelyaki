@@ -4,7 +4,10 @@
   "private": true,
   "packageManager": "npm@11.11.0",
   "scripts": {
+    "predev": "npm run licenses:generate",
     "dev": "next dev --turbopack",
+    "licenses:generate": "node scripts/generate-open-source-licenses.mjs",
+    "prebuild": "npm run licenses:generate",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "next lint",

@@ -43,12 +43,21 @@ export async function generateMetadata({
       description: seo.description,
       url: new URL(canonicalPath, siteUrl).toString(),
       siteName: "Pixelyaki",
-      type: "website"
+      type: "website",
+      images: [
+        {
+          url: "/android-chrome-512x512.png",
+          width: 512,
+          height: 512,
+          alt: seo.title
+        }
+      ]
     },
     twitter: {
       card: "summary",
       title: seo.title,
-      description: seo.description
+      description: seo.description,
+      images: ["/android-chrome-512x512.png"]
     }
   };
 }

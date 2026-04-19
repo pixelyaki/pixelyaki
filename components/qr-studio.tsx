@@ -1270,6 +1270,8 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                     ? extraModeCopy.smsEmptyPreview
                     : extraModeCopy.kakaopayEmptyPreview;
 
+  const isKo = locale === "ko";
+
   const modeButtons: Array<{ value: QrMode; label: string; icon: React.ReactNode }> = [
     { value: "text", label: modeCopy.textModeLabel, icon: <QrCode className="h-3.5 w-3.5" /> },
     { value: "url", label: modeCopy.urlModeLabel, icon: <Www className="h-3.5 w-3.5" /> },
@@ -1278,15 +1280,17 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     { value: "wifi", label: extraModeCopy.wifiModeLabel, icon: <Wifi className="h-3.5 w-3.5" /> },
     { value: "vcard", label: extraModeCopy.vcardModeLabel, icon: <UserSquare className="h-3.5 w-3.5" /> },
     { value: "sms", label: extraModeCopy.smsModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> },
-    { value: "send", label: modeCopy.sendModeLabel, icon: <SendDiagonal className="h-3.5 w-3.5" /> },
-    { value: "kakaopay", label: extraModeCopy.kakaopayModeLabel, icon: <Wallet className="h-3.5 w-3.5" /> }
+    ...(isKo ? [
+      { value: "send" as QrMode, label: modeCopy.sendModeLabel, icon: <SendDiagonal className="h-3.5 w-3.5" /> },
+      { value: "kakaopay" as QrMode, label: extraModeCopy.kakaopayModeLabel, icon: <Wallet className="h-3.5 w-3.5" /> }
+    ] : [])
   ];
 
   return (
     <section id="generator" className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6">
       <div className="overflow-x-auto">
-        <div className="flex w-max gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid md:w-auto md:grid-cols-9">
-          {modeButtons.slice(0, 7).map((button) => (
+        <div className={`flex w-max gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid md:w-auto ${isKo ? "md:grid-cols-9" : "md:grid-cols-7"}`}>
+          {modeButtons.map((button) => (
             <button
               key={button.value}
               type="button"
@@ -1299,24 +1303,6 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </span>
             </button>
           ))}
-          <div className="relative col-span-2 flex gap-1 rounded-md p-0.5 ring-1 ring-neutral-300 dark:ring-neutral-600">
-            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 select-none rounded-sm bg-neutral-100 px-0.5 text-[11px] leading-none dark:bg-neutral-800">
-              🇰🇷
-            </span>
-            {modeButtons.slice(7).map((button) => (
-              <button
-                key={button.value}
-                type="button"
-                className={`flex-1 cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-neutral-900 shadow-sm dark:bg-neutral-700 dark:text-neutral-100" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"}`}
-                onClick={() => setMode(button.value)}
-              >
-                <span className="inline-flex flex-col items-center gap-1 text-center">
-                  {button.icon}
-                  <span className="leading-tight">{button.label}</span>
-                </span>
-              </button>
-            ))}
-          </div>
         </div>
       </div>
 

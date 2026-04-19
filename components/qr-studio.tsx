@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ColorPickerGroup } from "@/components/color-picker-group";
 import { DownloadActions } from "@/components/download-actions";
 import { LogoUploader } from "@/components/logo-uploader";
@@ -9,6 +9,7 @@ import { QrTextField } from "@/components/qr-text-field";
 import { TransparencyToggle } from "@/components/transparency-toggle";
 import { downloadDataUrl, downloadTextFile } from "@/lib/download";
 import { makeQrFilename } from "@/lib/filename";
+import { trackGtmEvent } from "@/lib/gtm";
 import { renderQrPngDataUrl, renderQrSvgMarkup } from "@/lib/qr";
 import { validateLogoFile, validateText } from "@/lib/validation";
 
@@ -51,6 +52,7 @@ export function QrStudio({ copy }: QrStudioProps) {
   const [isRendering, setIsRendering] = useState(false);
   const [errorText, setErrorText] = useState<string | null>(null);
   const [logoErrorText, setLogoErrorText] = useState<string | null>(null);
+  const lastTrackedTextRef = useRef("");
 
   useEffect(() => {
     let cancelled = false;
@@ -60,6 +62,7 @@ export function QrStudio({ copy }: QrStudioProps) {
       if (!valid) {
         setPreviewPng("");
         setPreviewSvg("");
+        lastTrackedTextRef.current = "";
         if (text.length > 0) {
           setErrorText(copy.invalidText);
         } else {
@@ -93,6 +96,16 @@ export function QrStudio({ copy }: QrStudioProps) {
         if (!cancelled) {
           setPreviewPng(png);
           setPreviewSvg(svg);
+
+          const normalizedText = text.trim();
+          if (normalizedText && lastTrackedTextRef.current !== normalizedText) {
+            trackGtmEvent("qr_generate", {
+              text_length: normalizedText.length,
+              has_logo: Boolean(logoDataUrl),
+              transparent_background: transparentBackground
+            });
+            lastTrackedTextRef.current = normalizedText;
+          }
         }
       } catch (error) {
         if (!cancelled) {
@@ -128,31 +141,54 @@ export function QrStudio({ copy }: QrStudioProps) {
     if (!validation.valid) {
       setLogoDataUrl(null);
       setLogoErrorText(validation.reason === "size" ? copy.invalidLogoSize : copy.invalidLogoType);
+      trackGtmEvent("qr_logo_upload_rejected", {
+        reason: validation.reason ?? "unknown"
+      });
       return;
     }
 
     setLogoErrorText(null);
     const dataUrl = await readFileAsDataUrl(file);
     setLogoDataUrl(dataUrl);
+    trackGtmEvent("qr_logo_upload", {
+      file_type: file.type || "unknown",
+      file_size_kb: Math.max(1, Math.round(file.size / 1024))
+    });
+  }
+
+  function onRemoveLogo() {
+    if (!logoDataUrl) return;
+    setLogoDataUrl(null);
+    trackGtmEvent("qr_logo_remove");
   }
 
   function onDownloadPng() {
     if (!previewPng) return;
     downloadDataUrl(previewPng, fileNamePng);
+    trackGtmEvent("qr_download", {
+      format: "png",
+      text_length: text.trim().length,
+      has_logo: Boolean(logoDataUrl)
+    });
   }
 
   function onDownloadSvg() {
     if (!previewSvg) return;
     downloadTextFile(previewSvg, fileNameSvg, "image/svg+xml;charset=utf-8");
+    trackGtmEvent("qr_download", {
+      format: "svg",
+      text_length: text.trim().length,
+      has_logo: Boolean(logoDataUrl)
+    });
   }
 
   return (
     <section
       id="generator"
-      className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6 lg:grid-cols-[minmax(0,1fr)_380px]"
+      className="grid gap-3 bg-gray-50 p-4 dark:bg-gray-950 md:gap-4 md:p-6 lg:grid-cols-[minmax(0,1fr)_380px]"
     >
-      <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
-        <h2 className="mb-4 text-xs font-medium uppercase text-neutral-400 dark:text-neutral-500">
+      <section className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
+        <h2 className="mb-4 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
           {copy.inputPanelTitle}
         </h2>
         <QrTextField
@@ -198,12 +234,12 @@ export function QrStudio({ copy }: QrStudioProps) {
           removeLabel={copy.removeLogo}
           hasLogo={Boolean(logoDataUrl)}
           onFileChange={onLogoFile}
-          onRemove={() => setLogoDataUrl(null)}
+          onRemove={onRemoveLogo}
         />
         {logoErrorText ? <p className="text-xs text-red-500">{logoErrorText}</p> : null}
       </section>
 
-      <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
+      <section className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
         <QrPreviewCard
           title={copy.previewPanelTitle}
           previewUrl={previewPng}

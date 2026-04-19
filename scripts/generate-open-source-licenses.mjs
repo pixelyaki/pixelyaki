@@ -1,10 +1,20 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
+import { builtinModules } from "node:module";
 
 const rootDir = process.cwd();
+const packageJsonPath = path.join(rootDir, "package.json");
 const lockfilePath = path.join(rootDir, "package-lock.json");
 const outputDir = path.join(rootDir, "data");
 const outputPath = path.join(outputDir, "open-source-licenses.json");
+const sourceDirs = ["app", "components", "lib"];
+const sourceExtensions = new Set([".ts", ".tsx", ".js", ".jsx", ".mjs", ".cjs"]);
+const importRegex =
+  /(?:import|export)\s[\s\S]*?\sfrom\s*["']([^"']+)["']|import\(\s*["']([^"']+)["']\s*\)|require\(\s*["']([^"']+)["']\s*\)/g;
+
+const builtinModuleSet = new Set(
+  builtinModules.flatMap((moduleName) => [moduleName, moduleName.replace(/^node:/, "")])
+);
 
 function normalizeLicense(licenseValue) {
   if (typeof licenseValue === "string" && licenseValue.trim()) {
@@ -59,6 +69,99 @@ function extractNameFromPackagePath(packagePath) {
   return parts[parts.length - 1] ?? "";
 }
 
+function normalizeImportToPackageName(importPath) {
+  if (importPath.startsWith("@")) {
+    const [scope, name] = importPath.split("/");
+    if (!scope || !name) return importPath;
+    return `${scope}/${name}`;
+  }
+
+  const [name] = importPath.split("/");
+  return name ?? importPath;
+}
+
+function getParentPackagePath(packagePath) {
+  const parent = packagePath.replace(/\/node_modules\/(?:@[^/]+\/)?[^/]+$/, "");
+  if (parent === packagePath) return "";
+  return parent;
+}
+
+function resolveDependencyPath(lockPackages, fromPackagePath, dependencyName) {
+  let currentPath = fromPackagePath;
+
+  while (currentPath) {
+    const candidate = `${currentPath}/node_modules/${dependencyName}`;
+    if (lockPackages[candidate]) {
+      return candidate;
+    }
+    currentPath = getParentPackagePath(currentPath);
+  }
+
+  const rootCandidate = `node_modules/${dependencyName}`;
+  if (lockPackages[rootCandidate]) {
+    return rootCandidate;
+  }
+
+  return null;
+}
+
+async function collectSourceFiles(directoryPath, acc) {
+  let entries = [];
+  try {
+    entries = await fs.readdir(directoryPath, { withFileTypes: true });
+  } catch {
+    return;
+  }
+
+  await Promise.all(
+    entries.map(async (entry) => {
+      const fullPath = path.join(directoryPath, entry.name);
+      if (entry.isDirectory()) {
+        await collectSourceFiles(fullPath, acc);
+        return;
+      }
+
+      if (!entry.isFile()) return;
+      if (!sourceExtensions.has(path.extname(entry.name))) return;
+      acc.push(fullPath);
+    })
+  );
+}
+
+async function collectUsedPackagesFromSource() {
+  const files = [];
+  for (const dir of sourceDirs) {
+    await collectSourceFiles(path.join(rootDir, dir), files);
+  }
+
+  const packageNames = new Set();
+
+  for (const filePath of files) {
+    let code = "";
+    try {
+      code = await fs.readFile(filePath, "utf8");
+    } catch {
+      continue;
+    }
+
+    for (const match of code.matchAll(importRegex)) {
+      const importPath = match[1] || match[2] || match[3] || "";
+      if (!importPath) continue;
+      if (importPath.startsWith(".") || importPath.startsWith("/") || importPath.startsWith("@/")) {
+        continue;
+      }
+      if (importPath.startsWith("node:")) continue;
+
+      const packageName = normalizeImportToPackageName(importPath);
+      if (!packageName) continue;
+      if (builtinModuleSet.has(packageName)) continue;
+      packageNames.add(packageName);
+    }
+  }
+
+  return packageNames;
+}
+
 async function readJson(filePath) {
   const text = await fs.readFile(filePath, "utf8");
   return JSON.parse(text);
@@ -71,12 +174,63 @@ function comparePackages(a, b) {
 }
 
 async function main() {
-  const lockfile = await readJson(lockfilePath);
+  const [packageJson, lockfile, sourceUsedPackages] = await Promise.all([
+    readJson(packageJsonPath),
+    readJson(lockfilePath),
+    collectUsedPackagesFromSource()
+  ]);
+
   const lockPackages = lockfile.packages ?? {};
+  const directDependencies = Object.keys(packageJson.dependencies ?? {});
+  const seedPackages = new Set(
+    Array.from(sourceUsedPackages).filter((packageName) =>
+      directDependencies.includes(packageName)
+    )
+  );
+
+  if (seedPackages.size === 0) {
+    for (const dependencyName of directDependencies) {
+      seedPackages.add(dependencyName);
+    }
+  }
+
+  for (const coreDependency of ["next", "react", "react-dom"]) {
+    if (directDependencies.includes(coreDependency)) {
+      seedPackages.add(coreDependency);
+    }
+  }
+
+  const visitedPackagePaths = new Set();
+  const packagePathsQueue = Array.from(seedPackages)
+    .map((packageName) => `node_modules/${packageName}`)
+    .filter((packagePath) => Boolean(lockPackages[packagePath]));
+
+  while (packagePathsQueue.length > 0) {
+    const packagePath = packagePathsQueue.pop();
+    if (!packagePath || visitedPackagePaths.has(packagePath)) continue;
+
+    visitedPackagePaths.add(packagePath);
+    const lockEntry = lockPackages[packagePath];
+    if (!lockEntry) continue;
+
+    const runtimeDependencies = {
+      ...(lockEntry.dependencies ?? {}),
+      ...(lockEntry.optionalDependencies ?? {})
+    };
+
+    for (const dependencyName of Object.keys(runtimeDependencies)) {
+      const resolvedPath = resolveDependencyPath(lockPackages, packagePath, dependencyName);
+      if (resolvedPath && !visitedPackagePaths.has(resolvedPath)) {
+        packagePathsQueue.push(resolvedPath);
+      }
+    }
+  }
+
   const deduped = new Map();
 
-  for (const [packagePath, lockEntry] of Object.entries(lockPackages)) {
-    if (!packagePath.startsWith("node_modules/")) continue;
+  for (const packagePath of visitedPackagePaths) {
+    const lockEntry = lockPackages[packagePath];
+    if (!lockEntry) continue;
 
     const packageJsonPath = path.join(rootDir, packagePath, "package.json");
     const fallbackName = extractNameFromPackagePath(packagePath);
@@ -121,6 +275,8 @@ async function main() {
   const output = {
     generatedAt: new Date().toISOString(),
     packageCount: packages.length,
+    sourcePackageCount: sourceUsedPackages.size,
+    seedPackageCount: seedPackages.size,
     packages
   };
 

@@ -4,11 +4,15 @@ import { getSiteUrl } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getSiteUrl();
+  const staticLocalePaths = ["", "/privacy", "/terms", "/opensource"] as const;
+  const now = new Date();
 
-  return locales.map((locale) => ({
-    url: `${base}/${locale}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 0.9
-  }));
+  return locales.flatMap((locale) =>
+    staticLocalePaths.map((path) => ({
+      url: `${base}/${locale}${path}`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: path === "" ? 0.9 : 0.6
+    }))
+  );
 }

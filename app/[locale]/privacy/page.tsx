@@ -266,27 +266,27 @@ export default async function PrivacyPage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 md:py-12">
-      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
         <Header locale={locale} labels={headerLabels} />
-        <div className="border-t border-neutral-200 px-6 py-8 dark:border-neutral-800 md:px-10 md:py-10">
+        <div className="border-t border-gray-200 px-6 py-8 dark:border-gray-800 md:px-10 md:py-10">
           <Link
             href={`/${locale}`}
-            className="mb-6 inline-flex items-center gap-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
+            className="mb-6 inline-flex items-center gap-1.5 text-xs text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
           >
             <ArrowLeft width={14} height={14} aria-hidden />
             {copy.back}
           </Link>
-          <h1 className="mb-1 text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+          <h1 className="mb-1 text-2xl font-semibold text-gray-900 dark:text-gray-100">
             {copy.title}
           </h1>
-          <p className="mb-8 text-xs text-neutral-400 dark:text-neutral-500">{copy.updated}</p>
-          <div className="divide-y divide-neutral-100 dark:divide-neutral-800">
+          <p className="mb-8 text-xs text-gray-400 dark:text-gray-500">{copy.updated}</p>
+          <div className="divide-y divide-gray-100 dark:divide-gray-800">
             {copy.sections.map((section, i) => (
               <section key={i} className="py-5 first:pt-0">
-                <h2 className="mb-2 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
+                <h2 className="mb-2 text-sm font-semibold text-gray-900 dark:text-gray-100">
                   {section.heading}
                 </h2>
-                <p className="whitespace-pre-line text-sm text-neutral-600 dark:text-neutral-400">
+                <p className="whitespace-pre-line text-sm text-gray-600 dark:text-gray-400">
                   {section.body}
                 </p>
               </section>

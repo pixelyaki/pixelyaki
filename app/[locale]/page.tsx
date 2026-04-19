@@ -21,21 +21,21 @@ export default async function LocalePage({ params }: LocalePageProps) {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 md:py-12">
-      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm motion-safe:animate-[rise-in_360ms_ease_both] dark:border-neutral-800 dark:bg-neutral-900">
+      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm motion-safe:animate-[rise-in_360ms_ease_both] dark:border-gray-800 dark:bg-gray-900">
         <Header locale={locale} labels={copy.header} />
-        <div className="border-t border-neutral-200 dark:border-neutral-800">
+        <div className="border-t border-gray-200 dark:border-gray-800">
           <HeroSection copy={copy.hero} />
         </div>
-        <div className="border-t border-neutral-200 dark:border-neutral-800">
+        <div className="border-t border-gray-200 dark:border-gray-800">
           <QrStudio copy={copy.studio} />
         </div>
-        <div className="border-t border-neutral-200 dark:border-neutral-800">
+        <div className="border-t border-gray-200 dark:border-gray-800">
           <FeatureGrid items={copy.features} />
         </div>
-        <div className="border-t border-neutral-200 dark:border-neutral-800">
+        <div className="border-t border-gray-200 dark:border-gray-800">
           <FaqSection items={copy.faq} title={copy.faqTitle} />
         </div>
-        <div className="border-t border-neutral-200 dark:border-neutral-800">
+        <div className="border-t border-gray-200 dark:border-gray-800">
           <Footer locale={locale} labels={copy.footer} />
         </div>
       </div>

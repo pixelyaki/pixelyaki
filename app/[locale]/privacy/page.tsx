@@ -23,7 +23,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. 로컬 스토리지",
-        body: "테마(다크/라이트 모드) 설정은 이용자의 브라우저 로컬 스토리지에 저장됩니다. 이 데이터는 서버로 전송되지 않으며, 브라우저 설정에서 언제든지 삭제할 수 있습니다."
+        body: "다크/라이트 모드는 이용자의 시스템 설정을 자동으로 따릅니다. 서비스가 테마 설정을 별도로 로컬 스토리지에 저장하거나 서버로 전송하지 않습니다."
       },
       {
         heading: "4. 제3자 서비스",
@@ -58,7 +58,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. Local Storage",
-        body: "Your theme preference (dark/light mode) is saved in your browser's local storage. This data is never sent to a server and can be deleted at any time through your browser settings."
+        body: "Dark/light mode follows your system preference automatically. The service does not store a separate theme preference in local storage or send it to any server."
       },
       {
         heading: "4. Third-Party Services",
@@ -93,7 +93,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. 本地存储",
-        body: "您的主题偏好（深色/浅色模式）将保存在浏览器的本地存储中。该数据不会传输到服务器，您可随时通过浏览器设置将其删除。"
+        body: "深色/浅色模式会自动跟随您的系统设置。服务不会将主题偏好单独存储在本地，也不会传输到服务器。"
       },
       {
         heading: "4. 第三方服务",
@@ -128,7 +128,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. ローカルストレージ",
-        body: "テーマ設定（ダーク/ライトモード）はブラウザのローカルストレージに保存されます。このデータはサーバーに送信されず、ブラウザの設定からいつでも削除できます。"
+        body: "ダーク/ライトモードはお使いのシステム設定に自動で追従します。本サービスがテーマ設定をローカルストレージに個別保存したり、サーバーへ送信したりすることはありません。"
       },
       {
         heading: "4. 第三者サービス",
@@ -163,7 +163,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. Almacenamiento local",
-        body: "Tu preferencia de tema (modo oscuro/claro) se guarda en el almacenamiento local del navegador. Estos datos nunca se envían a un servidor y pueden eliminarse en cualquier momento desde la configuración del navegador."
+        body: "El modo oscuro/claro sigue automáticamente la configuración del sistema. El servicio no guarda una preferencia de tema separada en el almacenamiento local ni la envía a servidores."
       },
       {
         heading: "4. Servicios de terceros",
@@ -198,7 +198,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. Stockage local",
-        body: "Votre préférence de thème (mode sombre/clair) est enregistrée dans le stockage local de votre navigateur. Ces données ne sont jamais envoyées à un serveur et peuvent être supprimées à tout moment depuis les paramètres du navigateur."
+        body: "Le mode sombre/clair suit automatiquement la configuration de votre système. Le service n'enregistre pas de préférence de thème distincte dans le stockage local et ne l'envoie pas au serveur."
       },
       {
         heading: "4. Services tiers",
@@ -233,7 +233,7 @@ const content: Record<Locale, PrivacyContent> = {
       },
       {
         heading: "3. Lokaler Speicher",
-        body: "Ihre Design-Einstellung (Dunkel-/Hellmodus) wird im lokalen Speicher Ihres Browsers gespeichert. Diese Daten werden nie an einen Server übertragen und können jederzeit in den Browsereinstellungen gelöscht werden."
+        body: "Der Dunkel-/Hellmodus folgt automatisch Ihrer Systemeinstellung. Der Dienst speichert keine separate Theme-Präferenz im lokalen Speicher und überträgt sie nicht an einen Server."
       },
       {
         heading: "4. Drittanbieterdienste",

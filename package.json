@@ -18,6 +18,8 @@
     "turbo:typecheck": "turbo run typecheck"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "iconoir-react": "^7.11.0",
     "next": "^15.3.2",
     "qr-code-styling": "^1.9.2",

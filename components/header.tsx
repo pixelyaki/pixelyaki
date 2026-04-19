@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { type Locale } from "@/lib/i18n";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 type HeaderProps = {
   locale: Locale;
@@ -27,7 +26,6 @@ export function Header({ locale, labels }: HeaderProps) {
         </Link>
       </div>
       <div className="flex items-center gap-2">
-        <ThemeToggle />
         <a
           className="shrink-0 rounded-md bg-blue-700 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-blue-800 whitespace-nowrap"
           href="#generator"

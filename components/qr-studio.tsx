@@ -1,12 +1,14 @@
 "use client";
 
 import {
+  AppWindow,
   ChatBubble,
   Mail,
   Phone,
   QrCode,
   SendDiagonal,
   UserSquare,
+  Wallet,
   Wifi,
   Www
 } from "iconoir-react";
@@ -125,6 +127,19 @@ type ExtraModeCopy = {
   smsBodyPlaceholder: string;
   smsInvalid: string;
   smsEmptyPreview: string;
+  wechatModeLabel: string;
+  alipayModeLabel: string;
+  miniProgramModeLabel: string;
+  chinaLinkLabel: string;
+  chinaLinkPlaceholder: string;
+  chinaInvalidLink: string;
+  wechatEmptyPreview: string;
+  alipayEmptyPreview: string;
+  miniProgramLinkLabel: string;
+  miniProgramLinkPlaceholder: string;
+  miniProgramInvalidLink: string;
+  miniProgramEmptyPreview: string;
+  miniProgramServerHint: string;
 };
 
 type StyleCopy = {
@@ -384,7 +399,21 @@ const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
     smsBodyLabel: "메시지 (선택)",
     smsBodyPlaceholder: "예: 안녕하세요",
     smsInvalid: "SMS 전화번호 형식을 확인해 주세요.",
-    smsEmptyPreview: "전화번호를 입력하면 SMS QR 미리보기가 표시됩니다."
+    smsEmptyPreview: "전화번호를 입력하면 SMS QR 미리보기가 표시됩니다.",
+    wechatModeLabel: "WeChat",
+    alipayModeLabel: "Alipay",
+    miniProgramModeLabel: "Mini Program",
+    chinaLinkLabel: "공식 링크 또는 딥링크",
+    chinaLinkPlaceholder: "예: https://weixin.qq.com/... 또는 weixin://...",
+    chinaInvalidLink: "올바른 WeChat/Alipay 링크를 입력해 주세요.",
+    wechatEmptyPreview: "WeChat 링크를 입력하면 QR 미리보기가 표시됩니다.",
+    alipayEmptyPreview: "Alipay 링크를 입력하면 QR 미리보기가 표시됩니다.",
+    miniProgramLinkLabel: "Mini Program 링크",
+    miniProgramLinkPlaceholder: "예: https://wxaurl.cn/xxxxxx",
+    miniProgramInvalidLink: "올바른 Mini Program 링크를 입력해 주세요.",
+    miniProgramEmptyPreview: "Mini Program 링크를 입력하면 QR 미리보기가 표시됩니다.",
+    miniProgramServerHint:
+      "공식 Mini Program 코드(원형 코드)는 백엔드에서 WeChat API 연동이 필요합니다."
   },
   en: {
     wifiModeLabel: "Wi-Fi",
@@ -417,7 +446,21 @@ const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
     smsBodyLabel: "Message (optional)",
     smsBodyPlaceholder: "e.g. Hello!",
     smsInvalid: "Please check the SMS phone number format.",
-    smsEmptyPreview: "Enter a phone number to preview the SMS QR code."
+    smsEmptyPreview: "Enter a phone number to preview the SMS QR code.",
+    wechatModeLabel: "WeChat",
+    alipayModeLabel: "Alipay",
+    miniProgramModeLabel: "Mini Program",
+    chinaLinkLabel: "Official link or deep link",
+    chinaLinkPlaceholder: "e.g. https://weixin.qq.com/... or weixin://...",
+    chinaInvalidLink: "Please enter a valid WeChat/Alipay link.",
+    wechatEmptyPreview: "Enter a WeChat link to preview the QR code.",
+    alipayEmptyPreview: "Enter an Alipay link to preview the QR code.",
+    miniProgramLinkLabel: "Mini Program link",
+    miniProgramLinkPlaceholder: "e.g. https://wxaurl.cn/xxxxxx",
+    miniProgramInvalidLink: "Please enter a valid Mini Program link.",
+    miniProgramEmptyPreview: "Enter a Mini Program link to preview the QR code.",
+    miniProgramServerHint:
+      "Official Mini Program code generation requires backend integration with WeChat APIs."
   }
 };
 
@@ -443,10 +486,76 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetRounded: "Rounded",
     presetClassy: "Classy",
     presetDot: "Dot"
+  },
+  zh: {
+    title: "QR 样式",
+    presetLabel: "预设",
+    dotsLabel: "点样式",
+    cornerSquareLabel: "角块样式",
+    cornerDotLabel: "角点样式",
+    presetSquare: "方形",
+    presetRounded: "圆角",
+    presetClassy: "经典",
+    presetDot: "圆点"
+  },
+  ja: {
+    title: "QRスタイル",
+    presetLabel: "プリセット",
+    dotsLabel: "ドット形状",
+    cornerSquareLabel: "コーナー形状",
+    cornerDotLabel: "コーナードット",
+    presetSquare: "スクエア",
+    presetRounded: "ラウンド",
+    presetClassy: "クラシー",
+    presetDot: "ドット"
+  },
+  es: {
+    title: "Estilo QR",
+    presetLabel: "Preajuste",
+    dotsLabel: "Forma de puntos",
+    cornerSquareLabel: "Forma de esquina",
+    cornerDotLabel: "Punto de esquina",
+    presetSquare: "Cuadrado",
+    presetRounded: "Redondeado",
+    presetClassy: "Clasico",
+    presetDot: "Puntos"
+  },
+  fr: {
+    title: "Style QR",
+    presetLabel: "Preconfiguration",
+    dotsLabel: "Style des points",
+    cornerSquareLabel: "Style des coins",
+    cornerDotLabel: "Point de coin",
+    presetSquare: "Carre",
+    presetRounded: "Arrondi",
+    presetClassy: "Classique",
+    presetDot: "Points"
+  },
+  de: {
+    title: "QR-Stil",
+    presetLabel: "Voreinstellung",
+    dotsLabel: "Punktstil",
+    cornerSquareLabel: "Eckenstil",
+    cornerDotLabel: "Eckpunkt-Stil",
+    presetSquare: "Quadratisch",
+    presetRounded: "Abgerundet",
+    presetClassy: "Klassisch",
+    presetDot: "Punkte"
   }
 };
 
-type QrMode = "text" | "send" | "url" | "email" | "phone" | "wifi" | "vcard" | "sms";
+type QrMode =
+  | "text"
+  | "send"
+  | "url"
+  | "email"
+  | "phone"
+  | "wifi"
+  | "vcard"
+  | "sms"
+  | "wechat"
+  | "alipay"
+  | "mini-program";
 
 type QrStudioProps = {
   copy: StudioCopy;
@@ -454,7 +563,7 @@ type QrStudioProps = {
 };
 
 const INPUT_CLASS =
-  "w-full rounded-md border border-gray-200 bg-white p-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-gray-500 dark:focus:ring-gray-100/5";
+  "w-full rounded-md border border-neutral-200 bg-white p-2 text-sm text-neutral-900 outline-none transition focus:border-neutral-400 focus:ring-2 focus:ring-neutral-900/5 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:border-neutral-500 dark:focus:ring-neutral-100/5";
 
 const QR_STYLE_PRESETS: Record<
   QrStylePreset,
@@ -489,6 +598,9 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
   const [vcardAddress, setVcardAddress] = useState("");
   const [smsPhone, setSmsPhone] = useState("");
   const [smsBody, setSmsBody] = useState("");
+  const [wechatLink, setWechatLink] = useState("");
+  const [alipayLink, setAlipayLink] = useState("");
+  const [miniProgramLink, setMiniProgramLink] = useState("");
   const [stylePreset, setStylePreset] = useState<QrStylePreset>("square");
   const [dotsStyle, setDotsStyle] = useState<QrDotsStyle>(QR_STYLE_PRESETS.square.dots);
   const [cornerSquareStyle, setCornerSquareStyle] = useState<QrCornerSquareStyle>(QR_STYLE_PRESETS.square.cornerSquare);
@@ -534,6 +646,9 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     phone: smsPhone,
     body: smsBody
   });
+  const wechatPayload = buildChinaLinkPayload(wechatLink);
+  const alipayPayload = buildChinaLinkPayload(alipayLink);
+  const miniProgramPayload = buildChinaLinkPayload(miniProgramLink);
 
   let qrPayload = "";
   let modeError: string | null = null;
@@ -601,7 +716,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     } else {
       modeError = extraModeCopy.vcardInvalid;
     }
-  } else {
+  } else if (mode === "sms") {
     if (smsPhone.trim().length === 0) {
       modeError = null;
     } else if (smsPayload) {
@@ -609,6 +724,28 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     } else {
       modeError = extraModeCopy.smsInvalid;
     }
+  } else if (mode === "wechat") {
+    if (wechatLink.trim().length === 0) {
+      modeError = null;
+    } else if (wechatPayload) {
+      qrPayload = wechatPayload;
+    } else {
+      modeError = extraModeCopy.chinaInvalidLink;
+    }
+  } else if (mode === "alipay") {
+    if (alipayLink.trim().length === 0) {
+      modeError = null;
+    } else if (alipayPayload) {
+      qrPayload = alipayPayload;
+    } else {
+      modeError = extraModeCopy.chinaInvalidLink;
+    }
+  } else if (miniProgramLink.trim().length === 0) {
+    modeError = null;
+  } else if (miniProgramPayload) {
+    qrPayload = miniProgramPayload;
+  } else {
+    modeError = extraModeCopy.miniProgramInvalidLink;
   }
 
   useEffect(() => {
@@ -712,11 +849,29 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 has_email: Boolean(vcardEmail.trim()),
                 has_address: Boolean(vcardAddress.trim())
               });
-            } else {
+            } else if (mode === "sms") {
               trackGtmEvent("qr_generate", {
                 ...commonPayload,
                 sms_phone_length: normalizedSmsPhone.length,
                 sms_body_length: smsBody.trim().length
+              });
+            } else if (mode === "wechat") {
+              trackGtmEvent("qr_generate", {
+                ...commonPayload,
+                link_length: wechatLink.trim().length,
+                china_platform: "wechat"
+              });
+            } else if (mode === "alipay") {
+              trackGtmEvent("qr_generate", {
+                ...commonPayload,
+                link_length: alipayLink.trim().length,
+                china_platform: "alipay"
+              });
+            } else {
+              trackGtmEvent("qr_generate", {
+                ...commonPayload,
+                link_length: miniProgramLink.trim().length,
+                china_platform: "mini_program"
               });
             }
 
@@ -756,6 +911,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     normalizedSmsPhone.length,
     normalizedText.length,
     qrPayload,
+    miniProgramLink,
     smsBody,
     stylePreset,
     dotsStyle,
@@ -766,6 +922,8 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     vcardAddress,
     vcardCompany,
     vcardEmail,
+    wechatLink,
+    alipayLink,
     wifiEncryption,
     wifiSsid,
     normalizedVcardPhone.length
@@ -783,7 +941,10 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     normalizedPhone,
     wifiSsid,
     vcardName,
-    smsPhone
+    smsPhone,
+    wechatLink,
+    alipayLink,
+    miniProgramLink
   });
   const fileNamePng = makeQrFilename(filenameSeed, "png");
   const fileNameSvg = makeQrFilename(filenameSeed, "svg");
@@ -865,7 +1026,13 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 ? extraModeCopy.wifiEmptyPreview
                 : mode === "vcard"
                   ? extraModeCopy.vcardEmptyPreview
-                  : extraModeCopy.smsEmptyPreview;
+                  : mode === "sms"
+                    ? extraModeCopy.smsEmptyPreview
+                    : mode === "wechat"
+                      ? extraModeCopy.wechatEmptyPreview
+                      : mode === "alipay"
+                        ? extraModeCopy.alipayEmptyPreview
+                        : extraModeCopy.miniProgramEmptyPreview;
 
   const modeButtons: Array<{ value: QrMode; label: string; icon: React.ReactNode }> = [
     { value: "text", label: modeCopy.textModeLabel, icon: <QrCode className="h-3.5 w-3.5" /> },
@@ -875,22 +1042,25 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     { value: "phone", label: modeCopy.phoneModeLabel, icon: <Phone className="h-3.5 w-3.5" /> },
     { value: "wifi", label: extraModeCopy.wifiModeLabel, icon: <Wifi className="h-3.5 w-3.5" /> },
     { value: "vcard", label: extraModeCopy.vcardModeLabel, icon: <UserSquare className="h-3.5 w-3.5" /> },
-    { value: "sms", label: extraModeCopy.smsModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> }
+    { value: "sms", label: extraModeCopy.smsModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> },
+    { value: "wechat", label: extraModeCopy.wechatModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> },
+    { value: "alipay", label: extraModeCopy.alipayModeLabel, icon: <Wallet className="h-3.5 w-3.5" /> },
+    { value: "mini-program", label: extraModeCopy.miniProgramModeLabel, icon: <AppWindow className="h-3.5 w-3.5" /> }
   ];
 
   return (
-    <section id="generator" className="grid gap-3 bg-gray-50 p-4 dark:bg-gray-950 md:gap-4 md:p-6">
-      <section className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
-        <h2 className="mb-4 flex items-center gap-1.5 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
+    <section id="generator" className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6">
+      <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
+        <h2 className="mb-4 flex items-center gap-1.5 text-xs font-medium uppercase text-neutral-400 dark:text-neutral-500">
           <QrCode className="h-3.5 w-3.5" />
           <span>{modeCopy.modeSelectorTitle}</span>
         </h2>
-        <div className="grid grid-cols-2 gap-1 rounded-md bg-gray-100 p-1 dark:bg-gray-800/80 md:grid-cols-4 lg:grid-cols-8">
+        <div className="grid grid-cols-2 gap-1 rounded-md bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-11">
           {modeButtons.map((button) => (
             <button
               key={button.value}
               type="button"
-              className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100" : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"}`}
+              className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-neutral-900 shadow-sm dark:bg-neutral-700 dark:text-neutral-100" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"}`}
               onClick={() => setMode(button.value)}
             >
               <span className="inline-flex flex-col items-center gap-1 text-center">
@@ -903,8 +1073,8 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
       </section>
 
       <div className="grid gap-3 md:gap-4 lg:grid-cols-[minmax(0,1fr)_380px]">
-        <section className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
-          <h2 className="mb-4 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
+        <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
+          <h2 className="mb-4 text-xs font-medium uppercase text-neutral-400 dark:text-neutral-500">
             {copy.inputPanelTitle}
           </h2>
 
@@ -921,7 +1091,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
           {mode === "send" ? (
             <div className="mb-4 grid gap-3">
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="send-bank">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="send-bank">
                   {modeCopy.bankLabel}
                 </label>
                 <select
@@ -940,7 +1110,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
 
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="send-account">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="send-account">
                   {modeCopy.accountLabel}
                 </label>
                 <input
@@ -955,7 +1125,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
 
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="send-amount">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="send-amount">
                   {modeCopy.amountLabel}
                 </label>
                 <input
@@ -967,14 +1137,14 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   placeholder={modeCopy.amountPlaceholder}
                   className={INPUT_CLASS}
                 />
-                <small className="text-xs text-gray-400 dark:text-gray-500">{modeCopy.amountHint}</small>
+                <small className="text-xs text-neutral-400 dark:text-neutral-500">{modeCopy.amountHint}</small>
               </div>
             </div>
           ) : null}
 
           {mode === "url" ? (
             <div className="mb-4 grid gap-1.5">
-              <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="qr-url">
+              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="qr-url">
                 {modeCopy.urlLabel}
               </label>
               <input
@@ -990,7 +1160,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
 
           {mode === "email" ? (
             <div className="mb-4 grid gap-1.5">
-              <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="qr-email">
+              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="qr-email">
                 {modeCopy.emailLabel}
               </label>
               <input
@@ -1006,7 +1176,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
 
           {mode === "phone" ? (
             <div className="mb-4 grid gap-1.5">
-              <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="qr-phone">
+              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="qr-phone">
                 {modeCopy.phoneLabel}
               </label>
               <input
@@ -1023,7 +1193,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
           {mode === "wifi" ? (
             <div className="mb-4 grid gap-3">
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="wifi-ssid">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="wifi-ssid">
                   {extraModeCopy.wifiSsidLabel}
                 </label>
                 <input
@@ -1036,7 +1206,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="wifi-encryption">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="wifi-encryption">
                   {extraModeCopy.wifiEncryptionLabel}
                 </label>
                 <select
@@ -1052,7 +1222,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
               {wifiEncryption !== "nopass" ? (
                 <div className="grid gap-1.5">
-                  <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="wifi-password">
+                  <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="wifi-password">
                     {extraModeCopy.wifiPasswordLabel}
                   </label>
                   <input
@@ -1065,10 +1235,10 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   />
                 </div>
               ) : null}
-              <label className="flex cursor-pointer items-center gap-2 text-xs text-gray-700 dark:text-gray-300">
+              <label className="flex cursor-pointer items-center gap-2 text-xs text-neutral-700 dark:text-neutral-300">
                 <input
                   type="checkbox"
-                  className="h-3.5 w-3.5 rounded-sm border-gray-300 accent-gray-900 dark:accent-white"
+                  className="h-3.5 w-3.5 rounded-sm border-neutral-300 accent-neutral-900 dark:accent-white"
                   checked={wifiHidden}
                   onChange={(event) => setWifiHidden(event.target.checked)}
                 />
@@ -1080,7 +1250,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
           {mode === "vcard" ? (
             <div className="mb-4 grid gap-3">
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="vcard-name">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="vcard-name">
                   {extraModeCopy.vcardNameLabel}
                 </label>
                 <input
@@ -1093,7 +1263,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="vcard-company">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="vcard-company">
                   {extraModeCopy.vcardCompanyLabel}
                 </label>
                 <input
@@ -1106,7 +1276,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="vcard-phone">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="vcard-phone">
                   {extraModeCopy.vcardPhoneLabel}
                 </label>
                 <input
@@ -1119,7 +1289,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="vcard-email">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="vcard-email">
                   {extraModeCopy.vcardEmailLabel}
                 </label>
                 <input
@@ -1132,7 +1302,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="vcard-address">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="vcard-address">
                   {extraModeCopy.vcardAddressLabel}
                 </label>
                 <input
@@ -1150,7 +1320,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
           {mode === "sms" ? (
             <div className="mb-4 grid gap-3">
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="sms-phone">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="sms-phone">
                   {extraModeCopy.smsPhoneLabel}
                 </label>
                 <input
@@ -1163,7 +1333,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 />
               </div>
               <div className="grid gap-1.5">
-                <label className="text-xs font-medium text-gray-700 dark:text-gray-300" htmlFor="sms-body">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="sms-body">
                   {extraModeCopy.smsBodyLabel}
                 </label>
                 <textarea
@@ -1177,11 +1347,60 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
             </div>
           ) : null}
 
-          <div className="mb-4 grid gap-2 rounded-md border border-gray-200 p-3 dark:border-gray-700">
-            <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300">{styleCopy.title}</h3>
+          {mode === "wechat" ? (
+            <div className="mb-4 grid gap-1.5">
+              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="wechat-link">
+                {extraModeCopy.chinaLinkLabel}
+              </label>
+              <input
+                id="wechat-link"
+                type="text"
+                value={wechatLink}
+                onChange={(event) => setWechatLink(event.target.value)}
+                placeholder={extraModeCopy.chinaLinkPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+          ) : null}
+
+          {mode === "alipay" ? (
+            <div className="mb-4 grid gap-1.5">
+              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="alipay-link">
+                {extraModeCopy.chinaLinkLabel}
+              </label>
+              <input
+                id="alipay-link"
+                type="text"
+                value={alipayLink}
+                onChange={(event) => setAlipayLink(event.target.value)}
+                placeholder={extraModeCopy.chinaLinkPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+          ) : null}
+
+          {mode === "mini-program" ? (
+            <div className="mb-4 grid gap-1.5">
+              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="mini-program-link">
+                {extraModeCopy.miniProgramLinkLabel}
+              </label>
+              <input
+                id="mini-program-link"
+                type="text"
+                value={miniProgramLink}
+                onChange={(event) => setMiniProgramLink(event.target.value)}
+                placeholder={extraModeCopy.miniProgramLinkPlaceholder}
+                className={INPUT_CLASS}
+              />
+              <small className="text-xs text-neutral-500 dark:text-neutral-400">{extraModeCopy.miniProgramServerHint}</small>
+            </div>
+          ) : null}
+
+          <div className="mb-4 grid gap-2 rounded-md border border-neutral-200 p-3 dark:border-neutral-700">
+            <h3 className="text-xs font-medium text-neutral-700 dark:text-neutral-300">{styleCopy.title}</h3>
             <div className="grid gap-2 sm:grid-cols-2">
               <div className="grid gap-1.5">
-                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-preset">
+                <label className="text-xs text-neutral-500 dark:text-neutral-400" htmlFor="qr-style-preset">
                   {styleCopy.presetLabel}
                 </label>
                 <select
@@ -1198,7 +1417,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
 
               <div className="grid gap-1.5">
-                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-dots">
+                <label className="text-xs text-neutral-500 dark:text-neutral-400" htmlFor="qr-style-dots">
                   {styleCopy.dotsLabel}
                 </label>
                 <select
@@ -1217,7 +1436,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
 
               <div className="grid gap-1.5">
-                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-corner-square">
+                <label className="text-xs text-neutral-500 dark:text-neutral-400" htmlFor="qr-style-corner-square">
                   {styleCopy.cornerSquareLabel}
                 </label>
                 <select
@@ -1233,7 +1452,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
 
               <div className="grid gap-1.5">
-                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-corner-dot">
+                <label className="text-xs text-neutral-500 dark:text-neutral-400" htmlFor="qr-style-corner-dot">
                   {styleCopy.cornerDotLabel}
                 </label>
                 <select
@@ -1289,7 +1508,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
           {logoErrorText ? <p className="text-xs text-red-500">{logoErrorText}</p> : null}
         </section>
 
-        <section className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
+        <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
           <QrPreviewCard
             title={copy.previewPanelTitle}
             previewUrl={previewPng}
@@ -1326,6 +1545,9 @@ function getFilenameSeed(options: {
   wifiSsid: string;
   vcardName: string;
   smsPhone: string;
+  wechatLink: string;
+  alipayLink: string;
+  miniProgramLink: string;
 }): string {
   if (options.mode === "text") {
     return options.text || "sample";
@@ -1355,7 +1577,19 @@ function getFilenameSeed(options: {
     return `vcard-${options.vcardName || "contact"}`;
   }
 
-  return `sms-${options.smsPhone || "message"}`;
+  if (options.mode === "sms") {
+    return `sms-${options.smsPhone || "message"}`;
+  }
+
+  if (options.mode === "wechat") {
+    return `wechat-${options.wechatLink || "link"}`;
+  }
+
+  if (options.mode === "alipay") {
+    return `alipay-${options.alipayLink || "link"}`;
+  }
+
+  return `mini-program-${options.miniProgramLink || "link"}`;
 }
 
 function buildUrlPayload(value: string): string | null {
@@ -1370,6 +1604,19 @@ function buildUrlPayload(value: string): string | null {
       return null;
     }
     return url.toString();
+  } catch {
+    return null;
+  }
+}
+
+function buildChinaLinkPayload(value: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  const withScheme = /^[a-zA-Z][a-zA-Z\d+.-]*:/.test(trimmed) ? trimmed : `https://${trimmed}`;
+
+  try {
+    return new URL(withScheme).toString();
   } catch {
     return null;
   }

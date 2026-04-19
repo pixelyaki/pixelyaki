@@ -240,30 +240,30 @@ export default async function OpenSourcePage({ params }: Props) {
 
   return (
     <main className="mx-auto max-w-5xl px-4 py-8 md:py-12">
-      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
+      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900">
         <Header locale={locale} labels={headerLabels} />
-        <div className="border-t border-gray-200 px-6 py-8 dark:border-gray-800 md:px-10 md:py-10">
+        <div className="border-t border-neutral-200 px-6 py-8 dark:border-neutral-800 md:px-10 md:py-10">
           <Link
             href={`/${locale}`}
-            className="mb-6 inline-flex items-center gap-1.5 text-xs text-gray-400 transition-colors hover:text-gray-900 dark:hover:text-gray-100"
+            className="mb-6 inline-flex items-center gap-1.5 text-xs text-neutral-400 transition-colors hover:text-neutral-900 dark:hover:text-neutral-100"
           >
             <ArrowLeft width={14} height={14} aria-hidden />
             {copy.back}
           </Link>
-          <h1 className="mb-1 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+          <h1 className="mb-1 text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
             {copy.title}
           </h1>
-          <p className="mb-2 text-xs text-gray-400 dark:text-gray-500">
+          <p className="mb-2 text-xs text-neutral-400 dark:text-neutral-500">
             {copy.updatedPrefix} {updatedDate}
           </p>
-          <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
+          <p className="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
             {copy.intro}
           </p>
 
           {items.length > 0 ? (
-            <div className="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-800">
+            <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
               <table className="w-full min-w-[720px] text-left text-sm">
-                <thead className="bg-gray-50 text-xs uppercase text-gray-500 dark:bg-gray-950 dark:text-gray-400">
+                <thead className="bg-neutral-50 text-xs uppercase text-neutral-500 dark:bg-neutral-950 dark:text-neutral-400">
                   <tr>
                     <th className="px-4 py-3">{copy.columns.library}</th>
                     <th className="px-4 py-3">{copy.columns.usage}</th>
@@ -271,16 +271,16 @@ export default async function OpenSourcePage({ params }: Props) {
                     <th className="px-4 py-3">{copy.columns.link}</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                   {items.map((item) => (
                     <tr key={item.name} className="align-top">
-                      <td className="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">
+                      <td className="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">
                         {item.name}
                       </td>
-                      <td className="px-4 py-3 text-gray-600 dark:text-gray-400">
+                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                         {item.usage}
                       </td>
-                      <td className="px-4 py-3 text-gray-600 dark:text-gray-400">
+                      <td className="px-4 py-3 text-neutral-600 dark:text-neutral-400">
                         {item.license}
                       </td>
                       <td className="px-4 py-3">
@@ -299,12 +299,12 @@ export default async function OpenSourcePage({ params }: Props) {
               </table>
             </div>
           ) : (
-            <p className="rounded-lg border border-gray-200 px-4 py-3 text-sm text-gray-600 dark:border-gray-800 dark:text-gray-400">
+            <p className="rounded-lg border border-neutral-200 px-4 py-3 text-sm text-neutral-600 dark:border-neutral-800 dark:text-neutral-400">
               {copy.emptyState}
             </p>
           )}
 
-          <p className="mt-5 text-xs text-gray-500 dark:text-gray-400">{copy.note}</p>
+          <p className="mt-5 text-xs text-neutral-500 dark:text-neutral-400">{copy.note}</p>
         </div>
       </div>
     </main>

@@ -27,7 +27,7 @@ export default async function LocalePage({ params }: LocalePageProps) {
           <HeroSection copy={copy.hero} />
         </div>
         <div className="border-t border-gray-200 dark:border-gray-800">
-          <QrStudio copy={copy.studio} />
+          <QrStudio copy={copy.studio} locale={locale} />
         </div>
         <div className="border-t border-gray-200 dark:border-gray-800">
           <FeatureGrid items={copy.features} />

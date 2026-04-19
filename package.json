@@ -18,6 +18,7 @@
     "turbo:typecheck": "turbo run typecheck"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.4",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "iconoir-react": "^7.11.0",

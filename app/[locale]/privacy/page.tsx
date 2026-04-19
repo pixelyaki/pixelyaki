@@ -276,7 +276,7 @@ export default async function PrivacyPage({ params }: Props) {
             <ArrowLeft width={14} height={14} aria-hidden />
             {copy.back}
           </Link>
-          <h1 className="mb-1 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+          <h1 className="mb-1 text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
             {copy.title}
           </h1>
           <p className="mb-8 text-xs text-neutral-400 dark:text-neutral-500">{copy.updated}</p>
@@ -286,7 +286,7 @@ export default async function PrivacyPage({ params }: Props) {
                 <h2 className="mb-2 text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                   {section.heading}
                 </h2>
-                <p className="whitespace-pre-line text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                <p className="whitespace-pre-line text-sm text-neutral-600 dark:text-neutral-400">
                   {section.body}
                 </p>
               </section>

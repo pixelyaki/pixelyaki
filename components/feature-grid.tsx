@@ -12,7 +12,7 @@ export function FeatureGrid({ items }: FeatureGridProps) {
         {items.map((item) => (
           <article className="p-5" key={item.title}>
             <strong className="mb-1.5 block text-sm font-medium text-neutral-900 dark:text-neutral-100">{item.title}</strong>
-            <p className="text-xs leading-snug text-neutral-500 dark:text-neutral-400">{item.description}</p>
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">{item.description}</p>
           </article>
         ))}
       </div>

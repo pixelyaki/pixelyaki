@@ -250,20 +250,20 @@ export default async function OpenSourcePage({ params }: Props) {
             <ArrowLeft width={14} height={14} aria-hidden />
             {copy.back}
           </Link>
-          <h1 className="mb-1 text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100">
+          <h1 className="mb-1 text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
             {copy.title}
           </h1>
           <p className="mb-2 text-xs text-neutral-400 dark:text-neutral-500">
             {copy.updatedPrefix} {updatedDate}
           </p>
-          <p className="mb-6 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <p className="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
             {copy.intro}
           </p>
 
           {items.length > 0 ? (
             <div className="overflow-x-auto rounded-lg border border-neutral-200 dark:border-neutral-800">
               <table className="w-full min-w-[720px] text-left text-sm">
-                <thead className="bg-neutral-50 text-xs uppercase tracking-wider text-neutral-500 dark:bg-neutral-950 dark:text-neutral-400">
+                <thead className="bg-neutral-50 text-xs uppercase text-neutral-500 dark:bg-neutral-950 dark:text-neutral-400">
                   <tr>
                     <th className="px-4 py-3">{copy.columns.library}</th>
                     <th className="px-4 py-3">{copy.columns.usage}</th>

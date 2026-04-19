@@ -152,7 +152,7 @@ export function QrStudio({ copy }: QrStudioProps) {
       className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6 lg:grid-cols-[minmax(0,1fr)_380px]"
     >
       <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
-        <h2 className="mb-4 text-xs font-medium uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
+        <h2 className="mb-4 text-xs font-medium uppercase text-neutral-400 dark:text-neutral-500">
           {copy.inputPanelTitle}
         </h2>
         <QrTextField

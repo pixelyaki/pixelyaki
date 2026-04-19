@@ -13,8 +13,15 @@ import { id } from "./i18n/locales/id";
 import { it } from "./i18n/locales/it";
 import { pt } from "./i18n/locales/pt";
 import { th } from "./i18n/locales/th";
+import { vi } from "./i18n/locales/vi";
+import { tr } from "./i18n/locales/tr";
+import { nl } from "./i18n/locales/nl";
+import { pl } from "./i18n/locales/pl";
+import { tl } from "./i18n/locales/tl";
+import { ms } from "./i18n/locales/ms";
+import { bn } from "./i18n/locales/bn";
 
-export const locales = ["ko", "en", "zh", "ja", "es", "fr", "de", "ru", "ar", "hi", "id", "it", "pt", "th"] as const;
+export const locales = ["ko", "en", "zh", "ja", "es", "fr", "de", "ru", "ar", "hi", "id", "it", "pt", "th", "vi", "tr", "nl", "pl", "tl", "ms", "bn"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -69,11 +76,18 @@ export const localeDisplayNames: Record<Locale, string> = {
   id: "Indonesia",
   it: "Italiano",
   pt: "Português",
-  th: "ภาษาไทย"
+  th: "ภาษาไทย",
+  vi: "Tiếng Việt",
+  tr: "Türkçe",
+  nl: "Nederlands",
+  pl: "Polski",
+  tl: "Filipino",
+  ms: "Bahasa Melayu",
+  bn: "বাংলা"
 };
 
 const fullTranslationsByLocale: Record<Locale, FullTranslation> = {
-  ko, en, zh, ja, es, fr, de, ru, ar, hi, id, it, pt, th
+  ko, en, zh, ja, es, fr, de, ru, ar, hi, id, it, pt, th, vi, tr, nl, pl, tl, ms, bn
 };
 
 export function getFullTranslations(locale: Locale): FullTranslation {

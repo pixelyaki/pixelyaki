@@ -15,7 +15,7 @@ const baseFeatures = [
   },
   {
     title: "Logo Embed",
-    description: "Center logo with PNG, JPG, or SVG up to 2MB."
+    description: "Center logo with any image format (PNG, JPG, SVG, WebP, etc.) up to 10MB."
   },
   {
     title: "No Server Storage",
@@ -42,7 +42,7 @@ const baseFaq = [
   },
   {
     q: "Which logo files can I upload?",
-    a: "PNG, JPG, and SVG are supported up to 2MB."
+    a: "Most common image formats including PNG, JPG, SVG, and WebP are supported up to 10MB."
   }
 ];
 
@@ -70,7 +70,7 @@ export const en: FullTranslation = {
     backgroundColor: "Background color",
     transparentBackground: "Transparent PNG background",
     logoLabel: "Logo upload",
-    logoHint: "PNG/JPG/SVG, up to 2MB",
+    logoHint: "Image files, up to 10MB",
     removeLogo: "Remove logo",
     pngButton: "Download PNG",
     svgButton: "Download SVG",
@@ -78,8 +78,8 @@ export const en: FullTranslation = {
     emptyPreview: "Enter text to see a QR preview.",
     generating: "Generating QR...",
     invalidText: "Please enter 1 to 128 characters.",
-    invalidLogoType: "Only PNG/JPG/SVG logo files are supported.",
-    invalidLogoSize: "Logo file size must be 2MB or less.",
+    invalidLogoType: "Only image files are supported for the logo.",
+    invalidLogoSize: "Logo file size must be 10MB or less.",
     renderError: "An error occurred while generating the QR code.",
     contrastWarning: "Low contrast — the QR code may not scan reliably"
   },

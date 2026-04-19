@@ -24,7 +24,7 @@ export const ja: FullTranslation = {
     backgroundColor: "背景色",
     transparentBackground: "PNG背景を透過にする",
     logoLabel: "ロゴアップロード",
-    logoHint: "PNG/JPG/SVG、最大2MB",
+    logoHint: "Image files、最大10MB",
     removeLogo: "ロゴを削除",
     pngButton: "PNGをダウンロード",
     svgButton: "SVGをダウンロード",
@@ -32,8 +32,8 @@ export const ja: FullTranslation = {
     emptyPreview: "テキストを入力するとプレビューが表示されます。",
     generating: "QRコードを生成中...",
     invalidText: "1〜128文字で入力してください。",
-    invalidLogoType: "ロゴはPNG/JPG/SVGのみ対応です。",
-    invalidLogoSize: "ロゴは2MB以下にしてください。",
+    invalidLogoType: "ロゴはImage filesのみ対応です。",
+    invalidLogoSize: "ロゴは10MB以下にしてください。",
     renderError: "QRコード生成中にエラーが発生しました。",
     contrastWarning: "コントラストが低く、QRコードが読み取れない可能性があります"
   },
@@ -140,7 +140,7 @@ export const ja: FullTranslation = {
     },
     {
       title: "ロゴ挿入",
-      description: "PNG/JPG/SVGロゴ（最大2MB）を中央に配置できます。"
+      description: "Image filesロゴ（最大10MB）を中央に配置できます。"
     },
     {
       title: "サーバ保存なし",
@@ -167,7 +167,7 @@ export const ja: FullTranslation = {
     },
     {
       q: "ロゴファイルはどの形式をサポートしていますか？",
-      a: "PNG、JPG、SVG（2MB以下）をアップロードできます。"
+      a: "PNG、JPG、SVG（10MB以下）をアップロードできます。"
     }
   ],
   footer: {

@@ -24,7 +24,7 @@ export const th: FullTranslation = {
     backgroundColor: "สีพื้นหลัง",
     transparentBackground: "PNG พื้นหลังโปร่งใส",
     logoLabel: "อัปโหลดโลโก้",
-    logoHint: "PNG/JPG/SVG ไม่เกิน 2MB",
+    logoHint: "Image files ไม่เกิน 10MB",
     removeLogo: "ลบโลโก้",
     pngButton: "ดาวน์โหลด PNG",
     svgButton: "ดาวน์โหลด SVG",
@@ -32,8 +32,8 @@ export const th: FullTranslation = {
     emptyPreview: "ป้อนข้อความเพื่อดูตัวอย่าง QR",
     generating: "กำลังสร้าง QR...",
     invalidText: "กรุณาป้อนข้อความ 1 ถึง 128 ตัวอักษร",
-    invalidLogoType: "รองรับเฉพาะไฟล์โลโก้ PNG/JPG/SVG",
-    invalidLogoSize: "ขนาดไฟล์โลโก้ต้องไม่เกิน 2MB",
+    invalidLogoType: "รองรับเฉพาะไฟล์โลโก้ Image files",
+    invalidLogoSize: "ขนาดไฟล์โลโก้ต้องไม่เกิน 10MB",
     renderError: "เกิดข้อผิดพลาดขณะสร้าง QR Code",
     contrastWarning: "ความคมชัดต่ำ — QR Code อาจสแกนไม่ได้"
   },
@@ -140,7 +140,7 @@ export const th: FullTranslation = {
     },
     {
       title: "ฝังโลโก้",
-      description: "ใส่โลโก้ตรงกลางด้วย PNG, JPG หรือ SVG ขนาดสูงสุด 2MB"
+      description: "ใส่โลโก้ตรงกลางด้วย PNG, JPG หรือ SVG ขนาดสูงสุด 10MB"
     },
     {
       title: "ไม่มีการเก็บข้อมูลบนเซิร์ฟเวอร์",
@@ -167,7 +167,7 @@ export const th: FullTranslation = {
     },
     {
       q: "สามารถอัปโหลดไฟล์โลโก้อะไรได้บ้าง?",
-      a: "รองรับ PNG, JPG และ SVG ขนาดสูงสุด 2MB"
+      a: "รองรับ PNG, JPG และ SVG ขนาดสูงสุด 10MB"
     }
   ],
   footer: {

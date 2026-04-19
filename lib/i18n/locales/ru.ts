@@ -24,7 +24,7 @@ export const ru: FullTranslation = {
     backgroundColor: "Цвет фона",
     transparentBackground: "Прозрачный фон PNG",
     logoLabel: "Загрузить логотип",
-    logoHint: "PNG/JPG/SVG, до 2МБ",
+    logoHint: "Image files, до 2МБ",
     removeLogo: "Удалить логотип",
     pngButton: "Скачать PNG",
     svgButton: "Скачать SVG",
@@ -32,7 +32,7 @@ export const ru: FullTranslation = {
     emptyPreview: "Введите текст для предварительного просмотра QR.",
     generating: "Создание QR...",
     invalidText: "Введите от 1 до 128 символов.",
-    invalidLogoType: "Поддерживаются только PNG/JPG/SVG.",
+    invalidLogoType: "Поддерживаются только Image files.",
     invalidLogoSize: "Размер логотипа не должен превышать 2МБ.",
     renderError: "Произошла ошибка при создании QR-кода.",
     contrastWarning: "Низкий контраст — QR-код может плохо сканироваться"

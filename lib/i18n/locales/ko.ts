@@ -24,7 +24,7 @@ export const ko: FullTranslation = {
     backgroundColor: "배경색",
     transparentBackground: "PNG 배경 투명 처리",
     logoLabel: "로고 업로드",
-    logoHint: "PNG/JPG/SVG, 최대 2MB",
+    logoHint: "이미지 파일, 최대 10MB",
     removeLogo: "로고 제거",
     pngButton: "PNG 다운로드",
     svgButton: "SVG 다운로드",
@@ -32,8 +32,8 @@ export const ko: FullTranslation = {
     emptyPreview: "텍스트를 입력하면 QR 미리보기가 표시됩니다.",
     generating: "QR 생성 중...",
     invalidText: "텍스트를 1자 이상 128자 이하로 입력해 주세요.",
-    invalidLogoType: "로고 파일 형식은 PNG/JPG/SVG만 가능합니다.",
-    invalidLogoSize: "로고 파일 크기는 2MB 이하여야 합니다.",
+    invalidLogoType: "이미지 형식의 로고 파일만 업로드 가능합니다.",
+    invalidLogoSize: "로고 파일 크기는 10MB 이하여야 합니다.",
     renderError: "QR 코드를 생성하는 중 오류가 발생했습니다.",
     contrastWarning: "색상 대비가 낮아 QR 코드 인식에 문제가 생길 수 있습니다"
   },
@@ -140,7 +140,7 @@ export const ko: FullTranslation = {
     },
     {
       title: "로고 삽입",
-      description: "PNG/JPG/SVG 로고를 중앙에 넣을 수 있습니다."
+      description: "이미지(PNG, JPG, SVG 등) 로고를 중앙에 넣을 수 있습니다."
     },
     {
       title: "서버 저장 없음",
@@ -167,7 +167,7 @@ export const ko: FullTranslation = {
     },
     {
       q: "로고 파일은 어떤 형식을 지원하나요?",
-      a: "PNG, JPG, SVG를 2MB 이하로 업로드할 수 있습니다."
+      a: "다양한 이미지 형식을 10MB 이하로 업로드할 수 있습니다."
     }
   ],
   footer: {

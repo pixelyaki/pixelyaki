@@ -24,7 +24,7 @@ export const es: FullTranslation = {
     backgroundColor: "Color de fondo",
     transparentBackground: "Fondo PNG transparente",
     logoLabel: "Subir logo",
-    logoHint: "PNG/JPG/SVG, hasta 2MB",
+    logoHint: "Image files, hasta 10MB",
     removeLogo: "Quitar logo",
     pngButton: "Descargar PNG",
     svgButton: "Descargar SVG",
@@ -32,8 +32,8 @@ export const es: FullTranslation = {
     emptyPreview: "Ingresa texto para ver la vista previa del QR.",
     generating: "Generando QR...",
     invalidText: "Ingresa entre 1 y 128 caracteres.",
-    invalidLogoType: "Solo se admiten logos PNG/JPG/SVG.",
-    invalidLogoSize: "El logo debe ser de 2MB o menos.",
+    invalidLogoType: "Solo se admiten logos Image files.",
+    invalidLogoSize: "El logo debe ser de 10MB o menos.",
     renderError: "Ocurrió un error al generar el código QR.",
     contrastWarning: "Contraste insuficiente — el código QR puede no leerse correctamente"
   },
@@ -140,7 +140,7 @@ export const es: FullTranslation = {
     },
     {
       title: "Insertar Logo",
-      description: "Logo central con PNG, JPG o SVG de hasta 2MB."
+      description: "Logo central con PNG, JPG o SVG de hasta 10MB."
     },
     {
       title: "Sin Almacenamiento en Servidor",
@@ -167,7 +167,7 @@ export const es: FullTranslation = {
     },
     {
       q: "¿Qué archivos de logo puedo subir?",
-      a: "PNG, JPG y SVG de hasta 2MB."
+      a: "PNG, JPG y SVG de hasta 10MB."
     }
   ],
   footer: {

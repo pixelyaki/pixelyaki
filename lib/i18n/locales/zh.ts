@@ -24,7 +24,7 @@ export const zh: FullTranslation = {
     backgroundColor: "背景色",
     transparentBackground: "PNG 背景透明",
     logoLabel: "上传 Logo",
-    logoHint: "PNG/JPG/SVG，最大 2MB",
+    logoHint: "Image files，最大 10MB",
     removeLogo: "移除 Logo",
     pngButton: "下载 PNG",
     svgButton: "下载 SVG",
@@ -32,8 +32,8 @@ export const zh: FullTranslation = {
     emptyPreview: "输入文本后将显示二维码预览。",
     generating: "正在生成二维码...",
     invalidText: "请输入 1 到 128 个字符。",
-    invalidLogoType: "Logo 仅支持 PNG/JPG/SVG。",
-    invalidLogoSize: "Logo 文件必须小于等于 2MB。",
+    invalidLogoType: "Logo 仅支持 Image files。",
+    invalidLogoSize: "Logo 文件必须小于等于 10MB。",
     renderError: "生成二维码时发生错误。",
     contrastWarning: "色彩对比度低，二维码可能无法正常识别"
   },
@@ -140,7 +140,7 @@ export const zh: FullTranslation = {
     },
     {
       title: "Logo 嵌入",
-      description: "居中放置 Logo，支持高达 2MB 的 PNG、JPG 或 SVG。"
+      description: "居中放置 Logo，支持高达 10MB 的 PNG、JPG 或 SVG。"
     },
     {
       title: "无服务器存储",
@@ -167,7 +167,7 @@ export const zh: FullTranslation = {
     },
     {
       q: "我可以上传哪些 Logo 文件？",
-      a: "支持高达 2MB 的 PNG、JPG 和 SVG。"
+      a: "支持高达 10MB 的 PNG、JPG 和 SVG。"
     }
   ],
   footer: {

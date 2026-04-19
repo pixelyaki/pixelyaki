@@ -24,7 +24,7 @@ export const pt: FullTranslation = {
     backgroundColor: "Cor de fondo",
     transparentBackground: "Fundo PNG transparente",
     logoLabel: "Enviar logotipo",
-    logoHint: "PNG/JPG/SVG, até 2MB",
+    logoHint: "Image files, até 10MB",
     removeLogo: "Remover logotipo",
     pngButton: "Baixar PNG",
     svgButton: "Baixar SVG",
@@ -32,8 +32,8 @@ export const pt: FullTranslation = {
     emptyPreview: "Digite texto para ver a pré-visualização do QR.",
     generating: "Gerando QR...",
     invalidText: "Digite entre 1 e 128 caracteres.",
-    invalidLogoType: "Apenas arquivos de logotipo PNG/JPG/SVG são suportados.",
-    invalidLogoSize: "O logotipo deve ter 2MB ou menos.",
+    invalidLogoType: "Apenas arquivos de logotipo Image files são suportados.",
+    invalidLogoSize: "O logotipo deve ter 10MB ou menos.",
     renderError: "Ocorreu um erro ao gerar o código QR.",
     contrastWarning: "Contraste baixo — o QR code pode não ser lido corretamente"
   },
@@ -140,7 +140,7 @@ export const pt: FullTranslation = {
     },
     {
       title: "Inserir Logotipo",
-      description: "Logotipo central com PNG, JPG ou SVG de até 2MB."
+      description: "Logotipo central com PNG, JPG ou SVG de até 10MB."
     },
     {
       title: "Sem Armazenamento no Servidor",
@@ -167,7 +167,7 @@ export const pt: FullTranslation = {
     },
     {
       q: "¿Quais arquivos de logotipo posso enviar?",
-      a: "PNG, JPG e SVG são suportados até 2MB."
+      a: "PNG, JPG e SVG são suportados até 10MB."
     }
   ],
   footer: {

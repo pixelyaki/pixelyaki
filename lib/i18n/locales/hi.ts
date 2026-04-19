@@ -24,7 +24,7 @@ export const hi: FullTranslation = {
     backgroundColor: "बैकग्राउंड रंग",
     transparentBackground: "पारदर्शी PNG बैकग्राउंड",
     logoLabel: "लोगो अपलोड करें",
-    logoHint: "PNG/JPG/SVG, अधिकतम 2MB",
+    logoHint: "Image files, अधिकतम 10MB",
     removeLogo: "लोगो हटाएं",
     pngButton: "PNG डाउनलोड करें",
     svgButton: "SVG डाउनलोड करें",
@@ -32,8 +32,8 @@ export const hi: FullTranslation = {
     emptyPreview: "QR प्रीव्यू देखने के लिए टेक्स्ट दर्ज करें।",
     generating: "QR बना रहे हैं...",
     invalidText: "कृपया 1 से 128 अक्षर दर्ज करें।",
-    invalidLogoType: "केवल PNG/JPG/SVG लोगो फ़ाइलें समर्थित हैं।",
-    invalidLogoSize: "लोगो फ़ाइल का आकार 2MB या कम होना चाहिए।",
+    invalidLogoType: "केवल Image files लोगो फ़ाइलें समर्थित हैं।",
+    invalidLogoSize: "लोगो फ़ाइल का आकार 10MB या कम होना चाहिए।",
     renderError: "QR कोड बनाते समय एक त्रुटि हुई।",
     contrastWarning: "कम कंट्रास्ट — QR कोड स्कैन नहीं हो सकता"
   },
@@ -140,7 +140,7 @@ export const hi: FullTranslation = {
     },
     {
       title: "लोगो एम्बेड",
-      description: "2MB तक के PNG, JPG या SVG के साथ केंद्र लोगो।"
+      description: "10MB तक के PNG, JPG या SVG के साथ केंद्र लोगो।"
     },
     {
       title: "कोई सर्वर स्टोरेज नहीं",
@@ -167,7 +167,7 @@ export const hi: FullTranslation = {
     },
     {
       q: "मैं कौन सी लोगो फ़ाइलें अपलोड कर सकता हूँ?",
-      a: "2MB तक PNG, JPG और SVG समर्थित हैं।"
+      a: "10MB तक PNG, JPG और SVG समर्थित हैं।"
     }
   ],
   footer: {

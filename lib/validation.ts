@@ -1,5 +1,5 @@
 export const MAX_TEXT_LENGTH = 128;
-export const MAX_LOGO_BYTES = 2 * 1024 * 1024;
+export const MAX_LOGO_BYTES = 10 * 1024 * 1024;
 
 const supportedLogoTypes = new Set([
   "image/png",
@@ -13,7 +13,7 @@ export function validateText(text: string): boolean {
 }
 
 export function validateLogoFile(file: File): { valid: boolean; reason?: string } {
-  if (!supportedLogoTypes.has(file.type)) {
+  if (!file.type.startsWith("image/")) {
     return { valid: false, reason: "type" };
   }
 

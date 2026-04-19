@@ -24,7 +24,7 @@ export const id: FullTranslation = {
     backgroundColor: "Warna latar",
     transparentBackground: "Latar PNG transparan",
     logoLabel: "Unggah logo",
-    logoHint: "PNG/JPG/SVG, maks 2MB",
+    logoHint: "Image files, maks 10MB",
     removeLogo: "Hapus logo",
     pngButton: "Unduh PNG",
     svgButton: "Unduh SVG",
@@ -32,8 +32,8 @@ export const id: FullTranslation = {
     emptyPreview: "Masukkan teks untuk melihat pratinjau QR.",
     generating: "Membuat QR...",
     invalidText: "Masukkan 1 hingga 128 karakter.",
-    invalidLogoType: "Hanya file logo PNG/JPG/SVG yang didukung.",
-    invalidLogoSize: "Ukuran file logo harus 2MB atau kurang.",
+    invalidLogoType: "Hanya file logo Image files yang didukung.",
+    invalidLogoSize: "Ukuran file logo harus 10MB atau kurang.",
     renderError: "Terjadi kesalahan saat membuat kode QR.",
     contrastWarning: "Kontras rendah — kode QR mungkin tidak terbaca"
   },
@@ -140,7 +140,7 @@ export const id: FullTranslation = {
     },
     {
       title: "Sematkan Logo",
-      description: "Logo tengah dengan PNG, JPG, atau SVG hingga 2MB."
+      description: "Logo tengah dengan PNG, JPG, atau SVG hingga 10MB."
     },
     {
       title: "Tanpa Penyimpanan Server",
@@ -167,7 +167,7 @@ export const id: FullTranslation = {
     },
     {
       q: "File logo apa saja yang bisa saya unggah?",
-      a: "PNG, JPG, dan SVG didukung hingga 2MB."
+      a: "PNG, JPG, dan SVG didukung hingga 10MB."
     }
   ],
   footer: {

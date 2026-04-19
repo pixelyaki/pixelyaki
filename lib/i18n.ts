@@ -1,4 +1,4 @@
-export const locales = ["ko", "en", "zh", "ja", "es", "fr", "de", "ru", "ar", "hi", "id", "it", "pt"] as const;
+export const locales = ["ko", "en", "zh", "ja", "es", "fr", "de", "ru", "ar", "hi", "id", "it", "pt", "th"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -52,7 +52,8 @@ export const localeDisplayNames: Record<Locale, string> = {
   hi: "हिन्दी",
   id: "Indonesia",
   it: "Italiano",
-  pt: "Português"
+  pt: "Português",
+  th: "ภาษาไทย"
 };
 
 type FeatureItem = {
@@ -771,6 +772,47 @@ const copyByLocale: Record<Locale, PageCopy> = {
       copyright: "© Pixelyaki",
       trademark: "QR Code é uma marca registrada da DENSO WAVE INCORPORATED."
     }
+  },
+  th: {
+    header: { logo: "Pixelyaki", generate: "สร้าง" },
+    hero: {
+      eyebrow: "ไม่ต้องสมัครสมาชิก",
+      title: "แปลงข้อความเป็น QR Code ทันที",
+      description: "ปรับแต่งสี ใส่โลโก้ และดาวน์โหลด PNG โปร่งใสหรือ SVG"
+    },
+    studio: {
+      inputPanelTitle: "ข้อมูลและตัวเลือก",
+      previewPanelTitle: "ดูตัวอย่างแบบเรียลไทม์",
+      textLabel: "ข้อความ",
+      textPlaceholder: "ป้อนข้อความสูงสุด 128 ตัวอักษร",
+      textRule: "สูงสุด 128 ตัวอักษร",
+      foregroundColor: "สีพื้นหน้า",
+      backgroundColor: "สีพื้นหลัง",
+      transparentBackground: "PNG พื้นหลังโปร่งใส",
+      logoLabel: "อัปโหลดโลโก้",
+      logoHint: "PNG/JPG/SVG ไม่เกิน 2MB",
+      removeLogo: "ลบโลโก้",
+      pngButton: "ดาวน์โหลด PNG",
+      svgButton: "ดาวน์โหลด SVG",
+      fileNameLabel: "ตัวอย่างชื่อไฟล์",
+      emptyPreview: "ป้อนข้อความเพื่อดูตัวอย่าง QR",
+      generating: "กำลังสร้าง QR...",
+      invalidText: "กรุณาป้อนข้อความ 1 ถึง 128 ตัวอักษร",
+      invalidLogoType: "รองรับเฉพาะไฟล์โลโก้ PNG/JPG/SVG",
+      invalidLogoSize: "ขนาดไฟล์โลโก้ต้องไม่เกิน 2MB",
+      renderError: "เกิดข้อผิดพลาดขณะสร้าง QR Code",
+      contrastWarning: "ความคมชัดต่ำ — QR Code อาจสแกนไม่ได้"
+    },
+    features: baseFeatures,
+    faqTitle: "คำถามที่พบบ่อย",
+    faq: baseFaq,
+    footer: {
+      privacy: "นโยบายความเป็นส่วนตัว",
+      terms: "เงื่อนไขการใช้บริการ",
+      openSource: "ใบอนุญาตโอเพนซอร์ส",
+      copyright: "© Pixelyaki",
+      trademark: "QR Code เป็นเครื่องหมายการค้าของ DENSO WAVE INCORPORATED"
+    }
   }
 };
 
@@ -843,6 +885,11 @@ const seoByLocale: Record<Locale, SeoCopy> = {
     title: "Gerador de QR Pixelyaki | Download PNG/SVG Gratuito",
     description:
       "Crie QR codes a partir de texto instantaneamente sem cadastro. Personalize cores, adicione logotipo e baixe PNG transparente ou SVG."
+  },
+  th: {
+    title: "Pixelyaki QR Code Generator | ดาวน์โหลด PNG/SVG ฟรี",
+    description:
+      "สร้าง QR Code จากข้อความได้ทันที ไม่ต้องสมัครสมาชิก ปรับแต่งสี ใส่โลโก้ และดาวน์โหลด PNG โปร่งใสหรือ SVG"
   }
 };
 

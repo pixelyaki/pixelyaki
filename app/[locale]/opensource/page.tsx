@@ -220,6 +220,16 @@ const content: Record<Locale, OpenSourceCopy> = {
     note: "Esta lista é gerada automaticamente durante o build. Consulte cada repositório para os termos completos.",
     emptyState: "Não foi possível carregar a lista de licenças. Execute o build novamente.",
     defaultUsage: "Dependência"
+  },
+  th: {
+    title: "ใบอนุญาตโอเพนซอร์ส",
+    updatedPrefix: "อัปเดตอัตโนมัติ:",
+    back: "กลับ",
+    intro: "Pixelyaki สร้างขึ้นด้วยไลบรารีโอเพนซอร์สที่แสดงไว้ด้านล่าง",
+    columns: { library: "ไลบรารี", usage: "การใช้งาน", license: "ใบอนุญาต", link: "ลิงก์" },
+    note: "รายการนี้สร้างขึ้นอัตโนมัติระหว่างการ build กรุณาดูที่ repository ของแต่ละรายการสำหรับเงื่อนไขใบอนุญาตฉบับเต็ม",
+    emptyState: "ไม่สามารถโหลดรายการใบอนุญาตได้ กรุณา build ใหม่อีกครั้ง",
+    defaultUsage: "การพึ่งพา"
   }
 };
 

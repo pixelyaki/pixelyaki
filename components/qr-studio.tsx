@@ -108,6 +108,9 @@ type ExtraModeCopy = {
   wifiSsidLabel: string;
   wifiSsidPlaceholder: string;
   wifiEncryptionLabel: string;
+  wifiEncryptionWpa: string;
+  wifiEncryptionWep: string;
+  wifiEncryptionNoPassword: string;
   wifiPasswordLabel: string;
   wifiPasswordPlaceholder: string;
   wifiHiddenLabel: string;
@@ -147,6 +150,13 @@ type StyleCopy = {
   presetRounded: string;
   presetClassy: string;
   presetDot: string;
+  styleSquare: string;
+  styleDots: string;
+  styleRounded: string;
+  styleClassy: string;
+  styleClassyRounded: string;
+  styleExtraRounded: string;
+  styleDot: string;
   errorCorrectionLabel: string;
   eclL: string;
   eclM: string;
@@ -544,10 +554,40 @@ const modeCopyByLocale: Record<Locale, ModeCopy> = {
     phonePlaceholder: "ex. +821012345678",
     invalidPhone: "Digite um número de telefone válido.",
     phoneEmptyPreview: "Digite um número de telefone para pré-visualizar o QR."
+  },
+  th: {
+    modeSelectorTitle: "โหมด",
+    textModeLabel: "ข้อความ",
+    sendModeLabel: "QR โอนเงิน Toss",
+    urlModeLabel: "URL",
+    emailModeLabel: "อีเมล",
+    phoneModeLabel: "โทรศัพท์",
+    bankLabel: "รหัสธนาคาร",
+    bankPlaceholder: "เลือกธนาคาร",
+    accountLabel: "เลขบัญชี",
+    accountPlaceholder: "ป้อนเลขบัญชี",
+    amountLabel: "จำนวนเงิน (ไม่บังคับ)",
+    amountPlaceholder: "เช่น 10000",
+    amountHint: "เว้นว่างเพื่อสร้าง QR โอนเงินโดยไม่ระบุจำนวน",
+    invalidAccount: "กรุณาตรวจสอบธนาคารและเลขบัญชี",
+    invalidAmount: "จำนวนเงินต้องเป็นตัวเลขมากกว่า 0",
+    sendEmptyPreview: "ป้อนธนาคารและเลขบัญชีเพื่อดูตัวอย่าง QR โอนเงิน",
+    urlLabel: "URL",
+    urlPlaceholder: "เช่น pixelyaki.com หรือ https://pixelyaki.com",
+    invalidUrl: "กรุณาป้อน URL ที่ถูกต้อง",
+    urlEmptyPreview: "ป้อน URL เพื่อดูตัวอย่าง QR",
+    emailLabel: "ที่อยู่อีเมล",
+    emailPlaceholder: "เช่น hello@pixelyaki.com",
+    invalidEmail: "กรุณาป้อนที่อยู่อีเมลที่ถูกต้อง",
+    emailEmptyPreview: "ป้อนอีเมลเพื่อดูตัวอย่าง QR",
+    phoneLabel: "หมายเลขโทรศัพท์",
+    phonePlaceholder: "เช่น +821012345678",
+    invalidPhone: "กรุณาป้อนหมายเลขโทรศัพท์ที่ถูกต้อง",
+    phoneEmptyPreview: "ป้อนหมายเลขโทรศัพท์เพื่อดูตัวอย่าง QR"
   }
 };
 
-const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
+const extraModeCopyByLocale: Record<Locale, ExtraModeCopy> = {
   ko: {
     wifiModeLabel: "Wi-Fi",
     vcardModeLabel: "명함(vCard)",
@@ -617,10 +657,395 @@ const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
     smsEmptyPreview: "Enter a phone number to preview the SMS QR code.",
     kakaopayModeLabel: "KakaoPay Transfer QR",
     kakaopayEmptyPreview: "Enter KakaoPay transfer details to preview the QR code."
+  },
+  zh: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "名片(vCard)",
+    smsModeLabel: "短信",
+    wifiSsidLabel: "网络名称(SSID)",
+    wifiSsidPlaceholder: "例如：Pixelyaki_WiFi",
+    wifiEncryptionLabel: "加密方式",
+    wifiPasswordLabel: "密码",
+    wifiPasswordPlaceholder: "请输入 Wi-Fi 密码",
+    wifiHiddenLabel: "隐藏网络",
+    wifiInvalid: "请检查 SSID 和 Wi-Fi 设置。",
+    wifiEmptyPreview: "输入 Wi-Fi 信息后可预览二维码。",
+    vcardNameLabel: "姓名",
+    vcardNamePlaceholder: "例如：Arthur Kim",
+    vcardCompanyLabel: "公司",
+    vcardCompanyPlaceholder: "例如：Pixelyaki",
+    vcardPhoneLabel: "电话号码",
+    vcardPhonePlaceholder: "例如：+821012345678",
+    vcardEmailLabel: "邮箱",
+    vcardEmailPlaceholder: "例如：hello@pixelyaki.com",
+    vcardAddressLabel: "地址",
+    vcardAddressPlaceholder: "例如：Seoul, Korea",
+    vcardInvalid: "请输入姓名。",
+    vcardInvalidPhone: "请检查名片电话号码格式。",
+    vcardInvalidEmail: "请检查名片邮箱格式。",
+    vcardEmptyPreview: "输入名片信息后可预览二维码。",
+    smsPhoneLabel: "收件号码",
+    smsPhonePlaceholder: "例如：+821012345678",
+    smsBodyLabel: "短信内容（可选）",
+    smsBodyPlaceholder: "例如：你好",
+    smsInvalid: "请检查短信号码格式。",
+    smsEmptyPreview: "输入电话号码后可预览短信二维码。",
+    kakaopayModeLabel: "KakaoPay 转账 QR",
+    kakaopayEmptyPreview: "输入 KakaoPay 转账信息后可预览二维码。"
+  },
+  ja: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "名刺(vCard)",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "ネットワーク名(SSID)",
+    wifiSsidPlaceholder: "例: Pixelyaki_WiFi",
+    wifiEncryptionLabel: "暗号化方式",
+    wifiPasswordLabel: "パスワード",
+    wifiPasswordPlaceholder: "Wi-Fi パスワードを入力してください",
+    wifiHiddenLabel: "隠しネットワーク",
+    wifiInvalid: "SSID と Wi-Fi 設定を確認してください。",
+    wifiEmptyPreview: "Wi-Fi 情報を入力すると QR をプレビューできます。",
+    vcardNameLabel: "名前",
+    vcardNamePlaceholder: "例: Arthur Kim",
+    vcardCompanyLabel: "会社",
+    vcardCompanyPlaceholder: "例: Pixelyaki",
+    vcardPhoneLabel: "電話番号",
+    vcardPhonePlaceholder: "例: +821012345678",
+    vcardEmailLabel: "メール",
+    vcardEmailPlaceholder: "例: hello@pixelyaki.com",
+    vcardAddressLabel: "住所",
+    vcardAddressPlaceholder: "例: Seoul, Korea",
+    vcardInvalid: "名前を入力してください。",
+    vcardInvalidPhone: "名刺の電話番号形式を確認してください。",
+    vcardInvalidEmail: "名刺のメール形式を確認してください。",
+    vcardEmptyPreview: "連絡先情報を入力すると vCard QR をプレビューできます。",
+    smsPhoneLabel: "宛先電話番号",
+    smsPhonePlaceholder: "例: +821012345678",
+    smsBodyLabel: "メッセージ（任意）",
+    smsBodyPlaceholder: "例: こんにちは",
+    smsInvalid: "SMS の電話番号形式を確認してください。",
+    smsEmptyPreview: "電話番号を入力すると SMS QR をプレビューできます。",
+    kakaopayModeLabel: "KakaoPay 送金 QR",
+    kakaopayEmptyPreview: "KakaoPay 送金情報を入力すると QR をプレビューできます。"
+  },
+  es: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Nombre de red (SSID)",
+    wifiSsidPlaceholder: "p. ej. Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Cifrado",
+    wifiPasswordLabel: "Contraseña",
+    wifiPasswordPlaceholder: "Ingresa la contraseña Wi-Fi",
+    wifiHiddenLabel: "Red oculta",
+    wifiInvalid: "Revisa el SSID y la configuración Wi-Fi.",
+    wifiEmptyPreview: "Ingresa datos Wi-Fi para previsualizar el QR.",
+    vcardNameLabel: "Nombre",
+    vcardNamePlaceholder: "p. ej. Arthur Kim",
+    vcardCompanyLabel: "Empresa",
+    vcardCompanyPlaceholder: "p. ej. Pixelyaki",
+    vcardPhoneLabel: "Teléfono",
+    vcardPhonePlaceholder: "p. ej. +821012345678",
+    vcardEmailLabel: "Correo",
+    vcardEmailPlaceholder: "p. ej. hello@pixelyaki.com",
+    vcardAddressLabel: "Dirección",
+    vcardAddressPlaceholder: "p. ej. Seoul, Korea",
+    vcardInvalid: "Ingresa al menos un nombre.",
+    vcardInvalidPhone: "Revisa el formato del teléfono en vCard.",
+    vcardInvalidEmail: "Revisa el formato del correo en vCard.",
+    vcardEmptyPreview: "Ingresa datos de contacto para previsualizar el QR vCard.",
+    smsPhoneLabel: "Teléfono destinatario",
+    smsPhonePlaceholder: "p. ej. +821012345678",
+    smsBodyLabel: "Mensaje (opcional)",
+    smsBodyPlaceholder: "p. ej. Hola",
+    smsInvalid: "Revisa el formato del teléfono SMS.",
+    smsEmptyPreview: "Ingresa un teléfono para previsualizar el QR SMS.",
+    kakaopayModeLabel: "QR de transferencia KakaoPay",
+    kakaopayEmptyPreview: "Ingresa datos de KakaoPay para previsualizar el QR."
+  },
+  fr: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Nom du réseau (SSID)",
+    wifiSsidPlaceholder: "ex. Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Chiffrement",
+    wifiPasswordLabel: "Mot de passe",
+    wifiPasswordPlaceholder: "Saisissez le mot de passe Wi-Fi",
+    wifiHiddenLabel: "Réseau masqué",
+    wifiInvalid: "Vérifiez le SSID et les paramètres Wi-Fi.",
+    wifiEmptyPreview: "Saisissez les infos Wi-Fi pour prévisualiser le QR.",
+    vcardNameLabel: "Nom",
+    vcardNamePlaceholder: "ex. Arthur Kim",
+    vcardCompanyLabel: "Société",
+    vcardCompanyPlaceholder: "ex. Pixelyaki",
+    vcardPhoneLabel: "Téléphone",
+    vcardPhonePlaceholder: "ex. +821012345678",
+    vcardEmailLabel: "E-mail",
+    vcardEmailPlaceholder: "ex. hello@pixelyaki.com",
+    vcardAddressLabel: "Adresse",
+    vcardAddressPlaceholder: "ex. Seoul, Korea",
+    vcardInvalid: "Veuillez saisir au moins un nom.",
+    vcardInvalidPhone: "Vérifiez le format du téléphone vCard.",
+    vcardInvalidEmail: "Vérifiez le format de l'e-mail vCard.",
+    vcardEmptyPreview: "Saisissez les infos de contact pour prévisualiser le QR vCard.",
+    smsPhoneLabel: "Téléphone destinataire",
+    smsPhonePlaceholder: "ex. +821012345678",
+    smsBodyLabel: "Message (optionnel)",
+    smsBodyPlaceholder: "ex. Bonjour",
+    smsInvalid: "Vérifiez le format du numéro SMS.",
+    smsEmptyPreview: "Saisissez un téléphone pour prévisualiser le QR SMS.",
+    kakaopayModeLabel: "QR de transfert KakaoPay",
+    kakaopayEmptyPreview: "Saisissez les infos KakaoPay pour prévisualiser le QR."
+  },
+  de: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Netzwerkname (SSID)",
+    wifiSsidPlaceholder: "z. B. Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Verschlüsselung",
+    wifiPasswordLabel: "Passwort",
+    wifiPasswordPlaceholder: "Wi-Fi-Passwort eingeben",
+    wifiHiddenLabel: "Verstecktes Netzwerk",
+    wifiInvalid: "Bitte SSID und Wi-Fi-Einstellungen prüfen.",
+    wifiEmptyPreview: "Wi-Fi-Daten eingeben, um den QR-Code vorzuschauen.",
+    vcardNameLabel: "Name",
+    vcardNamePlaceholder: "z. B. Arthur Kim",
+    vcardCompanyLabel: "Firma",
+    vcardCompanyPlaceholder: "z. B. Pixelyaki",
+    vcardPhoneLabel: "Telefonnummer",
+    vcardPhonePlaceholder: "z. B. +821012345678",
+    vcardEmailLabel: "E-Mail",
+    vcardEmailPlaceholder: "z. B. hello@pixelyaki.com",
+    vcardAddressLabel: "Adresse",
+    vcardAddressPlaceholder: "z. B. Seoul, Korea",
+    vcardInvalid: "Bitte mindestens einen Namen eingeben.",
+    vcardInvalidPhone: "Bitte Telefonnummer im vCard-Format prüfen.",
+    vcardInvalidEmail: "Bitte E-Mail im vCard-Format prüfen.",
+    vcardEmptyPreview: "Kontaktdaten eingeben, um den vCard-QR-Code vorzuschauen.",
+    smsPhoneLabel: "Empfängertelefon",
+    smsPhonePlaceholder: "z. B. +821012345678",
+    smsBodyLabel: "Nachricht (optional)",
+    smsBodyPlaceholder: "z. B. Hallo",
+    smsInvalid: "Bitte SMS-Nummernformat prüfen.",
+    smsEmptyPreview: "Telefonnummer eingeben, um den SMS-QR-Code vorzuschauen.",
+    kakaopayModeLabel: "KakaoPay Transfer-QR",
+    kakaopayEmptyPreview: "KakaoPay-Daten eingeben, um den QR-Code vorzuschauen."
+  },
+  ru: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Имя сети (SSID)",
+    wifiSsidPlaceholder: "например, Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Шифрование",
+    wifiPasswordLabel: "Пароль",
+    wifiPasswordPlaceholder: "Введите пароль Wi-Fi",
+    wifiHiddenLabel: "Скрытая сеть",
+    wifiInvalid: "Проверьте SSID и настройки Wi-Fi.",
+    wifiEmptyPreview: "Введите данные Wi-Fi для предпросмотра QR-кода.",
+    vcardNameLabel: "Имя",
+    vcardNamePlaceholder: "например, Arthur Kim",
+    vcardCompanyLabel: "Компания",
+    vcardCompanyPlaceholder: "например, Pixelyaki",
+    vcardPhoneLabel: "Телефон",
+    vcardPhonePlaceholder: "например, +821012345678",
+    vcardEmailLabel: "Email",
+    vcardEmailPlaceholder: "например, hello@pixelyaki.com",
+    vcardAddressLabel: "Адрес",
+    vcardAddressPlaceholder: "например, Seoul, Korea",
+    vcardInvalid: "Введите хотя бы имя.",
+    vcardInvalidPhone: "Проверьте формат телефона vCard.",
+    vcardInvalidEmail: "Проверьте формат email vCard.",
+    vcardEmptyPreview: "Введите контактные данные для предпросмотра QR vCard.",
+    smsPhoneLabel: "Телефон получателя",
+    smsPhonePlaceholder: "например, +821012345678",
+    smsBodyLabel: "Сообщение (необязательно)",
+    smsBodyPlaceholder: "например, Привет",
+    smsInvalid: "Проверьте формат номера SMS.",
+    smsEmptyPreview: "Введите номер телефона для предпросмотра QR SMS.",
+    kakaopayModeLabel: "KakaoPay перевод QR",
+    kakaopayEmptyPreview: "Введите данные KakaoPay для предпросмотра QR-кода."
+  },
+  ar: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "اسم الشبكة (SSID)",
+    wifiSsidPlaceholder: "مثال: Pixelyaki_WiFi",
+    wifiEncryptionLabel: "التشفير",
+    wifiPasswordLabel: "كلمة المرور",
+    wifiPasswordPlaceholder: "أدخل كلمة مرور Wi-Fi",
+    wifiHiddenLabel: "شبكة مخفية",
+    wifiInvalid: "تحقق من SSID وإعدادات Wi-Fi.",
+    wifiEmptyPreview: "أدخل بيانات Wi-Fi لمعاينة رمز QR.",
+    vcardNameLabel: "الاسم",
+    vcardNamePlaceholder: "مثال: Arthur Kim",
+    vcardCompanyLabel: "الشركة",
+    vcardCompanyPlaceholder: "مثال: Pixelyaki",
+    vcardPhoneLabel: "رقم الهاتف",
+    vcardPhonePlaceholder: "مثال: +821012345678",
+    vcardEmailLabel: "البريد الإلكتروني",
+    vcardEmailPlaceholder: "مثال: hello@pixelyaki.com",
+    vcardAddressLabel: "العنوان",
+    vcardAddressPlaceholder: "مثال: Seoul, Korea",
+    vcardInvalid: "يرجى إدخال اسم على الأقل.",
+    vcardInvalidPhone: "تحقق من تنسيق هاتف vCard.",
+    vcardInvalidEmail: "تحقق من تنسيق بريد vCard.",
+    vcardEmptyPreview: "أدخل بيانات جهة الاتصال لمعاينة QR الخاص بـ vCard.",
+    smsPhoneLabel: "هاتف المستلم",
+    smsPhonePlaceholder: "مثال: +821012345678",
+    smsBodyLabel: "الرسالة (اختياري)",
+    smsBodyPlaceholder: "مثال: مرحبا",
+    smsInvalid: "تحقق من تنسيق رقم SMS.",
+    smsEmptyPreview: "أدخل رقم هاتف لمعاينة QR الخاص بالرسائل.",
+    kakaopayModeLabel: "QR تحويل KakaoPay",
+    kakaopayEmptyPreview: "أدخل بيانات KakaoPay لمعاينة رمز QR."
+  },
+  hi: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "नेटवर्क नाम (SSID)",
+    wifiSsidPlaceholder: "जैसे: Pixelyaki_WiFi",
+    wifiEncryptionLabel: "एन्क्रिप्शन",
+    wifiPasswordLabel: "पासवर्ड",
+    wifiPasswordPlaceholder: "Wi-Fi पासवर्ड दर्ज करें",
+    wifiHiddenLabel: "हिडन नेटवर्क",
+    wifiInvalid: "SSID और Wi-Fi सेटिंग जांचें।",
+    wifiEmptyPreview: "QR प्रीव्यू के लिए Wi-Fi विवरण दर्ज करें।",
+    vcardNameLabel: "नाम",
+    vcardNamePlaceholder: "जैसे: Arthur Kim",
+    vcardCompanyLabel: "कंपनी",
+    vcardCompanyPlaceholder: "जैसे: Pixelyaki",
+    vcardPhoneLabel: "फ़ोन नंबर",
+    vcardPhonePlaceholder: "जैसे: +821012345678",
+    vcardEmailLabel: "ईमेल",
+    vcardEmailPlaceholder: "जैसे: hello@pixelyaki.com",
+    vcardAddressLabel: "पता",
+    vcardAddressPlaceholder: "जैसे: Seoul, Korea",
+    vcardInvalid: "कम से कम नाम दर्ज करें।",
+    vcardInvalidPhone: "vCard फ़ोन नंबर का फ़ॉर्मैट जांचें।",
+    vcardInvalidEmail: "vCard ईमेल का फ़ॉर्मैट जांचें।",
+    vcardEmptyPreview: "vCard QR प्रीव्यू के लिए संपर्क विवरण दर्ज करें।",
+    smsPhoneLabel: "प्राप्तकर्ता फ़ोन",
+    smsPhonePlaceholder: "जैसे: +821012345678",
+    smsBodyLabel: "संदेश (वैकल्पिक)",
+    smsBodyPlaceholder: "जैसे: नमस्ते",
+    smsInvalid: "SMS फ़ोन नंबर का फ़ॉर्मैट जांचें।",
+    smsEmptyPreview: "SMS QR प्रीव्यू के लिए फ़ोन नंबर दर्ज करें।",
+    kakaopayModeLabel: "KakaoPay ट्रांसफर QR",
+    kakaopayEmptyPreview: "QR प्रीव्यू के लिए KakaoPay विवरण दर्ज करें।"
+  },
+  id: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Nama jaringan (SSID)",
+    wifiSsidPlaceholder: "mis. Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Enkripsi",
+    wifiPasswordLabel: "Kata sandi",
+    wifiPasswordPlaceholder: "Masukkan kata sandi Wi-Fi",
+    wifiHiddenLabel: "Jaringan tersembunyi",
+    wifiInvalid: "Periksa SSID dan pengaturan Wi-Fi.",
+    wifiEmptyPreview: "Masukkan detail Wi-Fi untuk pratinjau QR.",
+    vcardNameLabel: "Nama",
+    vcardNamePlaceholder: "mis. Arthur Kim",
+    vcardCompanyLabel: "Perusahaan",
+    vcardCompanyPlaceholder: "mis. Pixelyaki",
+    vcardPhoneLabel: "Nomor telepon",
+    vcardPhonePlaceholder: "mis. +821012345678",
+    vcardEmailLabel: "Email",
+    vcardEmailPlaceholder: "mis. hello@pixelyaki.com",
+    vcardAddressLabel: "Alamat",
+    vcardAddressPlaceholder: "mis. Seoul, Korea",
+    vcardInvalid: "Masukkan setidaknya nama.",
+    vcardInvalidPhone: "Periksa format nomor telepon vCard.",
+    vcardInvalidEmail: "Periksa format email vCard.",
+    vcardEmptyPreview: "Masukkan kontak untuk pratinjau QR vCard.",
+    smsPhoneLabel: "Telepon penerima",
+    smsPhonePlaceholder: "mis. +821012345678",
+    smsBodyLabel: "Pesan (opsional)",
+    smsBodyPlaceholder: "mis. Halo",
+    smsInvalid: "Periksa format nomor SMS.",
+    smsEmptyPreview: "Masukkan nomor telepon untuk pratinjau QR SMS.",
+    kakaopayModeLabel: "QR Transfer KakaoPay",
+    kakaopayEmptyPreview: "Masukkan detail KakaoPay untuk pratinjau QR."
+  },
+  it: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Nome rete (SSID)",
+    wifiSsidPlaceholder: "es. Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Crittografia",
+    wifiPasswordLabel: "Password",
+    wifiPasswordPlaceholder: "Inserisci la password Wi-Fi",
+    wifiHiddenLabel: "Rete nascosta",
+    wifiInvalid: "Controlla SSID e impostazioni Wi-Fi.",
+    wifiEmptyPreview: "Inserisci i dati Wi-Fi per vedere l'anteprima QR.",
+    vcardNameLabel: "Nome",
+    vcardNamePlaceholder: "es. Arthur Kim",
+    vcardCompanyLabel: "Azienda",
+    vcardCompanyPlaceholder: "es. Pixelyaki",
+    vcardPhoneLabel: "Telefono",
+    vcardPhonePlaceholder: "es. +821012345678",
+    vcardEmailLabel: "Email",
+    vcardEmailPlaceholder: "es. hello@pixelyaki.com",
+    vcardAddressLabel: "Indirizzo",
+    vcardAddressPlaceholder: "es. Seoul, Korea",
+    vcardInvalid: "Inserisci almeno un nome.",
+    vcardInvalidPhone: "Controlla il formato del telefono vCard.",
+    vcardInvalidEmail: "Controlla il formato email vCard.",
+    vcardEmptyPreview: "Inserisci i contatti per l'anteprima QR vCard.",
+    smsPhoneLabel: "Telefono destinatario",
+    smsPhonePlaceholder: "es. +821012345678",
+    smsBodyLabel: "Messaggio (opzionale)",
+    smsBodyPlaceholder: "es. Ciao",
+    smsInvalid: "Controlla il formato del numero SMS.",
+    smsEmptyPreview: "Inserisci un numero per l'anteprima QR SMS.",
+    kakaopayModeLabel: "QR Trasferimento KakaoPay",
+    kakaopayEmptyPreview: "Inserisci i dati KakaoPay per l'anteprima QR."
+  },
+  pt: {
+    wifiModeLabel: "Wi-Fi",
+    vcardModeLabel: "vCard",
+    smsModeLabel: "SMS",
+    wifiSsidLabel: "Nome da rede (SSID)",
+    wifiSsidPlaceholder: "ex. Pixelyaki_WiFi",
+    wifiEncryptionLabel: "Criptografia",
+    wifiPasswordLabel: "Senha",
+    wifiPasswordPlaceholder: "Digite a senha do Wi-Fi",
+    wifiHiddenLabel: "Rede oculta",
+    wifiInvalid: "Verifique o SSID e as configurações de Wi-Fi.",
+    wifiEmptyPreview: "Digite os dados do Wi-Fi para pré-visualizar o QR.",
+    vcardNameLabel: "Nome",
+    vcardNamePlaceholder: "ex. Arthur Kim",
+    vcardCompanyLabel: "Empresa",
+    vcardCompanyPlaceholder: "ex. Pixelyaki",
+    vcardPhoneLabel: "Telefone",
+    vcardPhonePlaceholder: "ex. +821012345678",
+    vcardEmailLabel: "E-mail",
+    vcardEmailPlaceholder: "ex. hello@pixelyaki.com",
+    vcardAddressLabel: "Endereço",
+    vcardAddressPlaceholder: "ex. Seoul, Korea",
+    vcardInvalid: "Digite pelo menos um nome.",
+    vcardInvalidPhone: "Verifique o formato do telefone no vCard.",
+    vcardInvalidEmail: "Verifique o formato do e-mail no vCard.",
+    vcardEmptyPreview: "Digite os contatos para pré-visualizar o QR vCard.",
+    smsPhoneLabel: "Telefone do destinatário",
+    smsPhonePlaceholder: "ex. +821012345678",
+    smsBodyLabel: "Mensagem (opcional)",
+    smsBodyPlaceholder: "ex. Olá",
+    smsInvalid: "Verifique o formato do número SMS.",
+    smsEmptyPreview: "Digite um telefone para pré-visualizar o QR SMS.",
+    kakaopayModeLabel: "QR Transferência KakaoPay",
+    kakaopayEmptyPreview: "Digite os dados do KakaoPay para pré-visualizar o QR."
   }
 };
 
-const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
+const styleCopyByLocale: Record<Locale, StyleCopy> = {
   ko: {
     title: "QR 스타일",
     presetLabel: "프리셋",
@@ -789,6 +1214,19 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetDot: "Ponto",
     errorCorrectionLabel: "Densidade",
     eclL: "Baixa", eclM: "Média", eclQ: "Alta", eclH: "Máxima"
+  },
+  th: {
+    title: "สไตล์ QR",
+    presetLabel: "พรีเซ็ต",
+    dotsLabel: "รูปแบบจุด",
+    cornerSquareLabel: "รูปแบบมุม",
+    cornerDotLabel: "จุดมุม",
+    presetSquare: "สี่เหลี่ยม",
+    presetRounded: "โค้งมน",
+    presetClassy: "คลาสสิก",
+    presetDot: "จุด",
+    errorCorrectionLabel: "ความหนาแน่น",
+    eclL: "ต่ำ", eclM: "ปานกลาง", eclQ: "สูง", eclH: "สูงสุด"
   }
 };
 
@@ -825,8 +1263,8 @@ const QR_STYLE_PRESETS: Record<
 
 export function QrStudio({ copy, locale }: QrStudioProps) {
   const modeCopy = modeCopyByLocale[locale];
-  const extraModeCopy = extraModeCopyByLocale[locale] ?? extraModeCopyByLocale.en!;
-  const styleCopy = styleCopyByLocale[locale] ?? styleCopyByLocale.en!;
+  const extraModeCopy = extraModeCopyByLocale[locale];
+  const styleCopy = styleCopyByLocale[locale];
   const [mode, setMode] = useState<QrMode>("text");
   const [text, setText] = useState("");
   const [bankCode, setBankCode] = useState("004");
@@ -1449,9 +1887,9 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   onChange={(event) => setWifiEncryption(event.target.value as "WPA" | "WEP" | "nopass")}
                   className={SELECT_CLASS}
                 >
-                  <option value="WPA">WPA/WPA2</option>
-                  <option value="WEP">WEP</option>
-                  <option value="nopass">No password</option>
+                  <option value="WPA">{extraModeCopy.wifiEncryptionWpa}</option>
+                  <option value="WEP">{extraModeCopy.wifiEncryptionWep}</option>
+                  <option value="nopass">{extraModeCopy.wifiEncryptionNoPassword}</option>
                 </select>
               </div>
               {wifiEncryption !== "nopass" ? (
@@ -1663,12 +2101,12 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   value={dotsStyle}
                   onChange={(event) => setDotsStyle(event.target.value as QrDotsStyle)}
                 >
-                  <option value="square">square</option>
-                  <option value="dots">dots</option>
-                  <option value="rounded">rounded</option>
-                  <option value="classy">classy</option>
-                  <option value="classy-rounded">classy-rounded</option>
-                  <option value="extra-rounded">extra-rounded</option>
+                  <option value="square">{styleCopy.styleSquare}</option>
+                  <option value="dots">{styleCopy.styleDots}</option>
+                  <option value="rounded">{styleCopy.styleRounded}</option>
+                  <option value="classy">{styleCopy.styleClassy}</option>
+                  <option value="classy-rounded">{styleCopy.styleClassyRounded}</option>
+                  <option value="extra-rounded">{styleCopy.styleExtraRounded}</option>
                 </select>
               </div>
 
@@ -1682,9 +2120,9 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   value={cornerSquareStyle}
                   onChange={(event) => setCornerSquareStyle(event.target.value as QrCornerSquareStyle)}
                 >
-                  <option value="square">square</option>
-                  <option value="dot">dot</option>
-                  <option value="extra-rounded">extra-rounded</option>
+                  <option value="square">{styleCopy.styleSquare}</option>
+                  <option value="dot">{styleCopy.styleDot}</option>
+                  <option value="extra-rounded">{styleCopy.styleExtraRounded}</option>
                 </select>
               </div>
 
@@ -1698,8 +2136,8 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   value={cornerDotStyle}
                   onChange={(event) => setCornerDotStyle(event.target.value as QrCornerDotStyle)}
                 >
-                  <option value="square">square</option>
-                  <option value="dot">dot</option>
+                  <option value="square">{styleCopy.styleSquare}</option>
+                  <option value="dot">{styleCopy.styleDot}</option>
                 </select>
               </div>
 

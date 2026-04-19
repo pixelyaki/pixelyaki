@@ -302,6 +302,19 @@ const content: Record<Locale, TermsContent> = {
       { heading: "5. Propriedade intelectual", body: "QR Code é uma marca registrada da DENSO WAVE INCORPORATED.\n\nTodo o conteúdo do Pixelyaki é propriedade do Pixelyaki." },
       { heading: "6. Alterações nos termos", body: "Estes termos podem ser atualizados sem aviso prévio. O uso continuado do serviço implica aceitação dos termos revisados." }
     ]
+  },
+  th: {
+    title: "เงื่อนไขการใช้บริการ",
+    updated: "อัปเดตล่าสุด: 20 เมษายน 2026",
+    back: "กลับ",
+    sections: [
+      { heading: "1. คำอธิบายบริการ", body: "Pixelyaki เป็นบริการเว็บฟรีที่แปลงข้อความเป็น QR Code ไม่จำเป็นต้องมีบัญชีหรือสมัครสมาชิก" },
+      { heading: "2. การใช้งานที่อนุญาต", body: "คุณสามารถใช้บริการนี้เพื่อวัตถุประสงค์ที่ถูกกฎหมายเท่านั้น สิ่งต่อไปนี้เป็นสิ่งต้องห้าม:\n• การสร้าง QR Code ที่มีเนื้อหาผิดกฎหมาย\n• การสร้าง QR Code เพื่อวัตถุประสงค์ที่เป็นอันตราย\n• การใช้บริการเพื่อสร้างความเสียหายแก่บุคคลที่สาม" },
+      { heading: "3. การเปลี่ยนแปลงบริการ", body: "เราอาจแก้ไขหรือยุติบริการได้ตลอดเวลาโดยไม่แจ้งล่วงหน้า" },
+      { heading: "4. การปฏิเสธความรับผิดชอบ", body: "บริการนี้จัดให้ 'ตามที่เป็น' โดยไม่มีการรับประกันใดๆ เราไม่รับผิดชอบต่อความเสียหายใดๆ" },
+      { heading: "5. ทรัพย์สินทางปัญญา", body: "QR Code เป็นเครื่องหมายการค้าของ DENSO WAVE INCORPORATED\n\nเนื้อหาทั้งหมดของ Pixelyaki เป็นทรัพย์สินของ Pixelyaki" },
+      { heading: "6. การเปลี่ยนแปลงเงื่อนไข", body: "เงื่อนไขเหล่านี้อาจได้รับการอัปเดตโดยไม่แจ้งล่วงหน้า การใช้บริการต่อเนื่องถือเป็นการยอมรับเงื่อนไขที่แก้ไขแล้ว" }
+    ]
   }
 };
 

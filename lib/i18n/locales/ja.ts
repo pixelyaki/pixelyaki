@@ -2,12 +2,12 @@ import { FullTranslation } from "../types";
 
 export const ja: FullTranslation = {
   seo: {
-    title: "Pixelyaki QRコード生成 | 無料PNG/SVGダウンロード",
+    title: "Pixelyaki QRコード作成 | 無料PNG/SVGダウンロード",
     description: "サインアップ不要でテキストをQRコード化。色変更、ロゴ挿入、透過PNG・SVGダウンロードに対応。"
   },
   header: {
     logo: "Pixelyaki",
-    generate: "生成"
+    generate: "QRコード作成"
   },
   hero: {
     eyebrow: "サインアップ不要",
@@ -102,8 +102,46 @@ export const ja: FullTranslation = {
     smsBodyPlaceholder: "例: こんにちは",
     smsInvalid: "SMS の電話番号形式を確認してください。",
     smsEmptyPreview: "電話番号を入力すると SMS QR をプレビューできます。",
-    kakaopayModeLabel: "KakaoPay 送金 QR",
-    kakaopayEmptyPreview: "KakaoPay 送金情報を入力すると QR をプレビューできます。"
+    kakaopayModeLabel: "KakaoPay即時送金",
+    kakaopayEmptyPreview: "KakaoPay送金情報を入力してプレビューを確認してください。",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "氏名",
+    mecardNamePlaceholder: "例: 山田太郎",
+    mecardPhoneLabel: "電話番号",
+    mecardPhonePlaceholder: "例: 09012345678",
+    mecardEmailLabel: "メールアドレス",
+    mecardEmailPlaceholder: "例: hello@pixelyaki.com",
+    mecardAddressLabel: "住所",
+    mecardAddressPlaceholder: "例: 東京都千代田区",
+    mecardEmptyPreview: "連絡先情報を入力してmeCard QRプレビューを確認してください。",
+    calendarModeLabel: "カレンダー",
+    calendarTitleLabel: "イベント名",
+    calendarTitlePlaceholder: "例: チームミーティング",
+    calendarStartLabel: "開始日時",
+    calendarEndLabel: "終了日時",
+    calendarLocationLabel: "場所",
+    calendarLocationPlaceholder: "例: 会議室1",
+    calendarDescriptionLabel: "説明",
+    calendarDescriptionPlaceholder: "例: プロジェクト内容の確認",
+    calendarEmptyPreview: "予定情報を入力してカレンダーQRプレビューを確認してください。",
+    paypalModeLabel: "PayPal",
+    paypalEmailLabel: "PayPalメール/ID",
+    paypalEmailPlaceholder: "例: payment@pixelyaki.com",
+    paypalItemLabel: "商品名",
+    paypalItemPlaceholder: "例: デザインサービス",
+    paypalAmountLabel: "金額",
+    paypalAmountPlaceholder: "例: 50.00",
+    paypalCurrencyLabel: "通貨",
+    paypalEmptyPreview: "決済情報を入力してPayPal QRプレビューを確認してください。",
+    cryptoModeLabel: "クリプト",
+    cryptoAddressLabel: "ウォレットアドレス",
+    cryptoAddressPlaceholder: "例: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "金額",
+    cryptoAmountPlaceholder: "例: 0.1",
+    cryptoCoinLabel: "コインの種類",
+    cryptoLabelLabel: "ラベル (名前)",
+    cryptoLabelPlaceholder: "例: ビットコインウォレット",
+    cryptoEmptyPreview: "ウォレット情報を入力してクリプトQRプレビューを確認してください。"
   },
   styles: {
     title: "QRスタイル",

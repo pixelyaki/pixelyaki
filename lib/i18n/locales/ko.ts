@@ -2,16 +2,16 @@ import { FullTranslation } from "../types";
 
 export const ko: FullTranslation = {
   seo: {
-    title: "Pixelyaki QR 코드 생성기 | 무료 PNG/SVG 다운로드",
+    title: "Pixelyaki QR 코드 만들기 | 무료 PNG/SVG 다운로드",
     description: "회원가입 없이 텍스트를 QR 코드로 즉시 변환하세요. 색상 변경, 로고 삽입, 투명 PNG와 SVG 다운로드를 지원합니다."
   },
   header: {
     logo: "Pixelyaki",
-    generate: "생성하기"
+    generate: "QR 코드 만들기"
   },
   hero: {
     eyebrow: "회원가입 없이 바로 사용",
-    title: "텍스트를 즉시 QR 코드로 변환하세요",
+    title: "텍스트를 즉시 QR 코드로 만드세요",
     description: "색상 변경, 로고 삽입, 투명 PNG와 SVG 다운로드까지 한 번에 처리할 수 있습니다."
   },
   studio: {
@@ -102,8 +102,46 @@ export const ko: FullTranslation = {
     smsBodyPlaceholder: "예: 안녕하세요",
     smsInvalid: "SMS 전화번호 형식을 확인해 주세요.",
     smsEmptyPreview: "전화번호를 입력하면 SMS QR 미리보기가 표시됩니다.",
-    kakaopayModeLabel: "카카오페이 송금 QR",
-    kakaopayEmptyPreview: "카카오페이 송금 정보를 입력하면 QR 미리보기가 표시됩니다."
+    kakaopayModeLabel: "카카오페이 송금",
+    kakaopayEmptyPreview: "카카오페이 송금 정보를 입력하여 미리보기를 확인하세요.",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "이름",
+    mecardNamePlaceholder: "예: 김철수",
+    mecardPhoneLabel: "전화번호",
+    mecardPhonePlaceholder: "예: 01012345678",
+    mecardEmailLabel: "이메일",
+    mecardEmailPlaceholder: "예: hello@pixelyaki.com",
+    mecardAddressLabel: "주소",
+    mecardAddressPlaceholder: "예: 서울특별시 강남구",
+    mecardEmptyPreview: "연락처 정보를 입력하여 meCard QR 미리보기를 확인하세요.",
+    calendarModeLabel: "캘린더",
+    calendarTitleLabel: "이벤트 제목",
+    calendarTitlePlaceholder: "예: 업무 미팅",
+    calendarStartLabel: "시작 시간",
+    calendarEndLabel: "종료 시간",
+    calendarLocationLabel: "장소",
+    calendarLocationPlaceholder: "예: 제1회의실",
+    calendarDescriptionLabel: "메모",
+    calendarDescriptionPlaceholder: "예: 프로젝트 계획 논의",
+    calendarEmptyPreview: "일정 정보를 입력하여 캘린더 QR 미리보기를 확인하세요.",
+    paypalModeLabel: "페이팔",
+    paypalEmailLabel: "페이팔 이메일/ID",
+    paypalEmailPlaceholder: "예: payment@pixelyaki.com",
+    paypalItemLabel: "상품명",
+    paypalItemPlaceholder: "예: 디자인 서비스",
+    paypalAmountLabel: "금액",
+    paypalAmountPlaceholder: "예: 50.00",
+    paypalCurrencyLabel: "통화",
+    paypalEmptyPreview: "결제 정보를 입력하여 페이팔 QR 미리보기를 확인하세요.",
+    cryptoModeLabel: "크립토",
+    cryptoAddressLabel: "지갑 주소",
+    cryptoAddressPlaceholder: "예: 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "금액",
+    cryptoAmountPlaceholder: "예: 0.1",
+    cryptoCoinLabel: "코인 종류",
+    cryptoLabelLabel: "라벨 (이름)",
+    cryptoLabelPlaceholder: "예: 비트코인 지갑",
+    cryptoEmptyPreview: "지갑 정보를 입력하여 크립토 QR 미리보기를 확인하세요."
   },
   styles: {
     title: "QR 스타일",

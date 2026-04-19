@@ -2,12 +2,12 @@ import { FullTranslation } from "../types";
 
 export const bn: FullTranslation = {
   seo: {
-    title: "Pixelyaki কিউআর কোড জেনারেটর | বিনামূল্যে PNG/SVG ডাউনলোড",
+    title: "কিউআর কোড তৈরি করুন Pixelyaki | বিনামূল্যে PNG/SVG ডাউনলোড",
     description: "সাইন-আপ ছাড়াই তাৎক্ষণিকভাবে টেক্সটকে কিউআর কোডে রূপান্তর করুন। রঙ কাস্টমাইজেশন, লোগো সংযোজন, স্বচ্ছ PNG এবং SVG ডাউনলোড সমর্থন করে।"
   },
   header: {
     logo: "Pixelyaki",
-    generate: "তৈরি করুন"
+    generate: "কিউআর কোড তৈরি করুন"
   },
   hero: {
     eyebrow: "সাইন-আপের প্রয়োজন নেই",
@@ -103,7 +103,45 @@ export const bn: FullTranslation = {
     smsInvalid: "অনুগ্রহ করে এসএমএস ফোন নম্বরের ফরম্যাট চেক করুন।",
     smsEmptyPreview: "এসএমএস কিউআর প্রিভিউ করতে একটি ফোন নম্বর লিখুন।",
     kakaopayModeLabel: "কাকাওপে ট্রান্সফার",
-    kakaopayEmptyPreview: "প্রিভিউ করতে কাকাওপে ট্রান্সফার তথ্য লিখুন।"
+    kakaopayEmptyPreview: "প্রিভিউ করতে কাকাওপে ট্রান্সফার তথ্য লিখুন।",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "Name",
+    mecardNamePlaceholder: "e.g. John Doe",
+    mecardPhoneLabel: "Phone",
+    mecardPhonePlaceholder: "e.g. +1234567890",
+    mecardEmailLabel: "Email",
+    mecardEmailPlaceholder: "e.g. hello@pixelyaki.com",
+    mecardAddressLabel: "Address",
+    mecardAddressPlaceholder: "e.g. New York, USA",
+    mecardEmptyPreview: "Enter contact info to see a meCard QR preview.",
+    calendarModeLabel: "Calendar",
+    calendarTitleLabel: "Event Title",
+    calendarTitlePlaceholder: "e.g. Team Meeting",
+    calendarStartLabel: "Start Date/Time",
+    calendarEndLabel: "End Date/Time",
+    calendarLocationLabel: "Location",
+    calendarLocationPlaceholder: "e.g. Meeting Room 1",
+    calendarDescriptionLabel: "Description",
+    calendarDescriptionPlaceholder: "e.g. Discuss project plans",
+    calendarEmptyPreview: "Enter event info to see a calendar QR preview.",
+    paypalModeLabel: "PayPal",
+    paypalEmailLabel: "PayPal Email/ID",
+    paypalEmailPlaceholder: "e.g. payment@pixelyaki.com",
+    paypalItemLabel: "Item Name",
+    paypalItemPlaceholder: "e.g. Design Service",
+    paypalAmountLabel: "Amount",
+    paypalAmountPlaceholder: "e.g. 50.00",
+    paypalCurrencyLabel: "Currency",
+    paypalEmptyPreview: "Enter payment info to see a PayPal QR preview.",
+    cryptoModeLabel: "Crypto",
+    cryptoAddressLabel: "Wallet Address",
+    cryptoAddressPlaceholder: "e.g. 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "Amount",
+    cryptoAmountPlaceholder: "e.g. 0.1",
+    cryptoCoinLabel: "Coin",
+    cryptoLabelLabel: "Label (Name)",
+    cryptoLabelPlaceholder: "e.g. Bitcoin Wallet",
+    cryptoEmptyPreview: "Enter wallet info to see a crypto QR preview."
   },
   styles: {
     title: "কিউআর স্টাইল",

@@ -2,12 +2,12 @@ import { FullTranslation } from "../types";
 
 export const ms: FullTranslation = {
   seo: {
-    title: "Penjana Kod QR Pixelyaki | Muat turun PNG/SVG Percuma",
+    title: "Buat Kod QR Pixelyaki | Muat turun PNG/SVG Percuma",
     description: "Tukar teks kepada kod QR dengan segera tanpa pendaftaran. Menyokong penyesuaian warna, penambahan logo, muat turun PNG telus dan SVG."
   },
   header: {
     logo: "Pixelyaki",
-    generate: "Jana"
+    generate: "Buat Kod QR"
   },
   hero: {
     eyebrow: "Tiada pendaftaran diperlukan",
@@ -103,7 +103,45 @@ export const ms: FullTranslation = {
     smsInvalid: "Sila semak format no. telefon SMS.",
     smsEmptyPreview: "Masukkan no. telefon untuk melihat pratonton SMS QR.",
     kakaopayModeLabel: "Pindahan KakaoPay",
-    kakaopayEmptyPreview: "Masukkan butiran KakaoPay untuk melihat pratonton."
+    kakaopayEmptyPreview: "Masukkan butiran KakaoPay untuk melihat pratonton.",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "Name",
+    mecardNamePlaceholder: "e.g. John Doe",
+    mecardPhoneLabel: "Phone",
+    mecardPhonePlaceholder: "e.g. +1234567890",
+    mecardEmailLabel: "Email",
+    mecardEmailPlaceholder: "e.g. hello@pixelyaki.com",
+    mecardAddressLabel: "Address",
+    mecardAddressPlaceholder: "e.g. New York, USA",
+    mecardEmptyPreview: "Enter contact info to see a meCard QR preview.",
+    calendarModeLabel: "Calendar",
+    calendarTitleLabel: "Event Title",
+    calendarTitlePlaceholder: "e.g. Team Meeting",
+    calendarStartLabel: "Start Date/Time",
+    calendarEndLabel: "End Date/Time",
+    calendarLocationLabel: "Location",
+    calendarLocationPlaceholder: "e.g. Meeting Room 1",
+    calendarDescriptionLabel: "Description",
+    calendarDescriptionPlaceholder: "e.g. Discuss project plans",
+    calendarEmptyPreview: "Enter event info to see a calendar QR preview.",
+    paypalModeLabel: "PayPal",
+    paypalEmailLabel: "PayPal Email/ID",
+    paypalEmailPlaceholder: "e.g. payment@pixelyaki.com",
+    paypalItemLabel: "Item Name",
+    paypalItemPlaceholder: "e.g. Design Service",
+    paypalAmountLabel: "Amount",
+    paypalAmountPlaceholder: "e.g. 50.00",
+    paypalCurrencyLabel: "Currency",
+    paypalEmptyPreview: "Enter payment info to see a PayPal QR preview.",
+    cryptoModeLabel: "Crypto",
+    cryptoAddressLabel: "Wallet Address",
+    cryptoAddressPlaceholder: "e.g. 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "Amount",
+    cryptoAmountPlaceholder: "e.g. 0.1",
+    cryptoCoinLabel: "Coin",
+    cryptoLabelLabel: "Label (Name)",
+    cryptoLabelPlaceholder: "e.g. Bitcoin Wallet",
+    cryptoEmptyPreview: "Enter wallet info to see a crypto QR preview."
   },
   styles: {
     title: "Gaya QR",

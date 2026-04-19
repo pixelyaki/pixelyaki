@@ -7,7 +7,7 @@ import { getCopy, isLocale, type Locale } from "@/lib/i18n";
 type Section = { heading: string; body: string };
 type TermsContent = { title: string; updated: string; back: string; sections: Section[] };
 
-const content: Record<Locale, TermsContent> = {
+const content: Partial<Record<Locale, TermsContent>> = {
   ko: {
     title: "이용약관",
     updated: "최종 수정일: 2026년 4월 18일",
@@ -324,7 +324,7 @@ export default async function TermsPage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const copy = content[locale];
+  const copy = content[locale] || content.en!;
   const headerLabels = getCopy(locale).header;
 
   return (

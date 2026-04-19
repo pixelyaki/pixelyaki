@@ -230,6 +230,76 @@ const content: Record<Locale, OpenSourceCopy> = {
     note: "รายการนี้สร้างขึ้นอัตโนมัติระหว่างการ build กรุณาดูที่ repository ของแต่ละรายการสำหรับเงื่อนไขใบอนุญาตฉบับเต็ม",
     emptyState: "ไม่สามารถโหลดรายการใบอนุญาตได้ กรุณา build ใหม่อีกครั้ง",
     defaultUsage: "การพึ่งพา"
+  },
+  vi: {
+    title: "Giấy phép nguồn mở",
+    updatedPrefix: "Tự động cập nhật:",
+    back: "Quay lại",
+    intro: "Pixelyaki được xây dựng với các thư viện nguồn mở được liệt kê bên dưới.",
+    columns: { library: "Thư viện", usage: "Sử dụng", license: "Giấy phép", link: "Liên kết" },
+    note: "Danh sách này được tạo tự động trong quá trình build. Vui lòng tham khảo từng kho lưu trữ để biết điều khoản đầy đủ.",
+    emptyState: "Không thể tải danh sách giấy phép. Vui lòng chạy lại build.",
+    defaultUsage: "Phụ thuộc"
+  },
+  tr: {
+    title: "Açık Kaynak Lisansları",
+    updatedPrefix: "Otomatik güncelleme:",
+    back: "Geri",
+    intro: "Pixelyaki, aşağıda listelenen açık kaynak kütüphaneleriyle oluşturulmuştur.",
+    columns: { library: "Kütüphane", usage: "Kullanım", license: "Lisans", link: "Bağlantı" },
+    note: "Bu liste derleme sırasında otomatik olarak oluşturulur. Tam lisans koşulları için her depoyu inceleyin.",
+    emptyState: "Lisans listesi yüklenemedi. Lütfen derlemeyi yeniden çalıştırın.",
+    defaultUsage: "Bağımlılık"
+  },
+  nl: {
+    title: "Open Source-licenties",
+    updatedPrefix: "Automatisch bijgewerkt:",
+    back: "Terug",
+    intro: "Pixelyaki is gebouwd met de onderstaande open source-bibliotheken.",
+    columns: { library: "Bibliotheek", usage: "Gebruik", license: "Licentie", link: "Link" },
+    note: "Deze lijst wordt automatisch gegenereerd tijdens de build. Raadpleeg elke repository voor de volledige licentievoorwaarden.",
+    emptyState: "Kan de licentielijst niet laden. Voer de build opnieuw uit.",
+    defaultUsage: "Afhankelijkheid"
+  },
+  pl: {
+    title: "Licencje open source",
+    updatedPrefix: "Automatyczna aktualizacja:",
+    back: "Wstecz",
+    intro: "Pixelyaki został zbudowany przy użyciu bibliotek open source wymienionych poniżej.",
+    columns: { library: "Biblioteka", usage: "Zastosowanie", license: "Licencja", link: "Link" },
+    note: "Ta lista jest generowana automatycznie podczas budowania. Pełne warunki licencji znajdziesz w poszczególnych repozytoriach.",
+    emptyState: "Nie można załadować listy licencji. Uruchom ponownie build.",
+    defaultUsage: "Zależność"
+  },
+  tl: {
+    title: "Mga Lisensya ng Open Source",
+    updatedPrefix: "Awtomatikong na-update:",
+    back: "Bumalik",
+    intro: "Ang Pixelyaki ay binuo gamit ang mga open source na library na nakalista sa ibaba.",
+    columns: { library: "Library", usage: "Paggamit", license: "Lisensya", link: "Link" },
+    note: "Ang listahang ito ay awtomatikong nabubuo sa panahon ng build. Tingnan ang bawat repository para sa kumpletong mga tuntunin ng lisensya.",
+    emptyState: "Hindi ma-load ang listahan ng lisensya. Pakipatakbo muli ang build.",
+    defaultUsage: "Dependency"
+  },
+  ms: {
+    title: "Lesen Sumber Terbuka",
+    updatedPrefix: "Dikemas kini secara automatik:",
+    back: "Kembali",
+    intro: "Pixelyaki dibina dengan perpustakaan sumber terbuka yang disenaraikan di bawah.",
+    columns: { library: "Perpustakaan", usage: "Penggunaan", license: "Lesen", link: "Pautan" },
+    note: "Senarai ini dijana secara automatik semasa build. Sila rujuk setiap repositori untuk terma lesen yang lengkap.",
+    emptyState: "Tidak dapat memuatkan senarai lesen. Sila jalankan build semula.",
+    defaultUsage: "Kebergantungan"
+  },
+  bn: {
+    title: "ওপেন সোর্স লাইসেন্স",
+    updatedPrefix: "স্বয়ংক্রিয় আপডেট:",
+    back: "ফিরে যান",
+    intro: "Pixelyaki নিচে তালিকাভুক্ত ওপেন সোর্স লাইব্রেরি দিয়ে তৈরি।",
+    columns: { library: "লাইব্রেরি", usage: "ব্যবহার", license: "লাইসেন্স", link: "লিংক" },
+    note: "এই তালিকা build-এর সময় স্বয়ংক্রিয়ভাবে তৈরি হয়। সম্পূর্ণ লাইসেন্স শর্তের জন্য প্রতিটি রিপোজিটরি দেখুন।",
+    emptyState: "লাইসেন্স তালিকা লোড করা যায়নি। অনুগ্রহ করে build পুনরায় চালান।",
+    defaultUsage: "নির্ভরতা"
   }
 };
 

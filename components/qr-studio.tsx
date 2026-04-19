@@ -9,7 +9,11 @@ import {
   UserSquare,
   Wallet,
   Wifi,
-  Www
+  Www,
+  User,
+  Calendar as CalendarIcon,
+  Paypal,
+  BitcoinCircle
 } from "iconoir-react";
 import { useEffect, useRef, useState } from "react";
 import { FullTranslation } from "@/lib/i18n/types";
@@ -60,7 +64,11 @@ type QrMode =
   | "wifi"
   | "vcard"
   | "sms"
-  | "kakaopay";
+  | "kakaopay"
+  | "mecard"
+  | "calendar"
+  | "paypal"
+  | "crypto";
 
 type QrStudioProps = {
   locale: Locale;
@@ -109,6 +117,23 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
   const [kakaoBankCode, setKakaoBankCode] = useState("004");
   const [kakaoAccountNo, setKakaoAccountNo] = useState("");
   const [kakaoAmount, setKakaoAmount] = useState("");
+  const [mecardName, setMecardName] = useState("");
+  const [mecardPhone, setMecardPhone] = useState("");
+  const [mecardEmail, setMecardEmail] = useState("");
+  const [mecardAddress, setMecardAddress] = useState("");
+  const [calendarTitle, setCalendarTitle] = useState("");
+  const [calendarStart, setCalendarStart] = useState("");
+  const [calendarEnd, setCalendarEnd] = useState("");
+  const [calendarLocation, setCalendarLocation] = useState("");
+  const [calendarDescription, setCalendarDescription] = useState("");
+  const [paypalEmail, setPaypalEmail] = useState("");
+  const [paypalItem, setPaypalItem] = useState("");
+  const [paypalAmount, setPaypalAmount] = useState("");
+  const [paypalCurrency, setPaypalCurrency] = useState("USD");
+  const [cryptoAddress, setCryptoAddress] = useState("");
+  const [cryptoCoin, setCryptoCoin] = useState("bitcoin");
+  const [cryptoAmount, setCryptoAmount] = useState("");
+  const [cryptoLabel, setCryptoLabel] = useState("");
   const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<QrErrorCorrectionLevel>("H");
   const [stylePreset, setStylePreset] = useState<QrStylePreset>("square");
   const [dotsStyle, setDotsStyle] = useState<QrDotsStyle>(QR_STYLE_PRESETS.square.dots);
@@ -164,6 +189,31 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
     accountNumber: kakaoAccountNo,
     amount: kakaoAmount
   });
+  const mecardPayload = buildMeCardPayload({
+    name: mecardName,
+    phone: mecardPhone,
+    email: mecardEmail,
+    address: mecardAddress
+  });
+  const calendarPayload = buildCalendarPayload({
+    title: calendarTitle,
+    start: calendarStart,
+    end: calendarEnd,
+    location: calendarLocation,
+    description: calendarDescription
+  });
+  const paypalPayload = buildPayPalPayload({
+    email: paypalEmail,
+    item: paypalItem,
+    amount: paypalAmount,
+    currency: paypalCurrency
+  });
+  const cryptoPayload = buildCryptoPayload({
+    address: cryptoAddress,
+    coin: cryptoCoin,
+    amount: cryptoAmount,
+    label: cryptoLabel
+  });
 
   let qrPayload = "";
   let modeError: string | null = null;
@@ -199,7 +249,31 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
     } else if (emailPayload) {
       qrPayload = emailPayload;
     } else {
-      modeError = modeCopy.invalidEmail;
+      modeError = modeCopy.emailEmptyPreview;
+    }
+  } else if (mode === "mecard") {
+    if (mecardPayload) {
+      qrPayload = mecardPayload;
+    } else {
+      modeError = extraModeCopy.mecardEmptyPreview;
+    }
+  } else if (mode === "calendar") {
+    if (calendarPayload) {
+      qrPayload = calendarPayload;
+    } else {
+      modeError = extraModeCopy.calendarEmptyPreview;
+    }
+  } else if (mode === "paypal") {
+    if (paypalPayload) {
+      qrPayload = paypalPayload;
+    } else {
+      modeError = extraModeCopy.paypalEmptyPreview;
+    }
+  } else if (mode === "crypto") {
+    if (cryptoPayload) {
+      qrPayload = cryptoPayload;
+    } else {
+      modeError = extraModeCopy.cryptoEmptyPreview;
     }
   } else if (mode === "phone") {
     if (phoneInput.trim().length === 0) {
@@ -511,24 +585,38 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
     setCornerDotStyle(preset.cornerDot);
   }
 
-  const emptyPreview =
-    mode === "text"
-      ? copy.emptyPreview
-      : mode === "send"
-        ? modeCopy.sendEmptyPreview
-        : mode === "url"
-          ? modeCopy.urlEmptyPreview
-          : mode === "email"
-            ? modeCopy.emailEmptyPreview
-            : mode === "phone"
-              ? modeCopy.phoneEmptyPreview
-              : mode === "wifi"
-                ? extraModeCopy.wifiEmptyPreview
-                : mode === "vcard"
-                  ? extraModeCopy.vcardEmptyPreview
-                  : mode === "sms"
-                    ? extraModeCopy.smsEmptyPreview
-                    : extraModeCopy.kakaopayEmptyPreview;
+  const emptyPreview = (() => {
+    switch (mode) {
+      case "text":
+        return copy.emptyPreview;
+      case "send":
+        return modeCopy.sendEmptyPreview;
+      case "url":
+        return modeCopy.urlEmptyPreview;
+      case "email":
+        return modeCopy.emailEmptyPreview;
+      case "phone":
+        return modeCopy.phoneEmptyPreview;
+      case "wifi":
+        return extraModeCopy.wifiEmptyPreview;
+      case "vcard":
+        return extraModeCopy.vcardEmptyPreview;
+      case "sms":
+        return extraModeCopy.smsEmptyPreview;
+      case "mecard":
+        return extraModeCopy.mecardEmptyPreview;
+      case "calendar":
+        return extraModeCopy.calendarEmptyPreview;
+      case "paypal":
+        return extraModeCopy.paypalEmptyPreview;
+      case "crypto":
+        return extraModeCopy.cryptoEmptyPreview;
+      case "kakaopay":
+        return extraModeCopy.kakaopayEmptyPreview;
+      default:
+        return copy.emptyPreview;
+    }
+  })();
 
   const isKo = locale === "ko";
 
@@ -540,6 +628,10 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
     { value: "wifi", label: extraModeCopy.wifiModeLabel, icon: <Wifi className="h-3.5 w-3.5" /> },
     { value: "vcard", label: extraModeCopy.vcardModeLabel, icon: <UserSquare className="h-3.5 w-3.5" /> },
     { value: "sms", label: extraModeCopy.smsModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> },
+    { value: "mecard", label: extraModeCopy.mecardModeLabel, icon: <User className="h-3.5 w-3.5" /> },
+    { value: "calendar", label: extraModeCopy.calendarModeLabel, icon: <CalendarIcon className="h-3.5 w-3.5" /> },
+    { value: "paypal", label: extraModeCopy.paypalModeLabel, icon: <Paypal className="h-3.5 w-3.5" /> },
+    { value: "crypto", label: extraModeCopy.cryptoModeLabel, icon: <BitcoinCircle className="h-3.5 w-3.5" /> },
     ...(isKo ? [
       { value: "send" as QrMode, label: modeCopy.sendModeLabel, icon: <SendDiagonal className="h-3.5 w-3.5" /> },
       { value: "kakaopay" as QrMode, label: extraModeCopy.kakaopayModeLabel, icon: <Wallet className="h-3.5 w-3.5" /> }
@@ -549,7 +641,7 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
   return (
     <section id="generator" className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6">
       <div className="overflow-x-auto">
-        <div className={`flex w-max gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid md:w-auto ${isKo ? "md:grid-cols-9" : "md:grid-cols-7"}`}>
+        <div className={`flex w-max gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid md:w-auto ${isKo ? "md:grid-cols-13" : "md:grid-cols-11"}`}>
           {modeButtons.map((button) => (
             <button
               key={button.value}
@@ -651,6 +743,287 @@ export function QrStudio({ locale, translations }: QrStudioProps) {
               />
             </div>
           ) : null}
+
+        {mode === "kakaopay" && (
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {modeCopy.bankLabel}
+              </label>
+              <select
+                value={kakaoBankCode}
+                onChange={(e) => setKakaoBankCode(e.target.value)}
+                className={SELECT_CLASS}
+              >
+                {kakaopayBanks.map((bank) => (
+                  <option key={bank.code} value={bank.code}>
+                    {bank.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {modeCopy.accountLabel}
+              </label>
+              <input
+                type="text"
+                value={kakaoAccountNo}
+                onChange={(e) => setKakaoAccountNo(e.target.value)}
+                placeholder={modeCopy.accountPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {modeCopy.amountLabel}
+              </label>
+              <input
+                type="text"
+                inputMode="numeric"
+                value={kakaoAmount}
+                onChange={(e) => setKakaoAmount(e.target.value)}
+                placeholder={modeCopy.amountPlaceholder}
+                className={INPUT_CLASS}
+              />
+              <p className="text-[10px] text-neutral-400">{modeCopy.amountHint}</p>
+            </div>
+          </div>
+        )}
+
+        {mode === "mecard" && (
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.mecardNameLabel}
+              </label>
+              <input
+                type="text"
+                value={mecardName}
+                onChange={(e) => setMecardName(e.target.value)}
+                placeholder={extraModeCopy.mecardNamePlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.mecardPhoneLabel}
+              </label>
+              <input
+                type="text"
+                value={mecardPhone}
+                onChange={(e) => setMecardPhone(e.target.value)}
+                placeholder={extraModeCopy.mecardPhonePlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.mecardEmailLabel}
+              </label>
+              <input
+                type="text"
+                value={mecardEmail}
+                onChange={(e) => setMecardEmail(e.target.value)}
+                placeholder={extraModeCopy.mecardEmailPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.mecardAddressLabel}
+              </label>
+              <input
+                type="text"
+                value={mecardAddress}
+                onChange={(e) => setMecardAddress(e.target.value)}
+                placeholder={extraModeCopy.mecardAddressPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+          </div>
+        )}
+
+        {mode === "calendar" && (
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.calendarTitleLabel}
+              </label>
+              <input
+                type="text"
+                value={calendarTitle}
+                onChange={(e) => setCalendarTitle(e.target.value)}
+                placeholder={extraModeCopy.calendarTitlePlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  {extraModeCopy.calendarStartLabel}
+                </label>
+                <input
+                  type="datetime-local"
+                  value={calendarStart}
+                  onChange={(e) => setCalendarStart(e.target.value)}
+                  className={INPUT_CLASS}
+                />
+              </div>
+              <div className="grid gap-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  {extraModeCopy.calendarEndLabel}
+                </label>
+                <input
+                  type="datetime-local"
+                  value={calendarEnd}
+                  onChange={(e) => setCalendarEnd(e.target.value)}
+                  className={INPUT_CLASS}
+                />
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.calendarLocationLabel}
+              </label>
+              <input
+                type="text"
+                value={calendarLocation}
+                onChange={(e) => setCalendarLocation(e.target.value)}
+                placeholder={extraModeCopy.calendarLocationPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.calendarDescriptionLabel}
+              </label>
+              <textarea
+                value={calendarDescription}
+                onChange={(e) => setCalendarDescription(e.target.value)}
+                placeholder={extraModeCopy.calendarDescriptionPlaceholder}
+                className={`${INPUT_CLASS} min-h-[80px] resize-none`}
+              />
+            </div>
+          </div>
+        )}
+
+        {mode === "paypal" && (
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.paypalEmailLabel}
+              </label>
+              <input
+                type="text"
+                value={paypalEmail}
+                onChange={(e) => setPaypalEmail(e.target.value)}
+                placeholder={extraModeCopy.paypalEmailPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.paypalItemLabel}
+              </label>
+              <input
+                type="text"
+                value={paypalItem}
+                onChange={(e) => setPaypalItem(e.target.value)}
+                placeholder={extraModeCopy.paypalItemPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  {extraModeCopy.paypalAmountLabel}
+                </label>
+                <input
+                  type="text"
+                  inputMode="decimal"
+                  value={paypalAmount}
+                  onChange={(e) => setPaypalAmount(e.target.value)}
+                  placeholder={extraModeCopy.paypalAmountPlaceholder}
+                  className={INPUT_CLASS}
+                />
+              </div>
+              <div className="grid gap-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                  {extraModeCopy.paypalCurrencyLabel}
+                </label>
+                <select
+                  value={paypalCurrency}
+                  onChange={(e) => setPaypalCurrency(e.target.value)}
+                  className={SELECT_CLASS}
+                >
+                  <option value="USD">USD ($)</option>
+                  <option value="EUR">EUR (€)</option>
+                  <option value="JPY">JPY (¥)</option>
+                  <option value="KRW">KRW (₩)</option>
+                  <option value="GBP">GBP (£)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {mode === "crypto" && (
+          <div className="grid gap-4">
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.cryptoCoinLabel}
+              </label>
+              <select
+                value={cryptoCoin}
+                onChange={(e) => setCryptoCoin(e.target.value)}
+                className={SELECT_CLASS}
+              >
+                <option value="bitcoin">Bitcoin (BTC)</option>
+                <option value="ethereum">Ethereum (ETH)</option>
+                <option value="litecoin">Litecoin (LTC)</option>
+                <option value="dash">Dash (DASH)</option>
+              </select>
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.cryptoAddressLabel}
+              </label>
+              <input
+                type="text"
+                value={cryptoAddress}
+                onChange={(e) => setCryptoAddress(e.target.value)}
+                placeholder={extraModeCopy.cryptoAddressPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.cryptoAmountLabel}
+              </label>
+              <input
+                type="text"
+                inputMode="decimal"
+                value={cryptoAmount}
+                onChange={(e) => setCryptoAmount(e.target.value)}
+                placeholder={extraModeCopy.cryptoAmountPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+            <div className="grid gap-2">
+              <label className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+                {extraModeCopy.cryptoLabelLabel}
+              </label>
+              <input
+                type="text"
+                value={cryptoLabel}
+                onChange={(e) => setCryptoLabel(e.target.value)}
+                placeholder={extraModeCopy.cryptoLabelPlaceholder}
+                className={INPUT_CLASS}
+              />
+            </div>
+          </div>
+        )}
 
           {mode === "email" ? (
             <div className="mb-4 grid gap-1.5">
@@ -1061,6 +1434,11 @@ function getFilenameSeed(options: {
   smsPhone: string;
   kakaoBankCode: string;
   kakaoAccountNo: string;
+  mecardName?: string;
+  calendarTitle?: string;
+  paypalEmail?: string;
+  cryptoCoin?: string;
+  cryptoAddress?: string;
 }): string {
   if (options.mode === "text") {
     return options.text || "sample";
@@ -1098,7 +1476,118 @@ function getFilenameSeed(options: {
     return `kakaopay-${options.kakaoBankCode || "bank"}-${options.kakaoAccountNo || "account"}`;
   }
 
+  if (options.mode === "mecard") {
+    return `mecard-${options.mecardName || "contact"}`;
+  }
+
+  if (options.mode === "calendar") {
+    return `calendar-${options.calendarTitle || "event"}`;
+  }
+
+  if (options.mode === "paypal") {
+    return `paypal-${options.paypalEmail || "payment"}`;
+  }
+
+  if (options.mode === "crypto") {
+    return `crypto-${options.cryptoCoin}-${(options.cryptoAddress || "").slice(0, 8)}`;
+  }
+
   return "sample";
+}
+
+function buildMeCardPayload(options: {
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+}): string | null {
+  const name = options.name.trim();
+  if (!name) return null;
+
+  const phone = normalizePhone(options.phone);
+  const email = options.email.trim();
+  const address = options.address.trim();
+
+  let payload = `MECARD:N:${sanitizeVCardValue(name)};`;
+  if (phone) payload += `TEL:${phone};`;
+  if (email && buildEmailPayload(email)) payload += `EMAIL:${sanitizeVCardValue(email)};`;
+  if (address) payload += `ADR:${sanitizeVCardValue(address)};`;
+  payload += ";";
+
+  return payload;
+}
+
+function buildCalendarPayload(options: {
+  title: string;
+  start: string;
+  end: string;
+  location: string;
+  description: string;
+}): string | null {
+  const title = options.title.trim();
+  if (!title || !options.start) return null;
+
+  const formatIso = (dateStr: string) => dateStr.replace(/[-:]/g, "").split(".")[0];
+  const start = formatIso(options.start);
+  const end = options.end ? formatIso(options.end) : "";
+
+  const lines = [
+    "BEGIN:VEVENT",
+    `SUMMARY:${sanitizeVCardValue(title)}`,
+    `DTSTART:${start}`
+  ];
+
+  if (end) lines.push(`DTEND:${end}`);
+  if (options.location.trim()) lines.push(`LOCATION:${sanitizeVCardValue(options.location)}`);
+  if (options.description.trim()) lines.push(`DESCRIPTION:${sanitizeVCardValue(options.description)}`);
+
+  lines.push("END:VEVENT");
+  return lines.join("\n");
+}
+
+function buildPayPalPayload(options: {
+  email: string;
+  item: string;
+  amount: string;
+  currency: string;
+}): string | null {
+  const email = options.email.trim();
+  if (!email || !buildEmailPayload(email)) return null;
+
+  const amount = options.amount.trim();
+  const params = new URLSearchParams({
+    cmd: "_xclick",
+    business: email,
+    currency_code: options.currency
+  });
+
+  if (options.item.trim()) params.append("item_name", options.item);
+  if (amount) params.append("amount", amount);
+
+  return `https://www.paypal.com/cgi-bin/webscr?${params.toString()}`;
+}
+
+function buildCryptoPayload(options: {
+  address: string;
+  coin: string;
+  amount: string;
+  label: string;
+}): string | null {
+  const address = options.address.trim();
+  if (!address) return null;
+
+  let uri = `${options.coin}:${address}`;
+  const params = new URLSearchParams();
+
+  if (options.amount.trim()) {
+    // Some coins use 'amount', some 'value'
+    const key = options.coin === "ethereum" ? "value" : "amount";
+    params.append(key, options.amount);
+  }
+  if (options.label.trim()) params.append("label", options.label);
+
+  const query = params.toString();
+  return query ? `${uri}?${query}` : uri;
 }
 
 function buildUrlPayload(value: string): string | null {

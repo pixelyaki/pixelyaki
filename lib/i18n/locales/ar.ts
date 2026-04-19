@@ -2,12 +2,12 @@ import { FullTranslation } from "../types";
 
 export const ar: FullTranslation = {
   seo: {
-    title: "مولّد رمز QR من Pixelyaki | PNG/SVG مجاني",
+    title: "إنشاء رمز QR Pixelyaki | PNG/SVG مجاني",
     description: "أنشئ رموز QR من النص فورًا بدون تسجيل. خصّص الألوان وأضف شعارًا وحمّل PNG شفافًا أو SVG."
   },
   header: {
     logo: "Pixelyaki",
-    generate: "إنشاء"
+    generate: "إنشاء رمز QR"
   },
   hero: {
     eyebrow: "بدون تسجيل",
@@ -103,7 +103,45 @@ export const ar: FullTranslation = {
     smsInvalid: "يرجى التحقق من تنسيق رقم هاتف SMS.",
     smsEmptyPreview: "أدخل رقم هاتف لمعاينة رمز QR لـ SMS.",
     kakaopayModeLabel: "QR تحويل KakaoPay",
-    kakaopayEmptyPreview: "أدخل تفاصيل تحويل KakaoPay لمعاينة رمز QR."
+    kakaopayEmptyPreview: "أدخل تفاصيل تحويل KakaoPay لمعاينة رمز QR.",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "Name",
+    mecardNamePlaceholder: "e.g. John Doe",
+    mecardPhoneLabel: "Phone",
+    mecardPhonePlaceholder: "e.g. +1234567890",
+    mecardEmailLabel: "Email",
+    mecardEmailPlaceholder: "e.g. hello@pixelyaki.com",
+    mecardAddressLabel: "Address",
+    mecardAddressPlaceholder: "e.g. New York, USA",
+    mecardEmptyPreview: "Enter contact info to see a meCard QR preview.",
+    calendarModeLabel: "Calendar",
+    calendarTitleLabel: "Event Title",
+    calendarTitlePlaceholder: "e.g. Team Meeting",
+    calendarStartLabel: "Start Date/Time",
+    calendarEndLabel: "End Date/Time",
+    calendarLocationLabel: "Location",
+    calendarLocationPlaceholder: "e.g. Meeting Room 1",
+    calendarDescriptionLabel: "Description",
+    calendarDescriptionPlaceholder: "e.g. Discuss project plans",
+    calendarEmptyPreview: "Enter event info to see a calendar QR preview.",
+    paypalModeLabel: "PayPal",
+    paypalEmailLabel: "PayPal Email/ID",
+    paypalEmailPlaceholder: "e.g. payment@pixelyaki.com",
+    paypalItemLabel: "Item Name",
+    paypalItemPlaceholder: "e.g. Design Service",
+    paypalAmountLabel: "Amount",
+    paypalAmountPlaceholder: "e.g. 50.00",
+    paypalCurrencyLabel: "Currency",
+    paypalEmptyPreview: "Enter payment info to see a PayPal QR preview.",
+    cryptoModeLabel: "Crypto",
+    cryptoAddressLabel: "Wallet Address",
+    cryptoAddressPlaceholder: "e.g. 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "Amount",
+    cryptoAmountPlaceholder: "e.g. 0.1",
+    cryptoCoinLabel: "Coin",
+    cryptoLabelLabel: "Label (Name)",
+    cryptoLabelPlaceholder: "e.g. Bitcoin Wallet",
+    cryptoEmptyPreview: "Enter wallet info to see a crypto QR preview."
   },
   styles: {
     title: "نمط QR",

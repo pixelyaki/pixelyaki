@@ -2,12 +2,12 @@ import { FullTranslation } from "../types";
 
 export const zh: FullTranslation = {
   seo: {
-    title: "Pixelyaki 二维码生成器 | 免费 PNG/SVG 下载",
+    title: "Pixelyaki 二维码制作 | 免费 PNG/SVG 下载",
     description: "无需注册，立即将文本转换为二维码。支持颜色调整、Logo 插入、透明 PNG 和 SVG 下载。"
   },
   header: {
     logo: "Pixelyaki",
-    generate: "生成"
+    generate: "制作二维码"
   },
   hero: {
     eyebrow: "无需注册",
@@ -102,8 +102,46 @@ export const zh: FullTranslation = {
     smsBodyPlaceholder: "例如：你好",
     smsInvalid: "请检查短信号码格式。",
     smsEmptyPreview: "输入电话号码后可预览短信二维码。",
-    kakaopayModeLabel: "KakaoPay 转账 QR",
-    kakaopayEmptyPreview: "输入 KakaoPay 转账信息后可预览二维码。"
+    kakaopayModeLabel: "KakaoPay 转账",
+    kakaopayEmptyPreview: "输入 KakaoPay 转账信息以查看预览。",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "姓名",
+    mecardNamePlaceholder: "例如：张三",
+    mecardPhoneLabel: "电话号码",
+    mecardPhonePlaceholder: "例如：13812345678",
+    mecardEmailLabel: "电子邮件",
+    mecardEmailPlaceholder: "例如：hello@pixelyaki.com",
+    mecardAddressLabel: "地址",
+    mecardAddressPlaceholder: "例如：北京市朝阳区",
+    mecardEmptyPreview: "输入联系人信息以查看 meCard QR 预览。",
+    calendarModeLabel: "日历",
+    calendarTitleLabel: "活动标题",
+    calendarTitlePlaceholder: "例如：团队会议",
+    calendarStartLabel: "开始时间",
+    calendarEndLabel: "结束时间",
+    calendarLocationLabel: "地点",
+    calendarLocationPlaceholder: "例如：会议室 1",
+    calendarDescriptionLabel: "描述",
+    calendarDescriptionPlaceholder: "例如：讨论项目计划",
+    calendarEmptyPreview: "输入活动信息以查看日历 QR 预览。",
+    paypalModeLabel: "PayPal",
+    paypalEmailLabel: "PayPal 邮箱/ID",
+    paypalEmailPlaceholder: "例如：payment@pixelyaki.com",
+    paypalItemLabel: "商品名称",
+    paypalItemPlaceholder: "例如：设计服务",
+    paypalAmountLabel: "金额",
+    paypalAmountPlaceholder: "例如：50.00",
+    paypalCurrencyLabel: "货币",
+    paypalEmptyPreview: "输入付款信息以查看 PayPal QR 预览。",
+    cryptoModeLabel: "加密货币",
+    cryptoAddressLabel: "钱包地址",
+    cryptoAddressPlaceholder: "例如：1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "金额",
+    cryptoAmountPlaceholder: "例如：0.1",
+    cryptoCoinLabel: "币种",
+    cryptoLabelLabel: "标签 (名称)",
+    cryptoLabelPlaceholder: "例如：比特币钱包",
+    cryptoEmptyPreview: "输入钱包信息以查看加密货币 QR 预览。"
   },
   styles: {
     title: "QR 样式",

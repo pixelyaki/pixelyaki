@@ -48,12 +48,12 @@ const baseFaq = [
 
 export const en: FullTranslation = {
   seo: {
-    title: "Pixelyaki QR Code Generator | Free PNG/SVG Download",
+    title: "Pixelyaki QR Code Maker | Create QR Code Online Free",
     description: "Create QR codes from text instantly with no sign-up. Customize colors, add logo, and download transparent PNG or SVG."
   },
   header: {
     logo: "Pixelyaki",
-    generate: "Generate"
+    generate: "Create QR Code"
   },
   hero: {
     eyebrow: "No sign-up required",
@@ -148,8 +148,46 @@ export const en: FullTranslation = {
     smsBodyPlaceholder: "e.g. Hello!",
     smsInvalid: "Please check the SMS phone number format.",
     smsEmptyPreview: "Enter a phone number to preview the SMS QR code.",
-    kakaopayModeLabel: "KakaoPay Transfer QR",
-    kakaopayEmptyPreview: "Enter KakaoPay transfer details to preview the QR code."
+    kakaopayModeLabel: "KakaoPay Transfer",
+    kakaopayEmptyPreview: "Enter KakaoPay info to see a preview.",
+    mecardModeLabel: "meCard",
+    mecardNameLabel: "Name",
+    mecardNamePlaceholder: "e.g. John Doe",
+    mecardPhoneLabel: "Phone",
+    mecardPhonePlaceholder: "e.g. +1234567890",
+    mecardEmailLabel: "Email",
+    mecardEmailPlaceholder: "e.g. hello@pixelyaki.com",
+    mecardAddressLabel: "Address",
+    mecardAddressPlaceholder: "e.g. New York, USA",
+    mecardEmptyPreview: "Enter contact info to see a meCard QR preview.",
+    calendarModeLabel: "Calendar",
+    calendarTitleLabel: "Event Title",
+    calendarTitlePlaceholder: "e.g. Team Meeting",
+    calendarStartLabel: "Start Date/Time",
+    calendarEndLabel: "End Date/Time",
+    calendarLocationLabel: "Location",
+    calendarLocationPlaceholder: "e.g. Meeting Room 1",
+    calendarDescriptionLabel: "Description",
+    calendarDescriptionPlaceholder: "e.g. Discuss project plans",
+    calendarEmptyPreview: "Enter event info to see a calendar QR preview.",
+    paypalModeLabel: "PayPal",
+    paypalEmailLabel: "PayPal Email/ID",
+    paypalEmailPlaceholder: "e.g. payment@pixelyaki.com",
+    paypalItemLabel: "Item Name",
+    paypalItemPlaceholder: "e.g. Design Service",
+    paypalAmountLabel: "Amount",
+    paypalAmountPlaceholder: "e.g. 50.00",
+    paypalCurrencyLabel: "Currency",
+    paypalEmptyPreview: "Enter payment info to see a PayPal QR preview.",
+    cryptoModeLabel: "Crypto",
+    cryptoAddressLabel: "Wallet Address",
+    cryptoAddressPlaceholder: "e.g. 1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+    cryptoAmountLabel: "Amount",
+    cryptoAmountPlaceholder: "e.g. 0.1",
+    cryptoCoinLabel: "Coin",
+    cryptoLabelLabel: "Label (Name)",
+    cryptoLabelPlaceholder: "e.g. Bitcoin Wallet",
+    cryptoEmptyPreview: "Enter wallet info to see a crypto QR preview."
   },
   styles: {
     title: "QR style",

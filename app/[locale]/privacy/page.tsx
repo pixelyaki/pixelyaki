@@ -7,7 +7,7 @@ import { getCopy, isLocale, type Locale } from "@/lib/i18n";
 type Section = { heading: string; body: string };
 type PrivacyContent = { title: string; updated: string; back: string; sections: Section[] };
 
-const content: Record<Locale, PrivacyContent> = {
+const content: Partial<Record<Locale, PrivacyContent>> = {
   ko: {
     title: "개인정보 처리방침",
     updated: "최종 수정일: 2026년 4월 18일",
@@ -359,7 +359,7 @@ export default async function PrivacyPage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  const copy = content[locale];
+  const copy = content[locale] || content.en!;
   const headerLabels = getCopy(locale).header;
 
   return (

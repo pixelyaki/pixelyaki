@@ -28,30 +28,7 @@ export const tossBanks: TossBank[] = [
   { code: "088", name: "신한은행" },
   { code: "089", name: "케이뱅크" },
   { code: "090", name: "카카오뱅크" },
-  { code: "092", name: "토스뱅크" },
-  { code: "103", name: "SBI저축은행" },
-  { code: "218", name: "KB증권" },
-  { code: "230", name: "미래에셋증권" },
-  { code: "238", name: "미래에셋증권" },
-  { code: "240", name: "삼성증권" },
-  { code: "243", name: "한국투자증권" },
-  { code: "247", name: "NH투자증권" },
-  { code: "261", name: "교보증권" },
-  { code: "262", name: "하이투자증권" },
-  { code: "263", name: "현대차투자증권" },
-  { code: "264", name: "키움증권" },
-  { code: "265", name: "이베스트증권" },
-  { code: "266", name: "SK증권" },
-  { code: "267", name: "대신증권" },
-  { code: "269", name: "한화투자증권" },
-  { code: "270", name: "하나증권" },
-  { code: "271", name: "토스증권" },
-  { code: "278", name: "신한투자증권" },
-  { code: "279", name: "DB금융투자" },
-  { code: "280", name: "유진투자" },
-  { code: "287", name: "메리츠증권" },
-  { code: "888", name: "토스머니" },
-  { code: "889", name: "토스포인트" }
+  { code: "092", name: "토스뱅크" }
 ];
 
 export function normalizeAccountNo(value: string): string {

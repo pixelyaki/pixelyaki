@@ -1,4 +1,4 @@
-export const locales = ["ko", "en", "zh", "ja", "es", "fr", "de"] as const;
+export const locales = ["ko", "en", "zh", "ja", "es", "fr", "de", "ru", "ar", "hi", "id", "it", "pt"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -33,6 +33,12 @@ export function detectLocaleFromAcceptLanguage(
   return defaultLocale;
 }
 
+export const rtlLocales = new Set<Locale>(["ar"]);
+
+export function isRtlLocale(locale: Locale): boolean {
+  return rtlLocales.has(locale);
+}
+
 export const localeDisplayNames: Record<Locale, string> = {
   ko: "한국어",
   en: "English",
@@ -40,7 +46,13 @@ export const localeDisplayNames: Record<Locale, string> = {
   ja: "日本語",
   es: "Español",
   fr: "Français",
-  de: "Deutsch"
+  de: "Deutsch",
+  ru: "Русский",
+  ar: "العربية",
+  hi: "हिन्दी",
+  id: "Indonesia",
+  it: "Italiano",
+  pt: "Português"
 };
 
 type FeatureItem = {
@@ -513,6 +525,252 @@ const copyByLocale: Record<Locale, PageCopy> = {
       copyright: "© Pixelyaki",
       trademark: "QR Code ist eine eingetragene Marke von DENSO WAVE INCORPORATED."
     }
+  },
+  ru: {
+    header: { logo: "Pixelyaki", generate: "Создать" },
+    hero: {
+      eyebrow: "Без регистрации",
+      title: "Мгновенно создавайте QR-коды из текста",
+      description: "Настройте цвета, добавьте логотип и скачайте прозрачный PNG или SVG."
+    },
+    studio: {
+      inputPanelTitle: "Ввод и настройки",
+      previewPanelTitle: "Предварительный просмотр",
+      textLabel: "Текст",
+      textPlaceholder: "Введите до 128 символов",
+      textRule: "Максимум 128 символов",
+      foregroundColor: "Цвет переднего плана",
+      backgroundColor: "Цвет фона",
+      transparentBackground: "Прозрачный фон PNG",
+      logoLabel: "Загрузить логотип",
+      logoHint: "PNG/JPG/SVG, до 2МБ",
+      removeLogo: "Удалить логотип",
+      pngButton: "Скачать PNG",
+      svgButton: "Скачать SVG",
+      fileNameLabel: "Предварительный просмотр имени файла",
+      emptyPreview: "Введите текст для предварительного просмотра QR.",
+      generating: "Создание QR...",
+      invalidText: "Введите от 1 до 128 символов.",
+      invalidLogoType: "Поддерживаются только PNG/JPG/SVG.",
+      invalidLogoSize: "Размер логотипа не должен превышать 2МБ.",
+      renderError: "Произошла ошибка при создании QR-кода.",
+      contrastWarning: "Низкий контраст — QR-код может плохо сканироваться"
+    },
+    features: baseFeatures,
+    faqTitle: "Часто задаваемые вопросы",
+    faq: baseFaq,
+    footer: {
+      privacy: "Конфиденциальность",
+      terms: "Условия использования",
+      openSource: "Лицензии с открытым исходным кодом",
+      copyright: "© Pixelyaki",
+      trademark: "QR Code является товарным знаком DENSO WAVE INCORPORATED."
+    }
+  },
+  ar: {
+    header: { logo: "Pixelyaki", generate: "إنشاء" },
+    hero: {
+      eyebrow: "بدون تسجيل",
+      title: "حوّل النص إلى رمز QR فورًا",
+      description: "خصّص الألوان، أضف شعارًا، وحمّل PNG شفافًا أو SVG."
+    },
+    studio: {
+      inputPanelTitle: "الإدخال والخيارات",
+      previewPanelTitle: "معاينة مباشرة",
+      textLabel: "النص",
+      textPlaceholder: "أدخل حتى 128 حرفًا",
+      textRule: "128 حرفًا كحد أقصى",
+      foregroundColor: "لون الواجهة",
+      backgroundColor: "لون الخلفية",
+      transparentBackground: "خلفية PNG شفافة",
+      logoLabel: "رفع الشعار",
+      logoHint: "PNG/JPG/SVG، حتى 2MB",
+      removeLogo: "إزالة الشعار",
+      pngButton: "تنزيل PNG",
+      svgButton: "تنزيل SVG",
+      fileNameLabel: "معاينة اسم الملف",
+      emptyPreview: "أدخل نصًا لمعاينة رمز QR.",
+      generating: "جارٍ إنشاء رمز QR...",
+      invalidText: "أدخل ما بين 1 و128 حرفًا.",
+      invalidLogoType: "يُدعم فقط PNG/JPG/SVG.",
+      invalidLogoSize: "يجب أن يكون حجم الشعار 2MB أو أقل.",
+      renderError: "حدث خطأ أثناء إنشاء رمز QR.",
+      contrastWarning: "التباين منخفض — قد لا يُقرأ رمز QR بشكل موثوق"
+    },
+    features: baseFeatures,
+    faqTitle: "الأسئلة الشائعة",
+    faq: baseFaq,
+    footer: {
+      privacy: "الخصوصية",
+      terms: "شروط الخدمة",
+      openSource: "تراخيص المصدر المفتوح",
+      copyright: "© Pixelyaki",
+      trademark: ".QR Code علامة تجارية مسجلة لـ DENSO WAVE INCORPORATED"
+    }
+  },
+  hi: {
+    header: { logo: "Pixelyaki", generate: "बनाएं" },
+    hero: {
+      eyebrow: "बिना साइन-अप के",
+      title: "टेक्स्ट को तुरंत QR कोड में बदलें",
+      description: "रंग कस्टमाइज़ करें, लोगो जोड़ें और पारदर्शी PNG या SVG डाउनलोड करें।"
+    },
+    studio: {
+      inputPanelTitle: "इनपुट और विकल्प",
+      previewPanelTitle: "लाइव प्रीव्यू",
+      textLabel: "टेक्स्ट",
+      textPlaceholder: "128 अक्षर तक दर्ज करें",
+      textRule: "अधिकतम 128 अक्षर",
+      foregroundColor: "फ़ोरग्राउंड रंग",
+      backgroundColor: "बैकग्राउंड रंग",
+      transparentBackground: "पारदर्शी PNG बैकग्राउंड",
+      logoLabel: "लोगो अपलोड करें",
+      logoHint: "PNG/JPG/SVG, अधिकतम 2MB",
+      removeLogo: "लोगो हटाएं",
+      pngButton: "PNG डाउनलोड करें",
+      svgButton: "SVG डाउनलोड करें",
+      fileNameLabel: "फ़ाइल नाम प्रीव्यू",
+      emptyPreview: "QR प्रीव्यू देखने के लिए टेक्स्ट दर्ज करें।",
+      generating: "QR बना रहे हैं...",
+      invalidText: "कृपया 1 से 128 अक्षर दर्ज करें।",
+      invalidLogoType: "केवल PNG/JPG/SVG लोगो फ़ाइलें समर्थित हैं।",
+      invalidLogoSize: "लोगो फ़ाइल का आकार 2MB या कम होना चाहिए।",
+      renderError: "QR कोड बनाते समय एक त्रुटि हुई।",
+      contrastWarning: "कम कंट्रास्ट — QR कोड स्कैन नहीं हो सकता"
+    },
+    features: baseFeatures,
+    faqTitle: "अक्सर पूछे जाने वाले प्रश्न",
+    faq: baseFaq,
+    footer: {
+      privacy: "गोपनीयता",
+      terms: "सेवा की शर्तें",
+      openSource: "ओपन सोर्स लाइसेंस",
+      copyright: "© Pixelyaki",
+      trademark: "QR Code, DENSO WAVE INCORPORATED का ट्रेडमार्क है।"
+    }
+  },
+  id: {
+    header: { logo: "Pixelyaki", generate: "Buat" },
+    hero: {
+      eyebrow: "Tanpa daftar",
+      title: "Ubah teks menjadi QR code seketika",
+      description: "Sesuaikan warna, tambahkan logo, dan unduh PNG transparan atau SVG."
+    },
+    studio: {
+      inputPanelTitle: "Input dan opsi",
+      previewPanelTitle: "Pratinjau langsung",
+      textLabel: "Teks",
+      textPlaceholder: "Masukkan hingga 128 karakter",
+      textRule: "Maksimum 128 karakter",
+      foregroundColor: "Warna depan",
+      backgroundColor: "Warna latar",
+      transparentBackground: "Latar PNG transparan",
+      logoLabel: "Unggah logo",
+      logoHint: "PNG/JPG/SVG, maks 2MB",
+      removeLogo: "Hapus logo",
+      pngButton: "Unduh PNG",
+      svgButton: "Unduh SVG",
+      fileNameLabel: "Pratinjau nama file",
+      emptyPreview: "Masukkan teks untuk melihat pratinjau QR.",
+      generating: "Membuat QR...",
+      invalidText: "Masukkan 1 hingga 128 karakter.",
+      invalidLogoType: "Hanya file logo PNG/JPG/SVG yang didukung.",
+      invalidLogoSize: "Ukuran file logo harus 2MB atau kurang.",
+      renderError: "Terjadi kesalahan saat membuat kode QR.",
+      contrastWarning: "Kontras rendah — kode QR mungkin tidak terbaca"
+    },
+    features: baseFeatures,
+    faqTitle: "Pertanyaan Umum",
+    faq: baseFaq,
+    footer: {
+      privacy: "Privasi",
+      terms: "Ketentuan",
+      openSource: "Lisensi Sumber Terbuka",
+      copyright: "© Pixelyaki",
+      trademark: "QR Code adalah merek dagang dari DENSO WAVE INCORPORATED."
+    }
+  },
+  it: {
+    header: { logo: "Pixelyaki", generate: "Genera" },
+    hero: {
+      eyebrow: "Senza registrazione",
+      title: "Trasforma il testo in QR code istantaneamente",
+      description: "Personalizza i colori, incorpora un logo ed esporta PNG trasparente o SVG."
+    },
+    studio: {
+      inputPanelTitle: "Input e opzioni",
+      previewPanelTitle: "Anteprima live",
+      textLabel: "Testo",
+      textPlaceholder: "Inserisci fino a 128 caratteri",
+      textRule: "Massimo 128 caratteri",
+      foregroundColor: "Colore primo piano",
+      backgroundColor: "Colore sfondo",
+      transparentBackground: "Sfondo PNG trasparente",
+      logoLabel: "Carica logo",
+      logoHint: "PNG/JPG/SVG, fino a 2MB",
+      removeLogo: "Rimuovi logo",
+      pngButton: "Scarica PNG",
+      svgButton: "Scarica SVG",
+      fileNameLabel: "Anteprima nome file",
+      emptyPreview: "Inserisci del testo per vedere l'anteprima QR.",
+      generating: "Generazione QR...",
+      invalidText: "Inserisci da 1 a 128 caratteri.",
+      invalidLogoType: "Sono supportati solo file logo PNG/JPG/SVG.",
+      invalidLogoSize: "Il logo deve essere 2MB o meno.",
+      renderError: "Si è verificato un errore durante la generazione del QR.",
+      contrastWarning: "Contrasto basso — il codice QR potrebbe non essere leggibile"
+    },
+    features: baseFeatures,
+    faqTitle: "Domande frequenti",
+    faq: baseFaq,
+    footer: {
+      privacy: "Privacy",
+      terms: "Termini",
+      openSource: "Licenze Open Source",
+      copyright: "© Pixelyaki",
+      trademark: "QR Code è un marchio registrato di DENSO WAVE INCORPORATED."
+    }
+  },
+  pt: {
+    header: { logo: "Pixelyaki", generate: "Gerar" },
+    hero: {
+      eyebrow: "Sem cadastro",
+      title: "Converta texto em QR code instantaneamente",
+      description: "Personalize cores, adicione logotipo e exporte PNG transparente ou SVG."
+    },
+    studio: {
+      inputPanelTitle: "Entrada e opções",
+      previewPanelTitle: "Pré-visualização ao vivo",
+      textLabel: "Texto",
+      textPlaceholder: "Digite até 128 caracteres",
+      textRule: "Máximo de 128 caracteres",
+      foregroundColor: "Cor de primeiro plano",
+      backgroundColor: "Cor de fundo",
+      transparentBackground: "Fundo PNG transparente",
+      logoLabel: "Enviar logotipo",
+      logoHint: "PNG/JPG/SVG, até 2MB",
+      removeLogo: "Remover logotipo",
+      pngButton: "Baixar PNG",
+      svgButton: "Baixar SVG",
+      fileNameLabel: "Pré-visualização do nome do arquivo",
+      emptyPreview: "Digite texto para ver a pré-visualização do QR.",
+      generating: "Gerando QR...",
+      invalidText: "Digite entre 1 e 128 caracteres.",
+      invalidLogoType: "Apenas arquivos de logotipo PNG/JPG/SVG são suportados.",
+      invalidLogoSize: "O logotipo deve ter 2MB ou menos.",
+      renderError: "Ocorreu um erro ao gerar o código QR.",
+      contrastWarning: "Contraste baixo — o QR code pode não ser lido corretamente"
+    },
+    features: baseFeatures,
+    faqTitle: "Perguntas frequentes",
+    faq: baseFaq,
+    footer: {
+      privacy: "Privacidade",
+      terms: "Termos",
+      openSource: "Licenças de Código Aberto",
+      copyright: "© Pixelyaki",
+      trademark: "QR Code é uma marca registrada da DENSO WAVE INCORPORATED."
+    }
   }
 };
 
@@ -555,6 +813,36 @@ const seoByLocale: Record<Locale, SeoCopy> = {
     title: "Pixelyaki QR-Code-Generator | Kostenloser PNG/SVG-Download",
     description:
       "Erstelle QR-Codes aus Text ohne Anmeldung. Farben anpassen, Logo einfügen und als transparentes PNG oder SVG herunterladen."
+  },
+  ru: {
+    title: "Pixelyaki Генератор QR-кодов | Бесплатный PNG/SVG",
+    description:
+      "Создавайте QR-коды из текста без регистрации. Настройте цвета, добавьте логотип и скачайте PNG или SVG."
+  },
+  ar: {
+    title: "مولّد رمز QR من Pixelyaki | PNG/SVG مجاني",
+    description:
+      "أنشئ رموز QR من النص فورًا بدون تسجيل. خصّص الألوان وأضف شعارًا وحمّل PNG شفافًا أو SVG."
+  },
+  hi: {
+    title: "Pixelyaki QR कोड जेनरेटर | मुफ्त PNG/SVG डाउनलोड",
+    description:
+      "बिना साइन-अप के टेक्स्ट से QR कोड तुरंत बनाएं। रंग कस्टमाइज़ करें, लोगो जोड़ें और PNG या SVG डाउनलोड करें।"
+  },
+  id: {
+    title: "Generator QR Code Pixelyaki | Unduh PNG/SVG Gratis",
+    description:
+      "Buat QR code dari teks secara instan tanpa daftar. Sesuaikan warna, tambahkan logo, dan unduh PNG transparan atau SVG."
+  },
+  it: {
+    title: "Generatore QR Pixelyaki | Download PNG/SVG Gratuito",
+    description:
+      "Crea codici QR da testo istantaneamente senza registrazione. Personalizza colori, aggiungi logo e scarica PNG trasparente o SVG."
+  },
+  pt: {
+    title: "Gerador de QR Pixelyaki | Download PNG/SVG Gratuito",
+    description:
+      "Crie QR codes a partir de texto instantaneamente sem cadastro. Personalize cores, adicione logotipo e baixe PNG transparente ou SVG."
   }
 };
 

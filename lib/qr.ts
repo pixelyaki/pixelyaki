@@ -1,5 +1,7 @@
 "use client";
 
+type QrErrorCorrectionLevel = "L" | "M" | "Q" | "H";
+
 type QrRenderOptions = {
   text: string;
   foregroundColor: string;
@@ -8,6 +10,7 @@ type QrRenderOptions = {
   logoDataUrl?: string | null;
   size?: number;
   style?: QrStyleOptions;
+  errorCorrectionLevel?: QrErrorCorrectionLevel;
 };
 
 type QrStylePreset = "square" | "rounded" | "classy" | "dot";
@@ -24,7 +27,6 @@ type QrStyleOptions = {
 
 type QrCodeStylingModule = typeof import("qr-code-styling");
 
-const ERROR_CORRECTION_LEVEL = "H";
 const MODULE_PIXEL_SIZE = 10;
 
 let qrCodeStylingModulePromise: Promise<QrCodeStylingModule> | null = null;
@@ -36,16 +38,17 @@ async function getQrCodeStylingModule(): Promise<QrCodeStylingModule> {
   return qrCodeStylingModulePromise;
 }
 
-async function getQrModuleCount(text: string): Promise<number> {
+async function getQrModuleCount(text: string, ecl: QrErrorCorrectionLevel): Promise<number> {
   const qrcode = await import("qrcode");
-  const code = qrcode.create(text, { errorCorrectionLevel: ERROR_CORRECTION_LEVEL });
+  const code = qrcode.create(text, { errorCorrectionLevel: ecl });
   return code.modules.size;
 }
 
 async function createQrCodeStyling(options: QrRenderOptions) {
+  const ecl = options.errorCorrectionLevel ?? "H";
   const [{ default: QRCodeStyling }, moduleCount] = await Promise.all([
     getQrCodeStylingModule(),
-    getQrModuleCount(options.text)
+    getQrModuleCount(options.text, ecl)
   ]);
   const size = moduleCount * MODULE_PIXEL_SIZE;
 
@@ -55,7 +58,7 @@ async function createQrCodeStyling(options: QrRenderOptions) {
     data: options.text,
     margin: 0,
     qrOptions: {
-      errorCorrectionLevel: ERROR_CORRECTION_LEVEL
+      errorCorrectionLevel: ecl
     },
     dotsOptions: {
       type: options.style?.dots ?? "square",
@@ -129,6 +132,7 @@ export type {
   QrCornerDotStyle,
   QrCornerSquareStyle,
   QrDotsStyle,
+  QrErrorCorrectionLevel,
   QrRenderOptions,
   QrStyleOptions,
   QrStylePreset

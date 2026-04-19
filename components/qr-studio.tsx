@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  AppWindow,
   ChatBubble,
   Mail,
   Phone,
@@ -20,6 +19,12 @@ import { QrPreviewCard } from "@/components/qr-preview-card";
 import { QrTextField } from "@/components/qr-text-field";
 import { TransparencyToggle } from "@/components/transparency-toggle";
 import { downloadDataUrl, downloadTextFile } from "@/lib/download";
+import {
+  buildKakaoPayBankLink,
+  kakaopayBanks,
+  normalizeKakaoAccountNumber,
+  normalizeKakaoAmount
+} from "@/lib/kakaopay";
 import { makeQrFilename } from "@/lib/filename";
 import { trackGtmEvent } from "@/lib/gtm";
 import { type Locale } from "@/lib/i18n";
@@ -29,6 +34,7 @@ import {
   type QrCornerDotStyle,
   type QrCornerSquareStyle,
   type QrDotsStyle,
+  type QrErrorCorrectionLevel,
   type QrStylePreset
 } from "@/lib/qr";
 import {
@@ -127,19 +133,8 @@ type ExtraModeCopy = {
   smsBodyPlaceholder: string;
   smsInvalid: string;
   smsEmptyPreview: string;
-  wechatModeLabel: string;
-  alipayModeLabel: string;
-  miniProgramModeLabel: string;
-  chinaLinkLabel: string;
-  chinaLinkPlaceholder: string;
-  chinaInvalidLink: string;
-  wechatEmptyPreview: string;
-  alipayEmptyPreview: string;
-  miniProgramLinkLabel: string;
-  miniProgramLinkPlaceholder: string;
-  miniProgramInvalidLink: string;
-  miniProgramEmptyPreview: string;
-  miniProgramServerHint: string;
+  kakaopayModeLabel: string;
+  kakaopayEmptyPreview: string;
 };
 
 type StyleCopy = {
@@ -152,6 +147,11 @@ type StyleCopy = {
   presetRounded: string;
   presetClassy: string;
   presetDot: string;
+  errorCorrectionLabel: string;
+  eclL: string;
+  eclM: string;
+  eclQ: string;
+  eclH: string;
 };
 
 const modeCopyByLocale: Record<Locale, ModeCopy> = {
@@ -364,6 +364,186 @@ const modeCopyByLocale: Record<Locale, ModeCopy> = {
     phonePlaceholder: "z. B. +821012345678",
     invalidPhone: "Bitte eine gueltige Telefonnummer eingeben.",
     phoneEmptyPreview: "Telefonnummer eingeben, um den QR-Code vorzuschauen."
+  },
+  ru: {
+    modeSelectorTitle: "Режим",
+    textModeLabel: "Текст",
+    sendModeLabel: "Toss перевод QR",
+    urlModeLabel: "URL",
+    emailModeLabel: "Эл. почта",
+    phoneModeLabel: "Телефон",
+    bankLabel: "Код банка",
+    bankPlaceholder: "Выберите банк",
+    accountLabel: "Номер счёта",
+    accountPlaceholder: "Введите номер счёта",
+    amountLabel: "Сумма (опционально)",
+    amountPlaceholder: "напр. 10000",
+    amountHint: "Оставьте пустым для создания QR без суммы.",
+    invalidAccount: "Проверьте банк и номер счёта.",
+    invalidAmount: "Сумма должна быть числом больше 0.",
+    sendEmptyPreview: "Введите банк и счёт для предварительного просмотра QR.",
+    urlLabel: "URL",
+    urlPlaceholder: "напр. pixelyaki.com или https://pixelyaki.com",
+    invalidUrl: "Введите корректный URL.",
+    urlEmptyPreview: "Введите URL для предварительного просмотра QR.",
+    emailLabel: "Email",
+    emailPlaceholder: "напр. hello@pixelyaki.com",
+    invalidEmail: "Введите корректный email.",
+    emailEmptyPreview: "Введите email для предварительного просмотра QR.",
+    phoneLabel: "Номер телефона",
+    phonePlaceholder: "напр. +821012345678",
+    invalidPhone: "Введите корректный номер телефона.",
+    phoneEmptyPreview: "Введите номер телефона для предварительного просмотра QR."
+  },
+  ar: {
+    modeSelectorTitle: "الوضع",
+    textModeLabel: "نص",
+    sendModeLabel: "QR تحويل Toss",
+    urlModeLabel: "URL",
+    emailModeLabel: "بريد",
+    phoneModeLabel: "هاتف",
+    bankLabel: "رمز البنك",
+    bankPlaceholder: "اختر بنكًا",
+    accountLabel: "رقم الحساب",
+    accountPlaceholder: "أدخل رقم الحساب",
+    amountLabel: "المبلغ (اختياري)",
+    amountPlaceholder: "مثال: 10000",
+    amountHint: "اتركه فارغًا لإنشاء QR بدون مبلغ.",
+    invalidAccount: "تحقق من البنك ورقم الحساب.",
+    invalidAmount: "يجب أن يكون المبلغ رقمًا أكبر من 0.",
+    sendEmptyPreview: "أدخل البنك والحساب لمعاينة QR التحويل.",
+    urlLabel: "URL",
+    urlPlaceholder: "مثال: pixelyaki.com أو https://pixelyaki.com",
+    invalidUrl: "أدخل URL صحيحًا.",
+    urlEmptyPreview: "أدخل URL لمعاينة رمز QR.",
+    emailLabel: "البريد الإلكتروني",
+    emailPlaceholder: "مثال: hello@pixelyaki.com",
+    invalidEmail: "أدخل بريدًا إلكترونيًا صحيحًا.",
+    emailEmptyPreview: "أدخل بريدًا إلكترونيًا لمعاينة رمز QR.",
+    phoneLabel: "رقم الهاتف",
+    phonePlaceholder: "مثال: +821012345678",
+    invalidPhone: "أدخل رقم هاتف صحيحًا.",
+    phoneEmptyPreview: "أدخل رقم هاتف لمعاينة رمز QR."
+  },
+  hi: {
+    modeSelectorTitle: "मोड",
+    textModeLabel: "टेक्स्ट",
+    sendModeLabel: "Toss ट्रांसफर QR",
+    urlModeLabel: "URL",
+    emailModeLabel: "ईमेल",
+    phoneModeLabel: "फ़ोन",
+    bankLabel: "बैंक कोड",
+    bankPlaceholder: "बैंक चुनें",
+    accountLabel: "खाता नंबर",
+    accountPlaceholder: "खाता नंबर दर्ज करें",
+    amountLabel: "राशि (वैकल्पिक)",
+    amountPlaceholder: "जैसे 10000",
+    amountHint: "राशि के बिना QR बनाने के लिए खाली छोड़ें।",
+    invalidAccount: "बैंक और खाता नंबर जांचें।",
+    invalidAmount: "राशि 0 से अधिक की संख्या होनी चाहिए।",
+    sendEmptyPreview: "ट्रांसफर QR देखने के लिए बैंक और खाता दर्ज करें।",
+    urlLabel: "URL",
+    urlPlaceholder: "जैसे pixelyaki.com या https://pixelyaki.com",
+    invalidUrl: "कृपया एक वैध URL दर्ज करें।",
+    urlEmptyPreview: "QR प्रीव्यू के लिए URL दर्ज करें।",
+    emailLabel: "ईमेल पता",
+    emailPlaceholder: "जैसे hello@pixelyaki.com",
+    invalidEmail: "कृपया एक वैध ईमेल पता दर्ज करें।",
+    emailEmptyPreview: "QR प्रीव्यू के लिए ईमेल दर्ज करें।",
+    phoneLabel: "फ़ोन नंबर",
+    phonePlaceholder: "जैसे +821012345678",
+    invalidPhone: "कृपया एक वैध फ़ोन नंबर दर्ज करें।",
+    phoneEmptyPreview: "QR प्रीव्यू के लिए फ़ोन नंबर दर्ज करें।"
+  },
+  id: {
+    modeSelectorTitle: "Mode",
+    textModeLabel: "Teks",
+    sendModeLabel: "QR Transfer Toss",
+    urlModeLabel: "URL",
+    emailModeLabel: "Email",
+    phoneModeLabel: "Telepon",
+    bankLabel: "Kode bank",
+    bankPlaceholder: "Pilih bank",
+    accountLabel: "Nomor rekening",
+    accountPlaceholder: "Masukkan nomor rekening",
+    amountLabel: "Jumlah (opsional)",
+    amountPlaceholder: "mis. 10000",
+    amountHint: "Kosongkan untuk membuat QR tanpa jumlah.",
+    invalidAccount: "Periksa bank dan nomor rekening.",
+    invalidAmount: "Jumlah harus berupa angka lebih dari 0.",
+    sendEmptyPreview: "Masukkan bank dan rekening untuk pratinjau QR transfer.",
+    urlLabel: "URL",
+    urlPlaceholder: "mis. pixelyaki.com atau https://pixelyaki.com",
+    invalidUrl: "Masukkan URL yang valid.",
+    urlEmptyPreview: "Masukkan URL untuk pratinjau QR.",
+    emailLabel: "Alamat email",
+    emailPlaceholder: "mis. hello@pixelyaki.com",
+    invalidEmail: "Masukkan alamat email yang valid.",
+    emailEmptyPreview: "Masukkan email untuk pratinjau QR.",
+    phoneLabel: "Nomor telepon",
+    phonePlaceholder: "mis. +821012345678",
+    invalidPhone: "Masukkan nomor telepon yang valid.",
+    phoneEmptyPreview: "Masukkan nomor telepon untuk pratinjau QR."
+  },
+  it: {
+    modeSelectorTitle: "Modalità",
+    textModeLabel: "Testo",
+    sendModeLabel: "QR Trasferimento Toss",
+    urlModeLabel: "URL",
+    emailModeLabel: "Email",
+    phoneModeLabel: "Telefono",
+    bankLabel: "Codice banca",
+    bankPlaceholder: "Seleziona una banca",
+    accountLabel: "Numero di conto",
+    accountPlaceholder: "Inserisci il numero di conto",
+    amountLabel: "Importo (opzionale)",
+    amountPlaceholder: "es. 10000",
+    amountHint: "Lascia vuoto per creare un QR senza importo.",
+    invalidAccount: "Controlla la banca e il numero di conto.",
+    invalidAmount: "L'importo deve essere un numero maggiore di 0.",
+    sendEmptyPreview: "Inserisci banca e conto per vedere il QR di trasferimento.",
+    urlLabel: "URL",
+    urlPlaceholder: "es. pixelyaki.com o https://pixelyaki.com",
+    invalidUrl: "Inserisci un URL valido.",
+    urlEmptyPreview: "Inserisci un URL per visualizzare l'anteprima QR.",
+    emailLabel: "Indirizzo email",
+    emailPlaceholder: "es. hello@pixelyaki.com",
+    invalidEmail: "Inserisci un indirizzo email valido.",
+    emailEmptyPreview: "Inserisci un'email per visualizzare l'anteprima QR.",
+    phoneLabel: "Numero di telefono",
+    phonePlaceholder: "es. +821012345678",
+    invalidPhone: "Inserisci un numero di telefono valido.",
+    phoneEmptyPreview: "Inserisci un numero di telefono per visualizzare l'anteprima QR."
+  },
+  pt: {
+    modeSelectorTitle: "Modo",
+    textModeLabel: "Texto",
+    sendModeLabel: "QR Transferência Toss",
+    urlModeLabel: "URL",
+    emailModeLabel: "E-mail",
+    phoneModeLabel: "Telefone",
+    bankLabel: "Código do banco",
+    bankPlaceholder: "Selecione um banco",
+    accountLabel: "Número da conta",
+    accountPlaceholder: "Digite o número da conta",
+    amountLabel: "Valor (opcional)",
+    amountPlaceholder: "ex. 10000",
+    amountHint: "Deixe em branco para criar QR sem valor.",
+    invalidAccount: "Verifique o banco e o número da conta.",
+    invalidAmount: "O valor deve ser um número maior que 0.",
+    sendEmptyPreview: "Digite banco e conta para pré-visualizar o QR de transferência.",
+    urlLabel: "URL",
+    urlPlaceholder: "ex. pixelyaki.com ou https://pixelyaki.com",
+    invalidUrl: "Digite um URL válido.",
+    urlEmptyPreview: "Digite um URL para pré-visualizar o QR.",
+    emailLabel: "Endereço de e-mail",
+    emailPlaceholder: "ex. hello@pixelyaki.com",
+    invalidEmail: "Digite um endereço de e-mail válido.",
+    emailEmptyPreview: "Digite um e-mail para pré-visualizar o QR.",
+    phoneLabel: "Número de telefone",
+    phonePlaceholder: "ex. +821012345678",
+    invalidPhone: "Digite um número de telefone válido.",
+    phoneEmptyPreview: "Digite um número de telefone para pré-visualizar o QR."
   }
 };
 
@@ -400,20 +580,8 @@ const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
     smsBodyPlaceholder: "예: 안녕하세요",
     smsInvalid: "SMS 전화번호 형식을 확인해 주세요.",
     smsEmptyPreview: "전화번호를 입력하면 SMS QR 미리보기가 표시됩니다.",
-    wechatModeLabel: "WeChat",
-    alipayModeLabel: "Alipay",
-    miniProgramModeLabel: "Mini Program",
-    chinaLinkLabel: "공식 링크 또는 딥링크",
-    chinaLinkPlaceholder: "예: https://weixin.qq.com/... 또는 weixin://...",
-    chinaInvalidLink: "올바른 WeChat/Alipay 링크를 입력해 주세요.",
-    wechatEmptyPreview: "WeChat 링크를 입력하면 QR 미리보기가 표시됩니다.",
-    alipayEmptyPreview: "Alipay 링크를 입력하면 QR 미리보기가 표시됩니다.",
-    miniProgramLinkLabel: "Mini Program 링크",
-    miniProgramLinkPlaceholder: "예: https://wxaurl.cn/xxxxxx",
-    miniProgramInvalidLink: "올바른 Mini Program 링크를 입력해 주세요.",
-    miniProgramEmptyPreview: "Mini Program 링크를 입력하면 QR 미리보기가 표시됩니다.",
-    miniProgramServerHint:
-      "공식 Mini Program 코드(원형 코드)는 백엔드에서 WeChat API 연동이 필요합니다."
+    kakaopayModeLabel: "카카오페이 송금 QR",
+    kakaopayEmptyPreview: "카카오페이 송금 정보를 입력하면 QR 미리보기가 표시됩니다."
   },
   en: {
     wifiModeLabel: "Wi-Fi",
@@ -447,20 +615,8 @@ const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
     smsBodyPlaceholder: "e.g. Hello!",
     smsInvalid: "Please check the SMS phone number format.",
     smsEmptyPreview: "Enter a phone number to preview the SMS QR code.",
-    wechatModeLabel: "WeChat",
-    alipayModeLabel: "Alipay",
-    miniProgramModeLabel: "Mini Program",
-    chinaLinkLabel: "Official link or deep link",
-    chinaLinkPlaceholder: "e.g. https://weixin.qq.com/... or weixin://...",
-    chinaInvalidLink: "Please enter a valid WeChat/Alipay link.",
-    wechatEmptyPreview: "Enter a WeChat link to preview the QR code.",
-    alipayEmptyPreview: "Enter an Alipay link to preview the QR code.",
-    miniProgramLinkLabel: "Mini Program link",
-    miniProgramLinkPlaceholder: "e.g. https://wxaurl.cn/xxxxxx",
-    miniProgramInvalidLink: "Please enter a valid Mini Program link.",
-    miniProgramEmptyPreview: "Enter a Mini Program link to preview the QR code.",
-    miniProgramServerHint:
-      "Official Mini Program code generation requires backend integration with WeChat APIs."
+    kakaopayModeLabel: "KakaoPay Transfer QR",
+    kakaopayEmptyPreview: "Enter KakaoPay transfer details to preview the QR code."
   }
 };
 
@@ -474,7 +630,9 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "Square",
     presetRounded: "Rounded",
     presetClassy: "Classy",
-    presetDot: "Dot"
+    presetDot: "Dot",
+    errorCorrectionLabel: "압축률",
+    eclL: "저 압축", eclM: "중간 압축", eclQ: "높은 압축", eclH: "최고 압축"
   },
   en: {
     title: "QR style",
@@ -485,7 +643,9 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "Square",
     presetRounded: "Rounded",
     presetClassy: "Classy",
-    presetDot: "Dot"
+    presetDot: "Dot",
+    errorCorrectionLabel: "Density",
+    eclL: "Low", eclM: "Medium", eclQ: "High", eclH: "Highest"
   },
   zh: {
     title: "QR 样式",
@@ -496,7 +656,9 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "方形",
     presetRounded: "圆角",
     presetClassy: "经典",
-    presetDot: "圆点"
+    presetDot: "圆点",
+    errorCorrectionLabel: "密度",
+    eclL: "低", eclM: "中", eclQ: "高", eclH: "最高"
   },
   ja: {
     title: "QRスタイル",
@@ -507,7 +669,9 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "スクエア",
     presetRounded: "ラウンド",
     presetClassy: "クラシー",
-    presetDot: "ドット"
+    presetDot: "ドット",
+    errorCorrectionLabel: "密度",
+    eclL: "低", eclM: "中", eclQ: "高", eclH: "最高"
   },
   es: {
     title: "Estilo QR",
@@ -518,7 +682,9 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "Cuadrado",
     presetRounded: "Redondeado",
     presetClassy: "Clasico",
-    presetDot: "Puntos"
+    presetDot: "Puntos",
+    errorCorrectionLabel: "Densidad",
+    eclL: "Baja", eclM: "Media", eclQ: "Alta", eclH: "Maxima"
   },
   fr: {
     title: "Style QR",
@@ -529,7 +695,9 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "Carre",
     presetRounded: "Arrondi",
     presetClassy: "Classique",
-    presetDot: "Points"
+    presetDot: "Points",
+    errorCorrectionLabel: "Densite",
+    eclL: "Faible", eclM: "Moyen", eclQ: "Eleve", eclH: "Maximum"
   },
   de: {
     title: "QR-Stil",
@@ -540,7 +708,87 @@ const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
     presetSquare: "Quadratisch",
     presetRounded: "Abgerundet",
     presetClassy: "Klassisch",
-    presetDot: "Punkte"
+    presetDot: "Punkte",
+    errorCorrectionLabel: "Dichte",
+    eclL: "Niedrig", eclM: "Mittel", eclQ: "Hoch", eclH: "Maximal"
+  },
+  ru: {
+    title: "Стиль QR",
+    presetLabel: "Пресет",
+    dotsLabel: "Стиль точек",
+    cornerSquareLabel: "Стиль угла",
+    cornerDotLabel: "Точка угла",
+    presetSquare: "Квадрат",
+    presetRounded: "Скруглённый",
+    presetClassy: "Классика",
+    presetDot: "Точка",
+    errorCorrectionLabel: "Плотность",
+    eclL: "Низкая", eclM: "Средняя", eclQ: "Высокая", eclH: "Максимум"
+  },
+  ar: {
+    title: "نمط QR",
+    presetLabel: "الإعداد المسبق",
+    dotsLabel: "نمط النقاط",
+    cornerSquareLabel: "نمط الزاوية",
+    cornerDotLabel: "نقطة الزاوية",
+    presetSquare: "مربع",
+    presetRounded: "مستدير",
+    presetClassy: "كلاسيكي",
+    presetDot: "نقطة",
+    errorCorrectionLabel: "الكثافة",
+    eclL: "منخفضة", eclM: "متوسطة", eclQ: "عالية", eclH: "أقصى"
+  },
+  hi: {
+    title: "QR स्टाइल",
+    presetLabel: "प्रीसेट",
+    dotsLabel: "डॉट्स शैली",
+    cornerSquareLabel: "कोने का आकार",
+    cornerDotLabel: "कोने का डॉट",
+    presetSquare: "वर्गाकार",
+    presetRounded: "गोल",
+    presetClassy: "क्लासी",
+    presetDot: "डॉट",
+    errorCorrectionLabel: "घनत्व",
+    eclL: "कम", eclM: "मध्यम", eclQ: "उच्च", eclH: "अधिकतम"
+  },
+  id: {
+    title: "Gaya QR",
+    presetLabel: "Prasetel",
+    dotsLabel: "Gaya titik",
+    cornerSquareLabel: "Gaya sudut",
+    cornerDotLabel: "Titik sudut",
+    presetSquare: "Kotak",
+    presetRounded: "Bulat",
+    presetClassy: "Klasik",
+    presetDot: "Titik",
+    errorCorrectionLabel: "Kepadatan",
+    eclL: "Rendah", eclM: "Sedang", eclQ: "Tinggi", eclH: "Maksimum"
+  },
+  it: {
+    title: "Stile QR",
+    presetLabel: "Preimpostazione",
+    dotsLabel: "Stile punti",
+    cornerSquareLabel: "Stile angolo",
+    cornerDotLabel: "Punto angolo",
+    presetSquare: "Quadrato",
+    presetRounded: "Arrotondato",
+    presetClassy: "Classico",
+    presetDot: "Punto",
+    errorCorrectionLabel: "Densità",
+    eclL: "Bassa", eclM: "Media", eclQ: "Alta", eclH: "Massima"
+  },
+  pt: {
+    title: "Estilo QR",
+    presetLabel: "Predefinição",
+    dotsLabel: "Estilo dos pontos",
+    cornerSquareLabel: "Estilo do canto",
+    cornerDotLabel: "Ponto do canto",
+    presetSquare: "Quadrado",
+    presetRounded: "Arredondado",
+    presetClassy: "Clássico",
+    presetDot: "Ponto",
+    errorCorrectionLabel: "Densidade",
+    eclL: "Baixa", eclM: "Média", eclQ: "Alta", eclH: "Máxima"
   }
 };
 
@@ -553,9 +801,7 @@ type QrMode =
   | "wifi"
   | "vcard"
   | "sms"
-  | "wechat"
-  | "alipay"
-  | "mini-program";
+  | "kakaopay";
 
 type QrStudioProps = {
   copy: StudioCopy;
@@ -564,6 +810,8 @@ type QrStudioProps = {
 
 const INPUT_CLASS =
   "w-full rounded-md border border-neutral-200 bg-white p-2 text-sm text-neutral-900 outline-none transition focus:border-neutral-400 focus:ring-2 focus:ring-neutral-900/5 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-100 dark:focus:border-neutral-500 dark:focus:ring-neutral-100/5";
+
+const SELECT_CLASS = `${INPUT_CLASS} cursor-pointer`;
 
 const QR_STYLE_PRESETS: Record<
   QrStylePreset,
@@ -598,9 +846,10 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
   const [vcardAddress, setVcardAddress] = useState("");
   const [smsPhone, setSmsPhone] = useState("");
   const [smsBody, setSmsBody] = useState("");
-  const [wechatLink, setWechatLink] = useState("");
-  const [alipayLink, setAlipayLink] = useState("");
-  const [miniProgramLink, setMiniProgramLink] = useState("");
+  const [kakaoBankCode, setKakaoBankCode] = useState("004");
+  const [kakaoAccountNo, setKakaoAccountNo] = useState("");
+  const [kakaoAmount, setKakaoAmount] = useState("");
+  const [errorCorrectionLevel, setErrorCorrectionLevel] = useState<QrErrorCorrectionLevel>("H");
   const [stylePreset, setStylePreset] = useState<QrStylePreset>("square");
   const [dotsStyle, setDotsStyle] = useState<QrDotsStyle>(QR_STYLE_PRESETS.square.dots);
   const [cornerSquareStyle, setCornerSquareStyle] = useState<QrCornerSquareStyle>(QR_STYLE_PRESETS.square.cornerSquare);
@@ -646,9 +895,15 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     phone: smsPhone,
     body: smsBody
   });
-  const wechatPayload = buildChinaLinkPayload(wechatLink);
-  const alipayPayload = buildChinaLinkPayload(alipayLink);
-  const miniProgramPayload = buildChinaLinkPayload(miniProgramLink);
+  const normalizedKakaoAccount = normalizeKakaoAccountNumber(kakaoAccountNo);
+  const normalizedKakaoAmount = normalizeKakaoAmount(kakaoAmount);
+  const hasKakaoAmountInput = normalizedKakaoAmount.length > 0;
+  const hasValidKakaoAmount = !hasKakaoAmountInput || isPositiveAmount(normalizedKakaoAmount);
+  const kakaoPayPayload = buildKakaoPayBankLink({
+    bankCode: kakaoBankCode,
+    accountNumber: kakaoAccountNo,
+    amount: kakaoAmount
+  });
 
   let qrPayload = "";
   let modeError: string | null = null;
@@ -724,28 +979,18 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     } else {
       modeError = extraModeCopy.smsInvalid;
     }
-  } else if (mode === "wechat") {
-    if (wechatLink.trim().length === 0) {
-      modeError = null;
-    } else if (wechatPayload) {
-      qrPayload = wechatPayload;
+  } else if (mode === "kakaopay") {
+    if (!kakaoBankCode || !normalizedKakaoAccount) {
+      modeError = kakaoAccountNo.length > 0 ? modeCopy.invalidAccount : null;
+    } else if (!hasValidKakaoAmount) {
+      modeError = modeCopy.invalidAmount;
+    } else if (kakaoPayPayload) {
+      qrPayload = kakaoPayPayload;
     } else {
-      modeError = extraModeCopy.chinaInvalidLink;
+      modeError = modeCopy.invalidAccount;
     }
-  } else if (mode === "alipay") {
-    if (alipayLink.trim().length === 0) {
-      modeError = null;
-    } else if (alipayPayload) {
-      qrPayload = alipayPayload;
-    } else {
-      modeError = extraModeCopy.chinaInvalidLink;
-    }
-  } else if (miniProgramLink.trim().length === 0) {
-    modeError = null;
-  } else if (miniProgramPayload) {
-    qrPayload = miniProgramPayload;
   } else {
-    modeError = extraModeCopy.miniProgramInvalidLink;
+    modeError = null;
   }
 
   useEffect(() => {
@@ -771,6 +1016,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
             backgroundColor,
             transparentBackground,
             logoDataUrl,
+            errorCorrectionLevel,
             style: {
               preset: stylePreset,
               dots: dotsStyle,
@@ -784,6 +1030,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
             backgroundColor,
             transparentBackground,
             logoDataUrl,
+            errorCorrectionLevel,
             style: {
               preset: stylePreset,
               dots: dotsStyle,
@@ -855,23 +1102,13 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 sms_phone_length: normalizedSmsPhone.length,
                 sms_body_length: smsBody.trim().length
               });
-            } else if (mode === "wechat") {
+            } else if (mode === "kakaopay") {
               trackGtmEvent("qr_generate", {
                 ...commonPayload,
-                link_length: wechatLink.trim().length,
-                china_platform: "wechat"
-              });
-            } else if (mode === "alipay") {
-              trackGtmEvent("qr_generate", {
-                ...commonPayload,
-                link_length: alipayLink.trim().length,
-                china_platform: "alipay"
-              });
-            } else {
-              trackGtmEvent("qr_generate", {
-                ...commonPayload,
-                link_length: miniProgramLink.trim().length,
-                china_platform: "mini_program"
+                bank_code: kakaoBankCode,
+                account_length: normalizedKakaoAccount.length,
+                has_amount: hasKakaoAmountInput,
+                china_platform: "kakaopay"
               });
             }
 
@@ -898,20 +1135,26 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     };
   }, [
     backgroundColor,
+    errorCorrectionLevel,
     bankCode,
+    kakaoBankCode,
+    kakaoAccountNo,
+    kakaoAmount,
     copy.renderError,
     emailInput,
     foregroundColor,
     hasAmountInput,
+    hasKakaoAmountInput,
+    hasValidKakaoAmount,
     logoDataUrl,
     mode,
     modeError,
     normalizedAccountNo.length,
+    normalizedKakaoAccount.length,
     normalizedPhone.length,
     normalizedSmsPhone.length,
     normalizedText.length,
     qrPayload,
-    miniProgramLink,
     smsBody,
     stylePreset,
     dotsStyle,
@@ -922,8 +1165,6 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     vcardAddress,
     vcardCompany,
     vcardEmail,
-    wechatLink,
-    alipayLink,
     wifiEncryption,
     wifiSsid,
     normalizedVcardPhone.length
@@ -942,9 +1183,8 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     wifiSsid,
     vcardName,
     smsPhone,
-    wechatLink,
-    alipayLink,
-    miniProgramLink
+    kakaoBankCode,
+    kakaoAccountNo
   });
   const fileNamePng = makeQrFilename(filenameSeed, "png");
   const fileNameSvg = makeQrFilename(filenameSeed, "svg");
@@ -1028,49 +1268,57 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   ? extraModeCopy.vcardEmptyPreview
                   : mode === "sms"
                     ? extraModeCopy.smsEmptyPreview
-                    : mode === "wechat"
-                      ? extraModeCopy.wechatEmptyPreview
-                      : mode === "alipay"
-                        ? extraModeCopy.alipayEmptyPreview
-                        : extraModeCopy.miniProgramEmptyPreview;
+                    : extraModeCopy.kakaopayEmptyPreview;
 
   const modeButtons: Array<{ value: QrMode; label: string; icon: React.ReactNode }> = [
     { value: "text", label: modeCopy.textModeLabel, icon: <QrCode className="h-3.5 w-3.5" /> },
-    { value: "send", label: modeCopy.sendModeLabel, icon: <SendDiagonal className="h-3.5 w-3.5" /> },
     { value: "url", label: modeCopy.urlModeLabel, icon: <Www className="h-3.5 w-3.5" /> },
     { value: "email", label: modeCopy.emailModeLabel, icon: <Mail className="h-3.5 w-3.5" /> },
     { value: "phone", label: modeCopy.phoneModeLabel, icon: <Phone className="h-3.5 w-3.5" /> },
     { value: "wifi", label: extraModeCopy.wifiModeLabel, icon: <Wifi className="h-3.5 w-3.5" /> },
     { value: "vcard", label: extraModeCopy.vcardModeLabel, icon: <UserSquare className="h-3.5 w-3.5" /> },
     { value: "sms", label: extraModeCopy.smsModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> },
-    { value: "wechat", label: extraModeCopy.wechatModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> },
-    { value: "alipay", label: extraModeCopy.alipayModeLabel, icon: <Wallet className="h-3.5 w-3.5" /> },
-    { value: "mini-program", label: extraModeCopy.miniProgramModeLabel, icon: <AppWindow className="h-3.5 w-3.5" /> }
+    { value: "send", label: modeCopy.sendModeLabel, icon: <SendDiagonal className="h-3.5 w-3.5" /> },
+    { value: "kakaopay", label: extraModeCopy.kakaopayModeLabel, icon: <Wallet className="h-3.5 w-3.5" /> }
   ];
 
   return (
     <section id="generator" className="grid gap-3 bg-neutral-50 p-4 dark:bg-neutral-950 md:gap-4 md:p-6">
-      <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
-        <h2 className="mb-4 flex items-center gap-1.5 text-xs font-medium uppercase text-neutral-400 dark:text-neutral-500">
-          <QrCode className="h-3.5 w-3.5" />
-          <span>{modeCopy.modeSelectorTitle}</span>
-        </h2>
-        <div className="grid grid-cols-2 gap-1 rounded-md bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid-cols-4 lg:grid-cols-8 xl:grid-cols-11">
-          {modeButtons.map((button) => (
+      <div className="overflow-x-auto">
+        <div className="flex w-max gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800/80 md:grid md:w-auto md:grid-cols-9">
+          {modeButtons.slice(0, 7).map((button) => (
             <button
               key={button.value}
               type="button"
-              className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-neutral-900 shadow-sm dark:bg-neutral-700 dark:text-neutral-100" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"}`}
+              className={`cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-neutral-900 shadow-sm dark:bg-neutral-700 dark:text-neutral-100" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"}`}
               onClick={() => setMode(button.value)}
             >
               <span className="inline-flex flex-col items-center gap-1 text-center">
                 {button.icon}
-                <span>{button.label}</span>
+                <span className="leading-tight">{button.label}</span>
               </span>
             </button>
           ))}
+          <div className="relative col-span-2 flex gap-1 rounded-md p-0.5 ring-1 ring-neutral-300 dark:ring-neutral-600">
+            <span className="pointer-events-none absolute -top-2.5 left-1/2 -translate-x-1/2 select-none rounded-sm bg-neutral-100 px-0.5 text-[11px] leading-none dark:bg-neutral-800">
+              🇰🇷
+            </span>
+            {modeButtons.slice(7).map((button) => (
+              <button
+                key={button.value}
+                type="button"
+                className={`flex-1 cursor-pointer rounded-md px-2 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-neutral-900 shadow-sm dark:bg-neutral-700 dark:text-neutral-100" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"}`}
+                onClick={() => setMode(button.value)}
+              >
+                <span className="inline-flex flex-col items-center gap-1 text-center">
+                  {button.icon}
+                  <span className="leading-tight">{button.label}</span>
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
-      </section>
+      </div>
 
       <div className="grid gap-3 md:gap-4 lg:grid-cols-[minmax(0,1fr)_380px]">
         <section className="rounded-lg border border-neutral-200 bg-white p-5 dark:border-neutral-700 dark:bg-neutral-900">
@@ -1098,12 +1346,12 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   id="send-bank"
                   value={bankCode}
                   onChange={(event) => setBankCode(event.target.value)}
-                  className={INPUT_CLASS}
+                  className={SELECT_CLASS}
                 >
                   <option value="">{modeCopy.bankPlaceholder}</option>
                   {tossBanks.map((bank) => (
                     <option key={bank.code} value={bank.code}>
-                      {bank.code} {bank.name}
+                      {bank.name}
                     </option>
                   ))}
                 </select>
@@ -1213,7 +1461,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   id="wifi-encryption"
                   value={wifiEncryption}
                   onChange={(event) => setWifiEncryption(event.target.value as "WPA" | "WEP" | "nopass")}
-                  className={INPUT_CLASS}
+                  className={SELECT_CLASS}
                 >
                   <option value="WPA">WPA/WPA2</option>
                   <option value="WEP">WEP</option>
@@ -1347,52 +1595,55 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
             </div>
           ) : null}
 
-          {mode === "wechat" ? (
-            <div className="mb-4 grid gap-1.5">
-              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="wechat-link">
-                {extraModeCopy.chinaLinkLabel}
-              </label>
-              <input
-                id="wechat-link"
-                type="text"
-                value={wechatLink}
-                onChange={(event) => setWechatLink(event.target.value)}
-                placeholder={extraModeCopy.chinaLinkPlaceholder}
-                className={INPUT_CLASS}
-              />
-            </div>
-          ) : null}
-
-          {mode === "alipay" ? (
-            <div className="mb-4 grid gap-1.5">
-              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="alipay-link">
-                {extraModeCopy.chinaLinkLabel}
-              </label>
-              <input
-                id="alipay-link"
-                type="text"
-                value={alipayLink}
-                onChange={(event) => setAlipayLink(event.target.value)}
-                placeholder={extraModeCopy.chinaLinkPlaceholder}
-                className={INPUT_CLASS}
-              />
-            </div>
-          ) : null}
-
-          {mode === "mini-program" ? (
-            <div className="mb-4 grid gap-1.5">
-              <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="mini-program-link">
-                {extraModeCopy.miniProgramLinkLabel}
-              </label>
-              <input
-                id="mini-program-link"
-                type="text"
-                value={miniProgramLink}
-                onChange={(event) => setMiniProgramLink(event.target.value)}
-                placeholder={extraModeCopy.miniProgramLinkPlaceholder}
-                className={INPUT_CLASS}
-              />
-              <small className="text-xs text-neutral-500 dark:text-neutral-400">{extraModeCopy.miniProgramServerHint}</small>
+          {mode === "kakaopay" ? (
+            <div className="mb-4 grid gap-3">
+              <div className="grid gap-1.5">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="kakaopay-bank">
+                  {modeCopy.bankLabel}
+                </label>
+                <select
+                  id="kakaopay-bank"
+                  value={kakaoBankCode}
+                  onChange={(event) => setKakaoBankCode(event.target.value)}
+                  className={SELECT_CLASS}
+                >
+                  <option value="">{modeCopy.bankPlaceholder}</option>
+                  {kakaopayBanks.map((bank) => (
+                    <option key={bank.code} value={bank.code}>
+                      {bank.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="grid gap-1.5">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="kakaopay-account">
+                  {modeCopy.accountLabel}
+                </label>
+                <input
+                  id="kakaopay-account"
+                  type="text"
+                  inputMode="numeric"
+                  value={kakaoAccountNo}
+                  onChange={(event) => setKakaoAccountNo(event.target.value)}
+                  placeholder={modeCopy.accountPlaceholder}
+                  className={INPUT_CLASS}
+                />
+              </div>
+              <div className="grid gap-1.5">
+                <label className="text-xs font-medium text-neutral-700 dark:text-neutral-300" htmlFor="kakaopay-amount">
+                  {modeCopy.amountLabel}
+                </label>
+                <input
+                  id="kakaopay-amount"
+                  type="text"
+                  inputMode="numeric"
+                  value={kakaoAmount}
+                  onChange={(event) => setKakaoAmount(event.target.value.replace(/[^0-9]/g, ""))}
+                  placeholder={modeCopy.amountPlaceholder}
+                  className={INPUT_CLASS}
+                />
+                <small className="text-xs text-neutral-400 dark:text-neutral-500">{modeCopy.amountHint}</small>
+              </div>
             </div>
           ) : null}
 
@@ -1405,7 +1656,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 </label>
                 <select
                   id="qr-style-preset"
-                  className={INPUT_CLASS}
+                  className={SELECT_CLASS}
                   value={stylePreset}
                   onChange={(event) => onChangeStylePreset(event.target.value as QrStylePreset)}
                 >
@@ -1422,7 +1673,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 </label>
                 <select
                   id="qr-style-dots"
-                  className={INPUT_CLASS}
+                  className={SELECT_CLASS}
                   value={dotsStyle}
                   onChange={(event) => setDotsStyle(event.target.value as QrDotsStyle)}
                 >
@@ -1441,7 +1692,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 </label>
                 <select
                   id="qr-style-corner-square"
-                  className={INPUT_CLASS}
+                  className={SELECT_CLASS}
                   value={cornerSquareStyle}
                   onChange={(event) => setCornerSquareStyle(event.target.value as QrCornerSquareStyle)}
                 >
@@ -1457,12 +1708,29 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                 </label>
                 <select
                   id="qr-style-corner-dot"
-                  className={INPUT_CLASS}
+                  className={SELECT_CLASS}
                   value={cornerDotStyle}
                   onChange={(event) => setCornerDotStyle(event.target.value as QrCornerDotStyle)}
                 >
                   <option value="square">square</option>
                   <option value="dot">dot</option>
+                </select>
+              </div>
+
+              <div className="grid gap-1.5">
+                <label className="text-xs text-neutral-500 dark:text-neutral-400" htmlFor="qr-error-correction">
+                  {styleCopy.errorCorrectionLabel}
+                </label>
+                <select
+                  id="qr-error-correction"
+                  className={SELECT_CLASS}
+                  value={errorCorrectionLevel}
+                  onChange={(event) => setErrorCorrectionLevel(event.target.value as QrErrorCorrectionLevel)}
+                >
+                  <option value="L">{styleCopy.eclL}</option>
+                  <option value="M">{styleCopy.eclM}</option>
+                  <option value="Q">{styleCopy.eclQ}</option>
+                  <option value="H">{styleCopy.eclH}</option>
                 </select>
               </div>
             </div>
@@ -1545,9 +1813,8 @@ function getFilenameSeed(options: {
   wifiSsid: string;
   vcardName: string;
   smsPhone: string;
-  wechatLink: string;
-  alipayLink: string;
-  miniProgramLink: string;
+  kakaoBankCode: string;
+  kakaoAccountNo: string;
 }): string {
   if (options.mode === "text") {
     return options.text || "sample";
@@ -1581,15 +1848,11 @@ function getFilenameSeed(options: {
     return `sms-${options.smsPhone || "message"}`;
   }
 
-  if (options.mode === "wechat") {
-    return `wechat-${options.wechatLink || "link"}`;
+  if (options.mode === "kakaopay") {
+    return `kakaopay-${options.kakaoBankCode || "bank"}-${options.kakaoAccountNo || "account"}`;
   }
 
-  if (options.mode === "alipay") {
-    return `alipay-${options.alipayLink || "link"}`;
-  }
-
-  return `mini-program-${options.miniProgramLink || "link"}`;
+  return "sample";
 }
 
 function buildUrlPayload(value: string): string | null {
@@ -1604,19 +1867,6 @@ function buildUrlPayload(value: string): string | null {
       return null;
     }
     return url.toString();
-  } catch {
-    return null;
-  }
-}
-
-function buildChinaLinkPayload(value: string): string | null {
-  const trimmed = value.trim();
-  if (!trimmed) return null;
-
-  const withScheme = /^[a-zA-Z][a-zA-Z\d+.-]*:/.test(trimmed) ? trimmed : `https://${trimmed}`;
-
-  try {
-    return new URL(withScheme).toString();
   } catch {
     return null;
   }

@@ -224,6 +224,84 @@ const content: Record<Locale, TermsContent> = {
         body: "Diese Bedingungen können ohne vorherige Ankündigung aktualisiert werden. Die weitere Nutzung des Dienstes nach Änderungen gilt als Zustimmung zu den überarbeiteten Bedingungen."
       }
     ]
+  },
+  ru: {
+    title: "Условия использования",
+    updated: "Последнее обновление: 18 апреля 2026 г.",
+    back: "Назад",
+    sections: [
+      { heading: "1. Описание сервиса", body: "Pixelyaki — бесплатный веб-сервис для генерации QR-кодов. Регистрация не требуется." },
+      { heading: "2. Допустимое использование", body: "Используйте сервис только в законных целях. Запрещено:\n• Генерация QR-кодов с незаконным контентом\n• Генерация QR-кодов в злоумышленных целях (фишинг, распространение вредоносного ПО и т.д.)\n• Причинение вреда третьим лицам через сервис" },
+      { heading: "3. Изменения и доступность", body: "Мы можем изменить или прекратить работу сервиса без уведомления и не несём ответственности за последствия." },
+      { heading: "4. Отказ от ответственности", body: "Сервис предоставляется «как есть», без гарантий точности, надёжности или пригодности для конкретных целей. Мы не несём ответственности за прямой или косвенный ущерб." },
+      { heading: "5. Интеллектуальная собственность", body: "«QR Code» является товарным знаком DENSO WAVE INCORPORATED.\n\nДизайн, исходный код и все материалы Pixelyaki принадлежат Pixelyaki." },
+      { heading: "6. Изменения условий", body: "Условия могут обновляться без уведомления. Продолжение использования сервиса означает согласие с обновлёнными условиями." }
+    ]
+  },
+  ar: {
+    title: "شروط الخدمة",
+    updated: "آخر تحديث: 18 أبريل 2026",
+    back: "رجوع",
+    sections: [
+      { heading: "1. وصف الخدمة", body: "Pixelyaki خدمة ويب مجانية لتحويل النص إلى رموز QR. لا يلزم إنشاء حساب." },
+      { heading: "2. الاستخدام المسموح", body: "يُسمح باستخدام الخدمة للأغراض المشروعة فقط. المحظورات:\n• إنشاء رموز QR تحتوي على محتوى غير قانوني\n• إنشاء رموز QR لأغراض خبيثة\n• استخدام الخدمة للإضرار بالآخرين" },
+      { heading: "3. تغييرات الخدمة", body: "يمكننا تعديل الخدمة أو إيقافها في أي وقت دون إشعار مسبق." },
+      { heading: "4. إخلاء المسؤولية", body: "تُقدَّم الخدمة كما هي دون أي ضمانات. لسنا مسؤولين عن أي أضرار مباشرة أو غير مباشرة." },
+      { heading: "5. الملكية الفكرية", body: "QR Code علامة تجارية مسجلة لـ DENSO WAVE INCORPORATED.\n\nجميع محتويات Pixelyaki ملك لـ Pixelyaki." },
+      { heading: "6. تغييرات الشروط", body: "قد تُحدَّث هذه الشروط دون إشعار. الاستمرار في استخدام الخدمة يعني قبول الشروط المحدَّثة." }
+    ]
+  },
+  hi: {
+    title: "सेवा की शर्तें",
+    updated: "अंतिम अपडेट: 18 अप्रैल 2026",
+    back: "वापस",
+    sections: [
+      { heading: "1. सेवा विवरण", body: "Pixelyaki एक मुफ्त वेब सेवा है जो टेक्स्ट को QR कोड में बदलती है। कोई अकाउंट आवश्यक नहीं।" },
+      { heading: "2. अनुमत उपयोग", body: "इस सेवा का उपयोग केवल कानूनी उद्देश्यों के लिए करें। निम्नलिखित निषिद्ध हैं:\n• अवैध सामग्री वाले QR कोड बनाना\n• दुर्भावनापूर्ण उद्देश्यों के लिए QR कोड बनाना\n• तृतीय पक्षों को नुकसान पहुंचाना" },
+      { heading: "3. सेवा परिवर्तन", body: "हम बिना पूर्व सूचना के सेवा बदल या बंद कर सकते हैं।" },
+      { heading: "4. अस्वीकरण", body: "सेवा 'जैसी है' प्रदान की जाती है, बिना किसी वारंटी के। हम किसी भी नुकसान के लिए जिम्मेदार नहीं हैं।" },
+      { heading: "5. बौद्धिक संपदा", body: "QR Code, DENSO WAVE INCORPORATED का ट्रेडमार्क है।\n\nPixelyaki की सभी सामग्री Pixelyaki की संपत्ति है।" },
+      { heading: "6. शर्तों में बदलाव", body: "शर्तें बिना सूचना के बदल सकती हैं। सेवा जारी रखने का अर्थ है नई शर्तों से सहमति।" }
+    ]
+  },
+  id: {
+    title: "Ketentuan Layanan",
+    updated: "Terakhir diperbarui: 18 April 2026",
+    back: "Kembali",
+    sections: [
+      { heading: "1. Deskripsi Layanan", body: "Pixelyaki adalah layanan web gratis yang mengonversi teks menjadi kode QR. Tidak diperlukan akun atau pendaftaran." },
+      { heading: "2. Penggunaan yang Diizinkan", body: "Layanan ini hanya boleh digunakan untuk tujuan yang sah. Dilarang:\n• Membuat kode QR berisi konten ilegal\n• Membuat kode QR untuk tujuan jahat\n• Menggunakan layanan untuk merugikan pihak ketiga" },
+      { heading: "3. Perubahan Layanan", body: "Kami dapat mengubah atau menghentikan layanan kapan saja tanpa pemberitahuan." },
+      { heading: "4. Penafian", body: "Layanan disediakan 'apa adanya' tanpa garansi apapun. Kami tidak bertanggung jawab atas kerusakan apapun." },
+      { heading: "5. Kekayaan Intelektual", body: "QR Code adalah merek dagang dari DENSO WAVE INCORPORATED.\n\nSeluruh konten Pixelyaki adalah milik Pixelyaki." },
+      { heading: "6. Perubahan Ketentuan", body: "Ketentuan ini dapat diperbarui tanpa pemberitahuan. Penggunaan layanan yang berkelanjutan berarti penerimaan ketentuan yang direvisi." }
+    ]
+  },
+  it: {
+    title: "Termini di Servizio",
+    updated: "Ultimo aggiornamento: 18 aprile 2026",
+    back: "Indietro",
+    sections: [
+      { heading: "1. Descrizione del servizio", body: "Pixelyaki è un servizio web gratuito che converte testo in codici QR. Non è richiesto alcun account." },
+      { heading: "2. Uso consentito", body: "Puoi utilizzare questo servizio solo per scopi leciti. È vietato:\n• Generare codici QR con contenuti illegali\n• Generare codici QR per scopi malevoli\n• Utilizzare il servizio per causare danni a terzi" },
+      { heading: "3. Modifiche al servizio", body: "Possiamo modificare o interrompere il servizio in qualsiasi momento senza preavviso." },
+      { heading: "4. Esclusione di responsabilità", body: "Il servizio è fornito 'così com'è', senza garanzie. Non siamo responsabili per danni diretti o indiretti." },
+      { heading: "5. Proprietà intellettuale", body: "QR Code è un marchio registrato di DENSO WAVE INCORPORATED.\n\nTutti i contenuti di Pixelyaki sono di proprietà di Pixelyaki." },
+      { heading: "6. Modifiche ai termini", body: "Questi termini possono essere aggiornati senza preavviso. Il continuo utilizzo del servizio implica l'accettazione dei termini aggiornati." }
+    ]
+  },
+  pt: {
+    title: "Termos de Serviço",
+    updated: "Última atualização: 18 de abril de 2026",
+    back: "Voltar",
+    sections: [
+      { heading: "1. Descrição do serviço", body: "Pixelyaki é um serviço web gratuito que converte texto em QR codes. Não é necessário cadastro." },
+      { heading: "2. Uso permitido", body: "Você pode usar este serviço apenas para fins lícitos. É proibido:\n• Gerar QR codes com conteúdo ilegal\n• Gerar QR codes para fins maliciosos\n• Usar o serviço para causar danos a terceiros" },
+      { heading: "3. Alterações no serviço", body: "Podemos modificar ou encerrar o serviço a qualquer momento sem aviso prévio." },
+      { heading: "4. Isenção de responsabilidade", body: "O serviço é fornecido 'como está', sem garantias. Não somos responsáveis por danos diretos ou indiretos." },
+      { heading: "5. Propriedade intelectual", body: "QR Code é uma marca registrada da DENSO WAVE INCORPORATED.\n\nTodo o conteúdo do Pixelyaki é propriedade do Pixelyaki." },
+      { heading: "6. Alterações nos termos", body: "Estes termos podem ser atualizados sem aviso prévio. O uso continuado do serviço implica aceitação dos termos revisados." }
+    ]
   }
 };
 

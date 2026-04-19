@@ -160,6 +160,66 @@ const content: Record<Locale, OpenSourceCopy> = {
     note: "Diese Liste wird beim Build automatisch erzeugt. Vollständige Lizenzbedingungen finden Sie in den offiziellen Repositories.",
     emptyState: "Lizenzliste konnte nicht geladen werden. Bitte Build erneut ausführen.",
     defaultUsage: "Abhängigkeit"
+  },
+  ru: {
+    title: "Лицензии с открытым исходным кодом",
+    updatedPrefix: "Автообновление:",
+    back: "Назад",
+    intro: "Pixelyaki создан с использованием библиотек с открытым исходным кодом, перечисленных ниже.",
+    columns: { library: "Библиотека", usage: "Применение", license: "Лицензия", link: "Ссылка" },
+    note: "Этот список генерируется автоматически при сборке. Полные условия лицензий см. в официальных репозиториях.",
+    emptyState: "Не удалось загрузить список лицензий. Выполните сборку повторно.",
+    defaultUsage: "Зависимость"
+  },
+  ar: {
+    title: "تراخيص المصدر المفتوح",
+    updatedPrefix: "تحديث تلقائي:",
+    back: "رجوع",
+    intro: "تم بناء Pixelyaki باستخدام مكتبات المصدر المفتوح المدرجة أدناه.",
+    columns: { library: "المكتبة", usage: "الاستخدام", license: "الرخصة", link: "رابط" },
+    note: "تُنشأ هذه القائمة تلقائيًا أثناء البناء. راجع كل مستودع للاطلاع على شروط الترخيص الكاملة.",
+    emptyState: "تعذّر تحميل قائمة التراخيص. يرجى إعادة تشغيل البناء.",
+    defaultUsage: "تبعية"
+  },
+  hi: {
+    title: "ओपन सोर्स लाइसेंस",
+    updatedPrefix: "स्वतः अपडेट:",
+    back: "वापस",
+    intro: "Pixelyaki नीचे सूचीबद्ध ओपन-सोर्स लाइब्रेरी के साथ बनाया गया है।",
+    columns: { library: "लाइब्रेरी", usage: "उपयोग", license: "लाइसेंस", link: "लिंक" },
+    note: "यह सूची बिल्ड के दौरान स्वतः जनरेट होती है। पूर्ण लाइसेंस शर्तों के लिए प्रत्येक रिपॉजिटरी देखें।",
+    emptyState: "लाइसेंस सूची लोड नहीं हो सकी। कृपया बिल्ड दोबारा चलाएं।",
+    defaultUsage: "डिपेंडेंसी"
+  },
+  id: {
+    title: "Lisensi Sumber Terbuka",
+    updatedPrefix: "Diperbarui otomatis:",
+    back: "Kembali",
+    intro: "Pixelyaki dibangun dengan pustaka sumber terbuka yang tercantum di bawah.",
+    columns: { library: "Pustaka", usage: "Penggunaan", license: "Lisensi", link: "Tautan" },
+    note: "Daftar ini dibuat secara otomatis saat build. Lihat masing-masing repositori untuk syarat lisensi lengkap.",
+    emptyState: "Gagal memuat daftar lisensi. Jalankan build kembali.",
+    defaultUsage: "Dependensi"
+  },
+  it: {
+    title: "Licenze Open Source",
+    updatedPrefix: "Aggiornamento automatico:",
+    back: "Indietro",
+    intro: "Pixelyaki è costruito con le librerie open source elencate di seguito.",
+    columns: { library: "Libreria", usage: "Utilizzo", license: "Licenza", link: "Link" },
+    note: "Questo elenco viene generato automaticamente durante il build. Consulta ogni repository per i termini completi.",
+    emptyState: "Impossibile caricare l'elenco delle licenze. Riesegui il build.",
+    defaultUsage: "Dipendenza"
+  },
+  pt: {
+    title: "Licenças de Código Aberto",
+    updatedPrefix: "Atualização automática:",
+    back: "Voltar",
+    intro: "Pixelyaki é construído com as bibliotecas de código aberto listadas abaixo.",
+    columns: { library: "Biblioteca", usage: "Uso", license: "Licença", link: "Link" },
+    note: "Esta lista é gerada automaticamente durante o build. Consulte cada repositório para os termos completos.",
+    emptyState: "Não foi possível carregar a lista de licenças. Execute o build novamente.",
+    defaultUsage: "Dependência"
   }
 };
 

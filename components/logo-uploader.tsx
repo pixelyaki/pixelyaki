@@ -30,7 +30,7 @@ export function LogoUploader({
       <small className="text-xs text-neutral-400 dark:text-neutral-500">{hint}</small>
       {hasLogo ? (
         <button
-          className="mt-1 rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
+          className="mt-1 cursor-pointer rounded-md border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-700 transition-colors hover:bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700"
           type="button"
           onClick={onRemove}
         >

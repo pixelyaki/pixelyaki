@@ -252,6 +252,90 @@ const content: Record<Locale, PrivacyContent> = {
         body: "Anfragen zum Datenschutz: pixelyaki@gmail.com"
       }
     ]
+  },
+  ru: {
+    title: "Политика конфиденциальности",
+    updated: "Последнее обновление: 18 апреля 2026 г.",
+    back: "Назад",
+    sections: [
+      { heading: "1. Обзор сервиса", body: "Pixelyaki («Сервис») — браузерный инструмент для генерации QR-кодов, не требующий регистрации." },
+      { heading: "2. Собираемая информация", body: "Текст, цвета и файлы логотипа не передаются и не хранятся на серверах. Вся обработка выполняется локально.\n\nДля улучшения сервиса Google Analytics 4 (GA4) может собирать:\n• Данные о посещённых страницах\n• Информацию об устройстве и браузере\n• Анонимизированные IP-адреса" },
+      { heading: "3. Локальное хранилище", body: "Тёмный/светлый режим следует настройкам системы. Сервис не хранит настройки темы отдельно и не отправляет их на сервер." },
+      { heading: "4. Сторонние сервисы", body: "Сервис использует Google Analytics 4. Данные хранятся на серверах Google согласно их политике.\nhttps://policies.google.com/privacy" },
+      { heading: "5. Конфиденциальность детей", body: "Сервис не предназначен для детей до 14 лет. Мы не собираем намеренно их персональные данные." },
+      { heading: "6. Изменения политики", body: "Политика может обновляться без уведомления. Дата изменения отображается в верхней части страницы." },
+      { heading: "7. Контакты", body: "По вопросам конфиденциальности: pixelyaki@gmail.com" }
+    ]
+  },
+  ar: {
+    title: "سياسة الخصوصية",
+    updated: "آخر تحديث: 18 أبريل 2026",
+    back: "رجوع",
+    sections: [
+      { heading: "1. نظرة عامة", body: "Pixelyaki هي أداة لإنشاء رموز QR تعمل عبر المتصفح ولا تتطلب إنشاء حساب." },
+      { heading: "2. المعلومات التي نجمعها", body: "النص والألوان وملفات الشعار لا تُرسل إلى أي خادم ولا تُخزَّن. تتم جميع العمليات محليًا.\n\nقد يجمع Google Analytics 4 (GA4):\n• بيانات زيارات الصفحات\n• معلومات الجهاز والمتصفح\n• عناوين IP مجهولة الهوية" },
+      { heading: "3. التخزين المحلي", body: "يتبع وضع الظلام/الفاتح إعدادات نظامك. لا تحتفظ الخدمة بتفضيل سمة منفصل." },
+      { heading: "4. خدمات الطرف الثالث", body: "تستخدم هذه الخدمة Google Analytics 4 وتخضع لسياسة الخصوصية الخاصة بها.\nhttps://policies.google.com/privacy" },
+      { heading: "5. خصوصية الأطفال", body: "لا تستهدف هذه الخدمة الأطفال دون سن 14 عامًا." },
+      { heading: "6. تغييرات هذه السياسة", body: "قد تُحدَّث هذه السياسة دون إشعار مسبق. ستعكس تاريخ المراجعة في أعلى هذه الصفحة." },
+      { heading: "7. التواصل", body: "للاستفسارات المتعلقة بالخصوصية: pixelyaki@gmail.com" }
+    ]
+  },
+  hi: {
+    title: "गोपनीयता नीति",
+    updated: "अंतिम अपडेट: 18 अप्रैल 2026",
+    back: "वापस",
+    sections: [
+      { heading: "1. सेवा अवलोकन", body: "Pixelyaki एक ब्राउज़र-आधारित QR कोड जनरेटर है जिसके लिए कोई अकाउंट या साइन-अप आवश्यक नहीं है।" },
+      { heading: "2. एकत्रित जानकारी", body: "QR कोड जनरेशन के लिए दर्ज किया गया टेक्स्ट, रंग और लोगो फ़ाइलें किसी सर्वर पर नहीं भेजी जाती हैं।\n\nGoogle Analytics 4 (GA4) एकत्र कर सकता है:\n• पेज विज़िट डेटा\n• डिवाइस और ब्राउज़र जानकारी\n• अनामीकृत IP पते" },
+      { heading: "3. लोकल स्टोरेज", body: "डार्क/लाइट मोड आपकी सिस्टम सेटिंग का अनुसरण करता है। सेवा थीम प्राथमिकता अलग से संग्रहीत नहीं करती।" },
+      { heading: "4. तृतीय-पक्ष सेवाएं", body: "यह सेवा Google Analytics 4 का उपयोग करती है। एकत्रित डेटा Google के सर्वर पर संग्रहीत होता है।\nhttps://policies.google.com/privacy" },
+      { heading: "5. बच्चों की गोपनीयता", body: "यह सेवा 14 वर्ष से कम उम्र के बच्चों के लिए नहीं है।" },
+      { heading: "6. नीति में बदलाव", body: "यह नीति बिना पूर्व सूचना के अपडेट हो सकती है।" },
+      { heading: "7. संपर्क", body: "गोपनीयता संबंधी प्रश्नों के लिए: pixelyaki@gmail.com" }
+    ]
+  },
+  id: {
+    title: "Kebijakan Privasi",
+    updated: "Terakhir diperbarui: 18 April 2026",
+    back: "Kembali",
+    sections: [
+      { heading: "1. Gambaran Layanan", body: "Pixelyaki adalah alat pembuatan QR code berbasis browser yang tidak memerlukan akun atau pendaftaran." },
+      { heading: "2. Informasi yang Kami Kumpulkan", body: "Teks, warna, dan file logo tidak dikirim atau disimpan di server. Semua pemrosesan terjadi di browser Anda.\n\nGoogle Analytics 4 (GA4) dapat mengumpulkan:\n• Data kunjungan halaman\n• Informasi perangkat dan browser\n• Alamat IP yang dianonimkan" },
+      { heading: "3. Penyimpanan Lokal", body: "Mode gelap/terang mengikuti pengaturan sistem secara otomatis. Layanan tidak menyimpan preferensi tema secara terpisah." },
+      { heading: "4. Layanan Pihak Ketiga", body: "Layanan ini menggunakan Google Analytics 4. Data tunduk pada Kebijakan Privasi Google.\nhttps://policies.google.com/privacy" },
+      { heading: "5. Privasi Anak", body: "Layanan ini tidak ditujukan untuk anak di bawah 14 tahun." },
+      { heading: "6. Perubahan Kebijakan", body: "Kebijakan ini dapat diperbarui tanpa pemberitahuan sebelumnya." },
+      { heading: "7. Kontak", body: "Pertanyaan privasi: pixelyaki@gmail.com" }
+    ]
+  },
+  it: {
+    title: "Informativa sulla Privacy",
+    updated: "Ultimo aggiornamento: 18 aprile 2026",
+    back: "Indietro",
+    sections: [
+      { heading: "1. Panoramica del servizio", body: "Pixelyaki è uno strumento per la generazione di codici QR basato su browser, che non richiede account o registrazione." },
+      { heading: "2. Informazioni raccolte", body: "Il testo, i colori e i file logo non vengono trasmessi né archiviati su server. Tutto il trattamento avviene nel browser.\n\nGoogle Analytics 4 (GA4) può raccogliere:\n• Dati di visita delle pagine\n• Informazioni su dispositivo e browser\n• Indirizzi IP anonimizzati" },
+      { heading: "3. Archiviazione locale", body: "La modalità scura/chiara segue automaticamente le impostazioni di sistema. Il servizio non memorizza preferenze di tema separatamente." },
+      { heading: "4. Servizi di terze parti", body: "Questo servizio utilizza Google Analytics 4. I dati sono soggetti alla Privacy Policy di Google.\nhttps://policies.google.com/privacy" },
+      { heading: "5. Privacy dei minori", body: "Questo servizio non è destinato a bambini sotto i 14 anni." },
+      { heading: "6. Modifiche alla politica", body: "Questa politica può essere aggiornata senza preavviso." },
+      { heading: "7. Contatti", body: "Per domande sulla privacy: pixelyaki@gmail.com" }
+    ]
+  },
+  pt: {
+    title: "Política de Privacidade",
+    updated: "Última atualização: 18 de abril de 2026",
+    back: "Voltar",
+    sections: [
+      { heading: "1. Visão geral do serviço", body: "Pixelyaki é uma ferramenta de geração de QR codes baseada em navegador, sem necessidade de conta ou cadastro." },
+      { heading: "2. Informações coletadas", body: "O texto, as cores e os arquivos de logotipo não são transmitidos nem armazenados em servidores. Todo o processamento ocorre no navegador.\n\nO Google Analytics 4 (GA4) pode coletar:\n• Dados de visitas às páginas\n• Informações sobre dispositivo e navegador\n• Endereços IP anonimizados" },
+      { heading: "3. Armazenamento local", body: "O modo escuro/claro segue automaticamente as configurações do sistema. O serviço não armazena preferência de tema separadamente." },
+      { heading: "4. Serviços de terceiros", body: "Este serviço usa o Google Analytics 4. Os dados estão sujeitos à Política de Privacidade do Google.\nhttps://policies.google.com/privacy" },
+      { heading: "5. Privacidade de menores", body: "Este serviço não é destinado a menores de 14 anos." },
+      { heading: "6. Alterações nesta política", body: "Esta política pode ser atualizada sem aviso prévio." },
+      { heading: "7. Contato", body: "Para dúvidas sobre privacidade: pixelyaki@gmail.com" }
+    ]
   }
 };
 

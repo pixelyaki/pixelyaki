@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { defaultLocale, getSeoCopy, isLocale, locales } from "@/lib/i18n";
+import { defaultLocale, getSeoCopy, isLocale, isRtlLocale, locales } from "@/lib/i18n";
 import { getSiteUrl } from "@/lib/site";
+import { HtmlDirSetter } from "@/components/html-dir-setter";
 
 type LocaleLayoutProps = {
   children: React.ReactNode;
@@ -62,5 +63,12 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  return children;
+  const dir = isRtlLocale(locale) ? "rtl" : "ltr";
+
+  return (
+    <>
+      <HtmlDirSetter dir={dir} lang={locale} />
+      {children}
+    </>
+  );
 }

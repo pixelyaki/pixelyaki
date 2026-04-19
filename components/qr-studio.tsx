@@ -21,7 +21,14 @@ import { downloadDataUrl, downloadTextFile } from "@/lib/download";
 import { makeQrFilename } from "@/lib/filename";
 import { trackGtmEvent } from "@/lib/gtm";
 import { type Locale } from "@/lib/i18n";
-import { renderQrPngDataUrl, renderQrSvgMarkup } from "@/lib/qr";
+import {
+  renderQrPngDataUrl,
+  renderQrSvgMarkup,
+  type QrCornerDotStyle,
+  type QrCornerSquareStyle,
+  type QrDotsStyle,
+  type QrStylePreset
+} from "@/lib/qr";
 import {
   buildTossSendLink,
   isPositiveAmount,
@@ -118,6 +125,18 @@ type ExtraModeCopy = {
   smsBodyPlaceholder: string;
   smsInvalid: string;
   smsEmptyPreview: string;
+};
+
+type StyleCopy = {
+  title: string;
+  presetLabel: string;
+  dotsLabel: string;
+  cornerSquareLabel: string;
+  cornerDotLabel: string;
+  presetSquare: string;
+  presetRounded: string;
+  presetClassy: string;
+  presetDot: string;
 };
 
 const modeCopyByLocale: Record<Locale, ModeCopy> = {
@@ -402,6 +421,31 @@ const extraModeCopyByLocale: Partial<Record<Locale, ExtraModeCopy>> = {
   }
 };
 
+const styleCopyByLocale: Partial<Record<Locale, StyleCopy>> = {
+  ko: {
+    title: "QR 스타일",
+    presetLabel: "프리셋",
+    dotsLabel: "점 모양",
+    cornerSquareLabel: "코너 모양",
+    cornerDotLabel: "코너 점 모양",
+    presetSquare: "Square",
+    presetRounded: "Rounded",
+    presetClassy: "Classy",
+    presetDot: "Dot"
+  },
+  en: {
+    title: "QR style",
+    presetLabel: "Preset",
+    dotsLabel: "Dots",
+    cornerSquareLabel: "Corner square",
+    cornerDotLabel: "Corner dot",
+    presetSquare: "Square",
+    presetRounded: "Rounded",
+    presetClassy: "Classy",
+    presetDot: "Dot"
+  }
+};
+
 type QrMode = "text" | "send" | "url" | "email" | "phone" | "wifi" | "vcard" | "sms";
 
 type QrStudioProps = {
@@ -412,9 +456,20 @@ type QrStudioProps = {
 const INPUT_CLASS =
   "w-full rounded-md border border-gray-200 bg-white p-2 text-sm text-gray-900 outline-none transition focus:border-gray-400 focus:ring-2 focus:ring-gray-900/5 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-gray-500 dark:focus:ring-gray-100/5";
 
+const QR_STYLE_PRESETS: Record<
+  QrStylePreset,
+  { dots: QrDotsStyle; cornerSquare: QrCornerSquareStyle; cornerDot: QrCornerDotStyle }
+> = {
+  square: { dots: "square", cornerSquare: "square", cornerDot: "square" },
+  rounded: { dots: "rounded", cornerSquare: "extra-rounded", cornerDot: "dot" },
+  classy: { dots: "classy", cornerSquare: "extra-rounded", cornerDot: "dot" },
+  dot: { dots: "dots", cornerSquare: "dot", cornerDot: "dot" }
+};
+
 export function QrStudio({ copy, locale }: QrStudioProps) {
   const modeCopy = modeCopyByLocale[locale];
   const extraModeCopy = extraModeCopyByLocale[locale] ?? extraModeCopyByLocale.en!;
+  const styleCopy = styleCopyByLocale[locale] ?? styleCopyByLocale.en!;
   const [mode, setMode] = useState<QrMode>("text");
   const [text, setText] = useState("");
   const [bankCode, setBankCode] = useState("004");
@@ -434,6 +489,10 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
   const [vcardAddress, setVcardAddress] = useState("");
   const [smsPhone, setSmsPhone] = useState("");
   const [smsBody, setSmsBody] = useState("");
+  const [stylePreset, setStylePreset] = useState<QrStylePreset>("square");
+  const [dotsStyle, setDotsStyle] = useState<QrDotsStyle>(QR_STYLE_PRESETS.square.dots);
+  const [cornerSquareStyle, setCornerSquareStyle] = useState<QrCornerSquareStyle>(QR_STYLE_PRESETS.square.cornerSquare);
+  const [cornerDotStyle, setCornerDotStyle] = useState<QrCornerDotStyle>(QR_STYLE_PRESETS.square.cornerDot);
   const [foregroundColor, setForegroundColor] = useState("#000000");
   const [backgroundColor, setBackgroundColor] = useState("#ffffff");
   const [transparentBackground, setTransparentBackground] = useState(true);
@@ -574,14 +633,26 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
             foregroundColor,
             backgroundColor,
             transparentBackground,
-            logoDataUrl
+            logoDataUrl,
+            style: {
+              preset: stylePreset,
+              dots: dotsStyle,
+              cornerSquare: cornerSquareStyle,
+              cornerDot: cornerDotStyle
+            }
           }),
           renderQrSvgMarkup({
             text: qrPayload,
             foregroundColor,
             backgroundColor,
             transparentBackground,
-            logoDataUrl
+            logoDataUrl,
+            style: {
+              preset: stylePreset,
+              dots: dotsStyle,
+              cornerSquare: cornerSquareStyle,
+              cornerDot: cornerDotStyle
+            }
           })
         ]);
 
@@ -593,7 +664,11 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
             const commonPayload = {
               mode,
               has_logo: Boolean(logoDataUrl),
-              transparent_background: transparentBackground
+              transparent_background: transparentBackground,
+              style_preset: stylePreset,
+              style_dots: dotsStyle,
+              style_corner_square: cornerSquareStyle,
+              style_corner_dot: cornerDotStyle
             };
 
             if (mode === "text") {
@@ -682,6 +757,10 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     normalizedText.length,
     qrPayload,
     smsBody,
+    stylePreset,
+    dotsStyle,
+    cornerSquareStyle,
+    cornerDotStyle,
     transparentBackground,
     urlInput,
     vcardAddress,
@@ -763,6 +842,14 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
     });
   }
 
+  function onChangeStylePreset(nextPreset: QrStylePreset) {
+    setStylePreset(nextPreset);
+    const preset = QR_STYLE_PRESETS[nextPreset];
+    setDotsStyle(preset.dots);
+    setCornerSquareStyle(preset.cornerSquare);
+    setCornerDotStyle(preset.cornerDot);
+  }
+
   const emptyPreview =
     mode === "text"
       ? copy.emptyPreview
@@ -806,7 +893,7 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100" : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"}`}
               onClick={() => setMode(button.value)}
             >
-              <span className="inline-flex items-center gap-1.5">
+              <span className="inline-flex flex-col items-center gap-1 text-center">
                 {button.icon}
                 <span>{button.label}</span>
               </span>
@@ -1089,6 +1176,78 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               </div>
             </div>
           ) : null}
+
+          <div className="mb-4 grid gap-2 rounded-md border border-gray-200 p-3 dark:border-gray-700">
+            <h3 className="text-xs font-medium text-gray-700 dark:text-gray-300">{styleCopy.title}</h3>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid gap-1.5">
+                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-preset">
+                  {styleCopy.presetLabel}
+                </label>
+                <select
+                  id="qr-style-preset"
+                  className={INPUT_CLASS}
+                  value={stylePreset}
+                  onChange={(event) => onChangeStylePreset(event.target.value as QrStylePreset)}
+                >
+                  <option value="square">{styleCopy.presetSquare}</option>
+                  <option value="rounded">{styleCopy.presetRounded}</option>
+                  <option value="classy">{styleCopy.presetClassy}</option>
+                  <option value="dot">{styleCopy.presetDot}</option>
+                </select>
+              </div>
+
+              <div className="grid gap-1.5">
+                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-dots">
+                  {styleCopy.dotsLabel}
+                </label>
+                <select
+                  id="qr-style-dots"
+                  className={INPUT_CLASS}
+                  value={dotsStyle}
+                  onChange={(event) => setDotsStyle(event.target.value as QrDotsStyle)}
+                >
+                  <option value="square">square</option>
+                  <option value="dots">dots</option>
+                  <option value="rounded">rounded</option>
+                  <option value="classy">classy</option>
+                  <option value="classy-rounded">classy-rounded</option>
+                  <option value="extra-rounded">extra-rounded</option>
+                </select>
+              </div>
+
+              <div className="grid gap-1.5">
+                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-corner-square">
+                  {styleCopy.cornerSquareLabel}
+                </label>
+                <select
+                  id="qr-style-corner-square"
+                  className={INPUT_CLASS}
+                  value={cornerSquareStyle}
+                  onChange={(event) => setCornerSquareStyle(event.target.value as QrCornerSquareStyle)}
+                >
+                  <option value="square">square</option>
+                  <option value="dot">dot</option>
+                  <option value="extra-rounded">extra-rounded</option>
+                </select>
+              </div>
+
+              <div className="grid gap-1.5">
+                <label className="text-xs text-gray-500 dark:text-gray-400" htmlFor="qr-style-corner-dot">
+                  {styleCopy.cornerDotLabel}
+                </label>
+                <select
+                  id="qr-style-corner-dot"
+                  className={INPUT_CLASS}
+                  value={cornerDotStyle}
+                  onChange={(event) => setCornerDotStyle(event.target.value as QrCornerDotStyle)}
+                >
+                  <option value="square">square</option>
+                  <option value="dot">dot</option>
+                </select>
+              </div>
+            </div>
+          </div>
 
           <ColorPickerGroup
             foregroundLabel={copy.foregroundColor}

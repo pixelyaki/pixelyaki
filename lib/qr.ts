@@ -7,6 +7,19 @@ type QrRenderOptions = {
   transparentBackground: boolean;
   logoDataUrl?: string | null;
   size?: number;
+  style?: QrStyleOptions;
+};
+
+type QrStylePreset = "square" | "rounded" | "classy" | "dot";
+type QrDotsStyle = "square" | "dots" | "rounded" | "classy" | "classy-rounded" | "extra-rounded";
+type QrCornerSquareStyle = "square" | "dot" | "extra-rounded";
+type QrCornerDotStyle = "square" | "dot";
+
+type QrStyleOptions = {
+  preset: QrStylePreset;
+  dots: QrDotsStyle;
+  cornerSquare: QrCornerSquareStyle;
+  cornerDot: QrCornerDotStyle;
 };
 
 type QrCodeStylingModule = typeof import("qr-code-styling");
@@ -45,9 +58,17 @@ async function createQrCodeStyling(options: QrRenderOptions) {
       errorCorrectionLevel: ERROR_CORRECTION_LEVEL
     },
     dotsOptions: {
-      type: "square",
+      type: options.style?.dots ?? "square",
       color: options.foregroundColor,
       roundSize: true
+    },
+    cornersSquareOptions: {
+      type: options.style?.cornerSquare ?? "square",
+      color: options.foregroundColor
+    },
+    cornersDotOptions: {
+      type: options.style?.cornerDot ?? "square",
+      color: options.foregroundColor
     },
     backgroundOptions: {
       color: options.transparentBackground ? "transparent" : options.backgroundColor
@@ -104,4 +125,11 @@ export async function renderQrSvgMarkup(options: QrRenderOptions): Promise<strin
   return rawData.toString("utf-8");
 }
 
-export type { QrRenderOptions };
+export type {
+  QrCornerDotStyle,
+  QrCornerSquareStyle,
+  QrDotsStyle,
+  QrRenderOptions,
+  QrStyleOptions,
+  QrStylePreset
+};

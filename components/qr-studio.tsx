@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  ChatBubble,
+  Mail,
+  Phone,
+  QrCode,
+  SendDiagonal,
+  UserSquare,
+  Wifi,
+  Www
+} from "iconoir-react";
 import { useEffect, useRef, useState } from "react";
 import { ColorPickerGroup } from "@/components/color-picker-group";
 import { DownloadActions } from "@/components/download-actions";
@@ -770,22 +780,23 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
                   ? extraModeCopy.vcardEmptyPreview
                   : extraModeCopy.smsEmptyPreview;
 
-  const modeButtons: Array<{ value: QrMode; label: string }> = [
-    { value: "text", label: modeCopy.textModeLabel },
-    { value: "send", label: modeCopy.sendModeLabel },
-    { value: "url", label: modeCopy.urlModeLabel },
-    { value: "email", label: modeCopy.emailModeLabel },
-    { value: "phone", label: modeCopy.phoneModeLabel },
-    { value: "wifi", label: extraModeCopy.wifiModeLabel },
-    { value: "vcard", label: extraModeCopy.vcardModeLabel },
-    { value: "sms", label: extraModeCopy.smsModeLabel }
+  const modeButtons: Array<{ value: QrMode; label: string; icon: React.ReactNode }> = [
+    { value: "text", label: modeCopy.textModeLabel, icon: <QrCode className="h-3.5 w-3.5" /> },
+    { value: "send", label: modeCopy.sendModeLabel, icon: <SendDiagonal className="h-3.5 w-3.5" /> },
+    { value: "url", label: modeCopy.urlModeLabel, icon: <Www className="h-3.5 w-3.5" /> },
+    { value: "email", label: modeCopy.emailModeLabel, icon: <Mail className="h-3.5 w-3.5" /> },
+    { value: "phone", label: modeCopy.phoneModeLabel, icon: <Phone className="h-3.5 w-3.5" /> },
+    { value: "wifi", label: extraModeCopy.wifiModeLabel, icon: <Wifi className="h-3.5 w-3.5" /> },
+    { value: "vcard", label: extraModeCopy.vcardModeLabel, icon: <UserSquare className="h-3.5 w-3.5" /> },
+    { value: "sms", label: extraModeCopy.smsModeLabel, icon: <ChatBubble className="h-3.5 w-3.5" /> }
   ];
 
   return (
     <section id="generator" className="grid gap-3 bg-gray-50 p-4 dark:bg-gray-950 md:gap-4 md:p-6">
       <section className="rounded-lg border border-gray-200 bg-white p-5 dark:border-gray-700 dark:bg-gray-900">
-        <h2 className="mb-4 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
-          {modeCopy.modeSelectorTitle}
+        <h2 className="mb-4 flex items-center gap-1.5 text-xs font-medium uppercase text-gray-400 dark:text-gray-500">
+          <QrCode className="h-3.5 w-3.5" />
+          <span>{modeCopy.modeSelectorTitle}</span>
         </h2>
         <div className="grid grid-cols-2 gap-1 rounded-md bg-gray-100 p-1 dark:bg-gray-800/80 md:grid-cols-4 lg:grid-cols-8">
           {modeButtons.map((button) => (
@@ -795,7 +806,10 @@ export function QrStudio({ copy, locale }: QrStudioProps) {
               className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${mode === button.value ? "bg-white text-gray-900 shadow-sm dark:bg-gray-700 dark:text-gray-100" : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"}`}
               onClick={() => setMode(button.value)}
             >
-              {button.label}
+              <span className="inline-flex items-center gap-1.5">
+                {button.icon}
+                <span>{button.label}</span>
+              </span>
             </button>
           ))}
         </div>
